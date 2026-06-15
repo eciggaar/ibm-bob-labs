@@ -175,6 +175,6 @@ In this lab, Bob helped you:
 
 ## ➡️ Next Step
 
-Proceed to [**Lab 2 — Feeding Bob: Generate Sample Content**](../generate-sample-content/)
+Proceed to [**Lab 2 — Feeding Bob: Generate Sample Content**](/labs/generate-sample-content/)
 
 In Lab 2, you'll generate 40 realistic HR documents and upload them to the repository using Bob — with a few deliberate mistakes that you'll fix in Lab 3.

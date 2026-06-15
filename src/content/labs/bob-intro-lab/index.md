@@ -73,4 +73,4 @@ An API browser interface is available locally to explore and interact with the b
 ## ➡️ Next steps
 In this introduction, you learned that Bob supports the full software development lifecycle, not just code generation. You remain in control at every step and Bob assists you with reasoning and implementation.
 
-Advance to [Start a project with /init and AGENTS.md](bob-intro/01---start-a-project) to learn how Bob uses the `/init` command to set up context in a new or existing project.
+Advance to [Start a project with /init and AGENTS.md](01---start-a-project) to learn how Bob uses the `/init` command to set up context in a new or existing project.
