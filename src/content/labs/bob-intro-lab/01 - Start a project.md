@@ -80,4 +80,4 @@ You can also manually edit the `AGENTS.md` to add context that Bob's automated s
 ## ➡️ Next steps
 In this tutorial, you learned that large language models are stateless and that `/init` solves this issue by generating `AGENTS.md`, which is a persistent context file Bob reads at the start of every conversation. You also learned that mode-specific `AGENTS.md` files provide targeted context for Code, Plan, Ask, and Advanced modes, and that you should re-run `/init` after major project changes to keep that context current.
 
-Advance to [Get code predictions](02---get-code-predictions) to learn how Bob accelerates development with AI-assisted code completion and next edit prediction.
+Advance to [Get code predictions](/labs/bob-intro/02---get-code-predictions) to learn how Bob accelerates development with AI-assisted code completion and next edit prediction.
