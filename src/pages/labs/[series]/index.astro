@@ -1,0 +1,389 @@
+---
+// src/pages/labs/[series]/index.astro
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allLabs = await getCollection('labs');
+  
+  // Group by lab_series
+  const seriesMap = allLabs.reduce<Record<string, any[]>>((acc, lab) => {
+    const series = lab.data.lab_series;
+    (acc[series] ??= []).push(lab);
+    return acc;
+  }, {});
+  
+  return Object.keys(seriesMap).map((series) => ({
+    params: { series },
+    props: { labs: seriesMap[series] },
+  }));
+}
+
+const { series } = Astro.params;
+const { labs } = Astro.props;
+
+// Find the landing page (has total_sections)
+const landingPage = labs.find(lab => lab.data.total_sections !== undefined);
+
+// Get all sections (don't have total_sections)
+const sections = labs
+  .filter(lab => lab.data.total_sections === undefined)
+  .sort((a, b) => (a.data.section_number ?? 99) - (b.data.section_number ?? 99));
+
+const { Content } = landingPage ? await landingPage.render() : { Content: null };
+
+// Get lab series title
+const labSeriesTitle = series === 'bob-intro' ? 'Bob Intro Lab' :
+                       series === 'bob-as-documentalist' ? 'Meet Bob, your AI documentalist' :
+                       series === 'generate-sample-content' ? 'Feeding Bob: generate sample content' :
+                       series === 'review-and-reclassify' ? 'Bob the Classifier: Review & Reclassify' :
+                       series;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{landingPage?.data.title || series} · Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/code-blocks.css" />
+  </head>
+  <body class="h-full bg-white text-slate-900 antialiased">
+
+    <!-- Top nav bar -->
+    <header class="fixed top-0 left-0 right-0 z-30 h-14 border-b border-slate-200 bg-white/90 backdrop-blur-sm flex items-center px-6 gap-4">
+      <a href="/" class="text-base font-semibold text-brand-700 tracking-tight hover:text-brand-600 transition-colors">
+        🧪 Labs
+      </a>
+      <span class="flex-1" />
+      <a href="/labs" class="text-sm text-slate-500 hover:text-slate-800 transition-colors">
+        All Labs
+      </a>
+    </header>
+
+    <div class="flex h-full pt-14">
+
+      <!-- Left Sidebar - Lab Navigation -->
+      <aside
+        id="sidebar"
+        class="fixed top-14 left-0 bottom-0 z-20 w-64 overflow-y-auto border-r border-slate-200 bg-slate-50 px-4 py-6 hidden lg:block"
+      >
+        <div class="mb-6">
+          <h3 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            {labSeriesTitle}
+          </h3>
+          <ul class="space-y-0.5">
+            <!-- Introduction (landing page) -->
+            <li>
+              <a
+                href={`/labs/${series}/`}
+                class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors bg-brand-100 font-medium text-brand-700"
+              >
+                <span class="text-xs text-slate-400">0</span>
+                <span class="flex-1">Introduction</span>
+              </a>
+            </li>
+            {sections.map((section) => (
+              <li>
+                <a
+                  href={`/labs/${series}/${section.slug.split('/').pop()}`}
+                  class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+                >
+                  {section.data.section_number !== undefined && (
+                    <span class="text-xs text-slate-400">{section.data.section_number}</span>
+                  )}
+                  <span class="flex-1">{section.data.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Mobile sidebar toggle -->
+      <button
+        id="sidebar-toggle"
+        class="lg:hidden fixed bottom-6 right-6 z-40 rounded-full bg-brand-600 p-3 text-white shadow-lg hover:bg-brand-700 transition-colors"
+        aria-label="Toggle navigation"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Main content -->
+      <main class="flex-1 lg:ml-64 xl:mr-64 min-w-0">
+        <div class="mx-auto max-w-3xl px-6 py-10">
+          <header class="mb-8 pb-6 border-b border-slate-200">
+            <h1 class="text-4xl font-normal text-slate-900 mb-4 leading-tight">
+              {landingPage?.data.title || series}
+            </h1>
+            {landingPage?.data.description && (
+              <p class="text-lg text-slate-600 leading-relaxed mb-4">
+                {landingPage.data.description}
+              </p>
+            )}
+            
+            <div class="flex flex-wrap gap-6 mt-4">
+              {landingPage?.data.estimated_duration && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z"/>
+                    <path d="M20.59 22L15 16.41 15 7 17 7 17 15.58 22 20.59 20.59 22z"/>
+                  </svg>
+                  {landingPage.data.estimated_duration}
+                </span>
+              )}
+              {landingPage?.data.bob_mode && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm0,26A12,12,0,1,1,28,16,12,12,0,0,1,16,28Z"/>
+                    <path d="M16,10a1.5,1.5,0,1,0-1.5-1.5A1.5,1.5,0,0,0,16,10Z"/>
+                    <path d="M16.5,13h-1a1,1,0,0,0-1,1v9a1,1,0,0,0,1,1h1a1,1,0,0,0,1-1V14A1,1,0,0,0,16.5,13Z"/>
+                  </svg>
+                  {landingPage.data.bob_mode} mode
+                </span>
+              )}
+              {landingPage?.data.total_sections && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M27,3H5A2,2,0,0,0,3,5V27a2,2,0,0,0,2,2H27a2,2,0,0,0,2-2V5A2,2,0,0,0,27,3ZM5,5H27V9H5ZM5,27V11H27V27Z"/>
+                  </svg>
+                  {landingPage.data.total_sections} sections
+                </span>
+              )}
+            </div>
+          </header>
+
+          {Content && (
+            <article id="main-content" class="prose prose-slate prose-headings:font-semibold prose-a:text-brand-600 prose-code:font-mono prose-pre:bg-slate-900 max-w-none">
+              <Content />
+            </article>
+          )}
+
+          <!-- Navigation buttons -->
+          <nav class="mt-12 pt-6 border-t border-slate-200 flex items-center justify-between">
+            <div class="flex-1">
+              <!-- No previous page for landing page -->
+            </div>
+            {sections.length > 0 && (
+              <a
+                href={`/labs/${series}/${sections[0].slug.split('/').pop()}`}
+                class="group flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                <span>{sections[0].data.title}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 transition-transform group-hover:translate-x-1">
+                  <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            )}
+          </nav>
+        </div>
+      </main>
+
+      <!-- Right Sidebar - Page TOC -->
+      <aside
+        id="page-toc"
+        class="fixed top-14 right-0 w-64 max-h-[calc(100vh-3.5rem)] overflow-y-auto pt-12 pr-4 pb-2 xl:block hidden"
+        style="scrollbar-width: none;"
+      >
+        <nav class="toc-nav sticky top-0" aria-label="On this page">
+          <h4 class="inline-flex items-center gap-1.5 text-sm text-slate-500 mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+              <path d="M21 5H3"></path>
+              <path d="M15 12H3"></path>
+              <path d="M17 19H3"></path>
+            </svg>
+            On this page
+          </h4>
+          <ul id="toc-list" class="list-none p-0 m-0 relative py-3 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-slate-200 space-y-1">
+            <!-- Generated dynamically by JavaScript -->
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Back to top button -->
+      <a
+        href="#main-content"
+        id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-brand-600 text-white rounded-full hidden items-center justify-center no-underline shadow-lg transition-all hover:bg-brand-700 hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2"
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="fill-current">
+          <path d="M16 14.586L10.707 19.879 9.293 18.465 16 11.758 22.707 18.465 21.293 19.879z"/>
+        </svg>
+      </a>
+
+    </div>
+
+    <script>
+      // Sidebar toggle for mobile
+      const toggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.getElementById('sidebar');
+      toggle?.addEventListener('click', () => {
+        sidebar?.classList.toggle('hidden');
+        sidebar?.classList.toggle('block');
+      });
+
+      // Generate TOC from headings (same as LabLayout.astro)
+      function generateTOC() {
+        const content = document.getElementById('main-content');
+        const tocList = document.getElementById('toc-list');
+        if (!content || !tocList) return;
+
+        const headings = content.querySelectorAll('h2, h3');
+        
+        if (headings.length === 0) {
+          tocList.innerHTML = '<li class="text-sm text-slate-400 pl-3">No headings found</li>';
+          return;
+        }
+
+        tocList.innerHTML = '';
+        headings.forEach((heading) => {
+          let id = heading.id;
+          if (!id) {
+            const text = heading.textContent || '';
+            id = text
+              .toLowerCase()
+              .trim()
+              .replace(/[^\w\s-]/g, '')
+              .replace(/\s+/g, '-')
+              .replace(/-+/g, '-');
+            
+            let finalId = id;
+            let counter = 1;
+            while (document.getElementById(finalId)) {
+              finalId = `${id}-${counter}`;
+              counter++;
+            }
+            heading.id = finalId;
+            id = finalId;
+          }
+
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `#${id}`;
+          a.textContent = heading.textContent || '';
+          a.className = `block py-1 text-sm text-slate-600 hover:text-brand-600 transition-colors border-l-2 border-transparent hover:border-brand-600 pl-3 ${
+            heading.tagName === 'H3' ? 'ml-4' : ''
+          }`;
+          
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            const link = tocList.querySelector(`a[href="#${id}"]`);
+            if (entry.isIntersecting) {
+              tocList.querySelectorAll('a').forEach((a) => {
+                a.classList.remove('text-brand-600', 'border-brand-600', 'font-medium');
+                a.classList.add('text-slate-600', 'border-transparent');
+              });
+              link?.classList.remove('text-slate-600', 'border-transparent');
+              link?.classList.add('text-brand-600', 'border-brand-600', 'font-medium');
+            }
+          });
+        }, { rootMargin: '-100px 0px -66%' });
+
+        headings.forEach((heading) => observer.observe(heading));
+      }
+
+      function setupBackToTop() {
+        const backToTop = document.getElementById('back-to-top');
+        if (!backToTop) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            backToTop.classList.remove('hidden');
+            backToTop.classList.add('flex');
+          } else {
+            backToTop.classList.add('hidden');
+            backToTop.classList.remove('flex');
+          }
+        });
+      }
+
+      // Setup copy buttons for code blocks with Flowbite-style icons
+      function setupCopyButtons() {
+        document.querySelectorAll('.prose pre').forEach((pre) => {
+          // Skip if button already exists
+          if (pre.querySelector('.copy-code-button')) return;
+          
+          const code = pre.querySelector('code');
+          if (!code) return;
+          
+          // Create copy button with Flowbite icons
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'copy-code-button';
+          button.setAttribute('aria-label', 'Copy code to clipboard');
+          
+          // Clipboard icon (default state)
+          const copyIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          copyIcon.setAttribute('class', 'copy-icon');
+          copyIcon.setAttribute('aria-hidden', 'true');
+          copyIcon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          copyIcon.setAttribute('fill', 'currentColor');
+          copyIcon.setAttribute('viewBox', '0 0 18 20');
+          copyIcon.innerHTML = '<path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>';
+          
+          // Success checkmark icon (hidden by default)
+          const successIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          successIcon.setAttribute('class', 'success-icon');
+          successIcon.setAttribute('aria-hidden', 'true');
+          successIcon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+          successIcon.setAttribute('fill', 'none');
+          successIcon.setAttribute('viewBox', '0 0 16 12');
+          successIcon.innerHTML = '<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>';
+          
+          button.appendChild(copyIcon);
+          button.appendChild(successIcon);
+          
+          // Add click handler
+          button.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            try {
+              await navigator.clipboard.writeText(code.textContent || '');
+              
+              // Show success state
+              button.classList.add('copied');
+              button.setAttribute('aria-label', 'Code copied to clipboard');
+              
+              // Reset after 2 seconds
+              setTimeout(() => {
+                button.classList.remove('copied');
+                button.setAttribute('aria-label', 'Copy code to clipboard');
+              }, 2000);
+            } catch (err) {
+              console.error('Failed to copy code:', err);
+            }
+          });
+          
+          pre.appendChild(button);
+        });
+      }
+
+      // Initialize on page load
+      function initializePage() {
+        generateTOC();
+        setupBackToTop();
+        setupCopyButtons();
+      }
+      
+      // Run immediately if DOM is already loaded, otherwise wait for DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePage);
+      } else {
+        initializePage();
+      }
+    </script>
+
+  </body>
+</html>

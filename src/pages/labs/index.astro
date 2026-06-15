@@ -1,0 +1,114 @@
+---
+// src/pages/labs/index.astro
+import { getCollection } from 'astro:content';
+
+// Get all lab entries
+const allLabs = await getCollection('labs');
+
+// Group by lab_series and find landing pages
+const labSeries = allLabs.reduce<Record<string, any>>((acc, lab) => {
+  const series = lab.data.lab_series;
+  if (!acc[series]) {
+    acc[series] = {
+      landing: null,
+      sections: []
+    };
+  }
+  
+  // Check if this is a landing page (has total_sections)
+  if (lab.data.total_sections !== undefined) {
+    acc[series].landing = lab;
+  } else {
+    acc[series].sections.push(lab);
+  }
+  
+  return acc;
+}, {});
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen bg-white font-sans antialiased">
+
+    <!-- Hero -->
+    <header class="border-b border-slate-200 bg-gradient-to-b from-brand-50 to-white px-6 py-16 text-center">
+      <p class="mb-3 text-xs font-semibold uppercase tracking-widest text-brand-500">Hands-On Learning</p>
+      <h1 class="text-4xl font-bold text-slate-900 sm:text-5xl">Labs</h1>
+      <p class="mx-auto mt-4 max-w-lg text-lg text-slate-500">
+        Comprehensive hands-on tutorials and exercises.
+      </p>
+    </header>
+
+    <!-- Labs grid -->
+    <main class="mx-auto max-w-4xl px-6 py-12">
+      {Object.keys(labSeries).length === 0 ? (
+        <p class="text-center text-slate-400">No labs found. Add <code>.md</code> files to <code>src/content/labs/</code>.</p>
+      ) : (
+        <ul class="grid gap-6 sm:grid-cols-2">
+          {Object.entries(labSeries).map(([seriesName, data]) => {
+            const landing = data.landing;
+            const sectionCount = data.sections.length;
+            
+            return (
+              <li>
+                <a
+                  href={`/labs/${seriesName}`}
+                  class="group block rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-brand-300 hover:shadow-md"
+                >
+                  <div class="mb-3 flex items-center justify-between">
+                    <span class="inline-block text-xs font-semibold uppercase tracking-wider text-brand-500">
+                      Lab Series
+                    </span>
+                    {landing?.data.estimated_duration && (
+                      <span class="inline-flex items-center gap-1 text-xs text-slate-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {landing.data.estimated_duration}
+                      </span>
+                    )}
+                  </div>
+                  <h2 class="text-xl font-semibold text-slate-900 group-hover:text-brand-700 transition-colors">
+                    {landing?.data.title || seriesName}
+                  </h2>
+                  {landing?.data.description && (
+                    <p class="mt-2 text-sm text-slate-500 line-clamp-2">{landing.data.description}</p>
+                  )}
+                  <div class="mt-4 flex items-center justify-between">
+                    <span class="text-xs text-slate-400">
+                      {sectionCount} section{sectionCount !== 1 ? 's' : ''}
+                    </span>
+                    <span class="inline-flex items-center gap-1 text-xs font-medium text-brand-600">
+                      Start lab
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      
+      <div class="mt-12 text-center">
+        <a href="/" class="text-sm text-slate-500 hover:text-brand-600 transition-colors">
+          ← Back to home
+        </a>
+      </div>
+    </main>
+
+  </body>
+</html>

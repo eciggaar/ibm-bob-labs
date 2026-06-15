@@ -1,0 +1,347 @@
+---
+// src/layouts/LabLayout.astro
+export interface Props {
+  title: string;
+  description?: string;
+  labSeries: string;
+  duration?: string;
+  audience?: string;
+  bobMode?: string;
+  allSections?: { title: string; slug: string; section_number?: number }[];
+  currentSlug?: string;
+}
+
+const { title, description = '', labSeries, duration, audience, bobMode, allSections = [], currentSlug = '' } = Astro.props;
+
+// Sort sections by section_number
+const sortedSections = [...allSections].sort((a, b) => (a.section_number ?? 99) - (b.section_number ?? 99));
+
+// Find current section index and get prev/next
+const currentIndex = sortedSections.findIndex(s => s.slug === currentSlug);
+const prevSection = currentIndex > 0 ? sortedSections[currentIndex - 1] : null;
+const nextSection = currentIndex >= 0 && currentIndex < sortedSections.length - 1 ? sortedSections[currentIndex + 1] : null;
+
+// Get lab series title
+const labSeriesTitle = labSeries === 'bob-intro' ? 'Bob Intro Lab' :
+                       labSeries === 'bob-as-documentalist' ? 'Meet Bob, your AI documentalist' :
+                       labSeries === 'generate-sample-content' ? 'Feeding Bob: generate sample content' :
+                       labSeries === 'review-and-reclassify' ? 'Bob the Classifier: Review & Reclassify' :
+                       labSeries;
+---
+
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title} · Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/code-blocks.css" />
+  </head>
+
+  <body class="h-full bg-white text-slate-900 antialiased">
+
+    <!-- Top nav bar -->
+    <header class="fixed top-0 left-0 right-0 z-30 h-14 border-b border-slate-200 bg-white/90 backdrop-blur-sm flex items-center px-6 gap-4">
+      <a href="/" class="text-base font-semibold text-brand-700 tracking-tight hover:text-brand-600 transition-colors">
+        🧪 Labs
+      </a>
+      <span class="flex-1" />
+      <a href="/labs" class="text-sm text-slate-500 hover:text-slate-800 transition-colors">
+        All Labs
+      </a>
+    </header>
+
+    <div class="flex h-full pt-14">
+
+      <!-- Left Sidebar - Lab Navigation -->
+      <aside
+        id="sidebar"
+        class="fixed top-14 left-0 bottom-0 z-20 w-64 overflow-y-auto border-r border-slate-200 bg-slate-50 px-4 py-6 hidden lg:block"
+      >
+        <div class="mb-6">
+          <h3 class="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <a href={`/labs/${labSeries}`} class="hover:text-brand-600 transition-colors">
+              {labSeriesTitle}
+            </a>
+          </h3>
+          <ul class="space-y-0.5">
+            <!-- Introduction (landing page) -->
+            <li>
+              <a
+                href={`/labs/${labSeries}/`}
+                class="flex items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors text-slate-600 hover:bg-slate-200 hover:text-slate-900"
+              >
+                <span class="text-xs text-slate-400">0</span>
+                <span class="flex-1">Introduction</span>
+              </a>
+            </li>
+            {sortedSections.map((section) => (
+              <li>
+                <a
+                  href={`/labs/${labSeries}/${section.slug}`}
+                  class={`flex items-center gap-2 rounded-md px-3 py-1.5 text-sm transition-colors ${
+                    currentSlug === section.slug
+                      ? 'bg-brand-100 font-medium text-brand-700'
+                      : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900'
+                  }`}
+                >
+                  {section.section_number !== undefined && (
+                    <span class="text-xs text-slate-400">{section.section_number}</span>
+                  )}
+                  <span class="flex-1">{section.title}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Mobile sidebar toggle -->
+      <button
+        id="sidebar-toggle"
+        class="lg:hidden fixed bottom-6 right-6 z-40 rounded-full bg-brand-600 p-3 text-white shadow-lg hover:bg-brand-700 transition-colors"
+        aria-label="Toggle navigation"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Main content -->
+      <main class="flex-1 lg:ml-64 xl:mr-64 min-w-0">
+        <div class="mx-auto max-w-3xl px-6 py-10">
+          <header class="mb-8 pb-6 border-b border-slate-200">
+            <h1 class="text-4xl font-normal text-slate-900 mb-4 leading-tight">{title}</h1>
+            {description && (
+              <p class="text-lg text-slate-600 leading-relaxed mb-4">{description}</p>
+            )}
+            
+            <div class="flex flex-wrap gap-6 mt-4">
+              {duration && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z"/>
+                    <path d="M20.59 22L15 16.41 15 7 17 7 17 15.58 22 20.59 20.59 22z"/>
+                  </svg>
+                  {duration}
+                </span>
+              )}
+              {bobMode && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm0,26A12,12,0,1,1,28,16,12,12,0,0,1,16,28Z"/>
+                    <path d="M16,10a1.5,1.5,0,1,0-1.5-1.5A1.5,1.5,0,0,0,16,10Z"/>
+                    <path d="M16.5,13h-1a1,1,0,0,0-1,1v9a1,1,0,0,0,1,1h1a1,1,0,0,0,1-1V14A1,1,0,0,0,16.5,13Z"/>
+                  </svg>
+                  {bobMode} mode
+                </span>
+              )}
+              {audience && (
+                <span class="flex items-center gap-2 text-sm text-slate-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="16" height="16" class="fill-current shrink-0">
+                    <path d="M16,4a5,5,0,1,1-5,5,5,5,0,0,1,5-5m0-2a7,7,0,1,0,7,7A7,7,0,0,0,16,2Z"/>
+                    <path d="M26,30H24V25a5,5,0,0,0-5-5H13a5,5,0,0,0-5,5v5H6V25a7,7,0,0,1,7-7h6a7,7,0,0,1,7,7Z"/>
+                  </svg>
+                  {audience}
+                </span>
+              )}
+            </div>
+          </header>
+
+          <article id="main-content" class="prose prose-slate prose-headings:font-semibold prose-a:text-brand-600 prose-code:font-mono prose-pre:bg-slate-900 max-w-none">
+            <slot />
+          </article>
+
+          <!-- Navigation buttons -->
+          <nav class="mt-12 pt-6 border-t border-slate-200 flex items-center justify-between">
+            {prevSection ? (
+              <a
+                href={`/labs/${labSeries}/${prevSection.slug}`}
+                class="group flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 transition-transform group-hover:-translate-x-1">
+                  <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+                </svg>
+                <span>{prevSection.title}</span>
+              </a>
+            ) : (
+              <a
+                href={`/labs/${labSeries}/`}
+                class="group flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 transition-transform group-hover:-translate-x-1">
+                  <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+                </svg>
+                <span>Introduction</span>
+              </a>
+            )}
+            {nextSection && (
+              <a
+                href={`/labs/${labSeries}/${nextSection.slug}`}
+                class="group flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+              >
+                <span>{nextSection.title}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 transition-transform group-hover:translate-x-1">
+                  <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            )}
+          </nav>
+        </div>
+      </main>
+
+      <!-- Right Sidebar - Page TOC -->
+      <aside
+        id="page-toc"
+        class="fixed top-14 right-0 w-64 max-h-[calc(100vh-3.5rem)] overflow-y-auto pt-12 pr-4 pb-2 xl:block hidden"
+        style="scrollbar-width: none;"
+      >
+        <nav class="toc-nav sticky top-0" aria-label="On this page">
+          <h4 class="inline-flex items-center gap-1.5 text-sm text-slate-500 mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0">
+              <path d="M21 5H3"></path>
+              <path d="M15 12H3"></path>
+              <path d="M17 19H3"></path>
+            </svg>
+            On this page
+          </h4>
+          <ul id="toc-list" class="list-none p-0 m-0 relative py-3 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-px before:bg-slate-200 space-y-1">
+            <!-- Generated dynamically by JavaScript -->
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Back to top button -->
+      <a
+        href="#main-content"
+        id="back-to-top"
+        class="fixed bottom-8 right-8 w-12 h-12 bg-brand-600 text-white rounded-full hidden items-center justify-center no-underline shadow-lg transition-all hover:bg-brand-700 hover:-translate-y-0.5 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-brand-600 focus:ring-offset-2"
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" class="fill-current">
+          <path d="M16 14.586L10.707 19.879 9.293 18.465 16 11.758 22.707 18.465 21.293 19.879z"/>
+        </svg>
+      </a>
+
+    </div>
+
+    <script>
+      import { initCopyButtons } from '../utils/copyButton.js';
+
+      // Sidebar toggle for mobile
+      const toggle = document.getElementById('sidebar-toggle');
+      const sidebar = document.getElementById('sidebar');
+      toggle?.addEventListener('click', () => {
+        sidebar?.classList.toggle('hidden');
+        sidebar?.classList.toggle('block');
+      });
+
+      // Generate TOC from headings
+      function generateTOC() {
+        const content = document.getElementById('main-content');
+        const tocList = document.getElementById('toc-list');
+        if (!content || !tocList) return;
+
+        const headings = content.querySelectorAll('h2, h3');
+        
+        if (headings.length === 0) {
+          tocList.innerHTML = '<li class="text-sm text-slate-400 pl-3">No headings found</li>';
+          return;
+        }
+
+        tocList.innerHTML = '';
+        headings.forEach((heading, index) => {
+          // Generate a clean ID from the heading text
+          let id = heading.id;
+          if (!id) {
+            const text = heading.textContent || '';
+            id = text
+              .toLowerCase()
+              .trim()
+              .replace(/[^\w\s-]/g, '') // Remove special chars
+              .replace(/\s+/g, '-')      // Replace spaces with hyphens
+              .replace(/-+/g, '-');      // Replace multiple hyphens with single
+            
+            // Ensure unique ID
+            let finalId = id;
+            let counter = 1;
+            while (document.getElementById(finalId)) {
+              finalId = `${id}-${counter}`;
+              counter++;
+            }
+            heading.id = finalId;
+            id = finalId;
+          }
+
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = `#${id}`;
+          a.textContent = heading.textContent || '';
+          a.className = `block py-1 text-sm text-slate-600 hover:text-brand-600 transition-colors border-l-2 border-transparent hover:border-brand-600 pl-3 ${
+            heading.tagName === 'H3' ? 'ml-4' : ''
+          }`;
+          
+          li.appendChild(a);
+          tocList.appendChild(li);
+        });
+
+        // Highlight active section on scroll
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            const link = tocList.querySelector(`a[href="#${id}"]`);
+            if (entry.isIntersecting) {
+              tocList.querySelectorAll('a').forEach((a) => {
+                a.classList.remove('text-brand-600', 'border-brand-600', 'font-medium');
+                a.classList.add('text-slate-600', 'border-transparent');
+              });
+              link?.classList.remove('text-slate-600', 'border-transparent');
+              link?.classList.add('text-brand-600', 'border-brand-600', 'font-medium');
+            }
+          });
+        }, { rootMargin: '-100px 0px -66%' });
+
+        headings.forEach((heading) => observer.observe(heading));
+      }
+
+      // Back to top button
+      function setupBackToTop() {
+        const backToTop = document.getElementById('back-to-top');
+        if (!backToTop) return;
+
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            backToTop.classList.remove('hidden');
+            backToTop.classList.add('flex');
+          } else {
+            backToTop.classList.add('hidden');
+            backToTop.classList.remove('flex');
+          }
+        });
+      }
+
+
+      // Initialize on page load
+      function initializePage() {
+        generateTOC();
+        setupBackToTop();
+        initCopyButtons();
+      }
+      
+      // Run immediately if DOM is already loaded, otherwise wait for DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializePage);
+      } else {
+        initializePage();
+      }
+    </script>
+
+  </body>
+</html>

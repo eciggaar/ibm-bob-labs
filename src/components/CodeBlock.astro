@@ -1,0 +1,129 @@
+---
+// CodeBlock.astro - Code block component with Flowbite-style copy icons
+export interface Props {
+  code?: string;
+  language?: string;
+  class?: string;
+}
+
+const { code = '', language = '', class: className = '' } = Astro.props;
+---
+
+<div class={`code-block-wrapper relative ${className}`}>
+  <pre class="code-block"><code class={language ? `language-${language}` : ''}><slot>{code}</slot></code></pre>
+  <button
+    type="button"
+    class="copy-button absolute top-3 right-3 inline-flex items-center justify-center p-2 text-gray-500 hover:text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 transition-all"
+    aria-label="Copy code to clipboard"
+  >
+    <!-- Default clipboard icon -->
+    <span class="copy-icon">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+        <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z"/>
+      </svg>
+    </span>
+    <!-- Success checkmark icon (hidden by default) -->
+    <span class="success-icon hidden">
+      <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+      </svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  // Add copy functionality to all code blocks
+  function initCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('.code-block-wrapper');
+    
+    codeBlocks.forEach((wrapper) => {
+      const button = wrapper.querySelector('.copy-button') as HTMLButtonElement;
+      const codeBlock = wrapper.querySelector('code');
+      const copyIcon = button?.querySelector('.copy-icon');
+      const successIcon = button?.querySelector('.success-icon');
+      
+      if (!button || !codeBlock || !copyIcon || !successIcon) return;
+      
+      button.addEventListener('click', async () => {
+        try {
+          // Get the code text
+          const code = codeBlock.textContent || '';
+          
+          // Copy to clipboard
+          await navigator.clipboard.writeText(code);
+          
+          // Show success state
+          copyIcon.classList.add('hidden');
+          successIcon.classList.remove('hidden');
+          button.setAttribute('aria-label', 'Code copied to clipboard');
+          
+          // Reset after 2 seconds
+          setTimeout(() => {
+            copyIcon.classList.remove('hidden');
+            successIcon.classList.add('hidden');
+            button.setAttribute('aria-label', 'Copy code to clipboard');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy code:', err);
+        }
+      });
+    });
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCodeBlocks);
+  } else {
+    initCodeBlocks();
+  }
+  
+  // Re-initialize after navigation (for SPA-like behavior)
+  document.addEventListener('astro:page-load', initCodeBlocks);
+</script>
+
+<style>
+  .code-block-wrapper {
+    position: relative;
+    margin: 1.5rem 0;
+  }
+  
+  .code-block {
+    background-color: rgb(249, 250, 251);
+    border: 1px solid rgb(229, 231, 235);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    padding-right: 3.5rem; /* Space for button */
+    overflow-x: auto;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  
+  :global(.dark) .code-block {
+    background-color: rgb(17, 24, 39);
+    border-color: rgb(55, 65, 81);
+  }
+  
+  .code-block code {
+    background-color: transparent !important;
+    color: rgb(17, 24, 39);
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+  }
+  
+  :global(.dark) .code-block code {
+    color: rgb(229, 231, 235);
+  }
+  
+  .copy-button {
+    z-index: 10;
+  }
+  
+  .copy-button:focus {
+    outline: 2px solid rgb(59, 130, 246);
+    outline-offset: 2px;
+  }
+</style>

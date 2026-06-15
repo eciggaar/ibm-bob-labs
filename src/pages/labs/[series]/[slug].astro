@@ -1,0 +1,50 @@
+---
+// src/pages/labs/[series]/[slug].astro
+import { getCollection } from 'astro:content';
+import LabLayout from '../../../layouts/LabLayout.astro';
+
+export async function getStaticPaths() {
+  const allLabs = await getCollection('labs');
+  
+  // Filter out landing pages (they have total_sections)
+  const sections = allLabs.filter(lab => lab.data.total_sections === undefined);
+  
+  return sections.map((entry) => ({
+    params: {
+      series: entry.data.lab_series,
+      slug: entry.slug.split('/').pop() // Get just the filename part
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Get all sections in this lab series for the sidebar
+const allLabs = await getCollection('labs');
+const seriesSections = allLabs
+  .filter(lab =>
+    lab.data.lab_series === entry.data.lab_series &&
+    lab.data.total_sections === undefined
+  )
+  .sort((a, b) => (a.data.section_number ?? 99) - (b.data.section_number ?? 99))
+  .map((lab) => ({
+    title: lab.data.title,
+    slug: lab.slug.split('/').pop(),
+    section_number: lab.data.section_number,
+  }));
+---
+
+<LabLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  labSeries={entry.data.lab_series}
+  duration={entry.data.duration}
+  audience={entry.data.audience}
+  bobMode={entry.data.bob_mode}
+  allSections={seriesSections}
+  currentSlug={entry.slug.split('/').pop()}
+>
+  <Content />
+</LabLayout>
