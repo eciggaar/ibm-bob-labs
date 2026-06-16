@@ -10,14 +10,15 @@ description: "Find all documents with missing or incorrect metadata"
 
 You want Bob to find all HR documents in your namespace that are missing critical metadata — specifically, documents without an `EmployeeID` or with an obviously wrong one.
 
-## 💬 Prompt to Bob (ASK MODE)
+## 💬 Prompt to Bob
 
 > ⚠️ Replace `DUPONT` with your actual last name from Lab 2.
 
+Switch to **Ask Mode**
+
 ```
-Bob, I want to run a classification audit on my HR documents in namespace /BOB_LAB/DUPONT/.
-Can you find all documents in the HRDocument class that are missing an EmployeeID,
-or have an EmployeeID that doesn't look right?
+Bob, I want to run a classification audit on my HR documents in namespace /BOB_LAB/<YOUR_LASTNAME>/.
+Can you find all documents in the HRDocument class that are missing an EmployeeID, or have an EmployeeID that doesn't look right?
 ```
 
 ## 🔍 What Bob Does Behind the Scenes

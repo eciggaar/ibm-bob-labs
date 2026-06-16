@@ -12,6 +12,8 @@ You need a complete inventory of all document classes. Instead of navigating the
 
 ## 💬 Prompt to Bob
 
+Switch to **Ask Mode**
+
 ```
 Bob, I want to understand our IBM Content Services repository. 
 Can you give me a complete inventory of all the document classes we have? 
@@ -21,9 +23,9 @@ Group them by domain if you can.
 ## 🔍 What Bob Does Behind the Scenes
 
 1. Calls `list_root_classes` → discovers `Document` as the root class type
-2. Calls `determine_class` with keyword `"Document"` → retrieves all 91 subclasses
+2. Calls `determine_class` with keyword `"Document"` → retrieves all subclasses
 3. Analyzes the symbolic names and display names
-4. Groups them by domain (HR, Financial, Legal, System, Integration, Specialized)
+4. Groups them by domain (e.g. HR, Tax Administration, System / Technical)
 
 ## ✅ Expected Output from Bob
 
@@ -70,4 +72,4 @@ If you want the next level of detail, we can produce a second inventory that sep
 Bob can describe the **business purpose** of each class without you needing to read technical documentation. Notice how he groups them by domain — this is AI reasoning about naming patterns, not a pre-configured taxonomy.
 
 ### For Administrators
-The `determine_class` tool queries the live repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.
+The `determine_class` tool --- made available by the MCP server --- queries the live FNCM repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.

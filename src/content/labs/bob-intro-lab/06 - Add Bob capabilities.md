@@ -17,18 +17,6 @@ Rules, which you learned about in the [previous tutorial](https://bob.ibm.com/do
 In this tutorial, you show Bob how to behave like a product manager by creating a custom mode that clarifies a user problem, proposes user stories, suggests an MVP, defines success metrics, and produces a roadmap. Then you test the mode.
 
 
-## 📋 Prerequisites
-To complete this tutorial, you need the following:
-
-* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
-
-```text
-git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
-```
-
-* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
-
 ### Create a product management custom mode
 To help you with product planning tasks and transform feature ideas into a structured, prioritized product plan, create a Product Management custom mode.
 
@@ -99,4 +87,4 @@ Bob gives you a list of potential features to build, and might ask clarifying qu
 ## ➡️ Next steps
 In this tutorial, you learned how to create a custom mode that defines a product manager persona with specific instructions and tool access. You also tested the mode by asking Bob to recommend a new feature to build and answering its clarifying questions.
 
-Advance to [Create a new context window](https://bob.ibm.com/docs/ide/getting-started/tutorials/context-window) to learn how conversation memory, file reads, and context management affect Bob's performance and output quality.
+Advance to [Create a new context window](/labs/bob-intro/07---create-a-new-context-window) to learn how conversation memory, file reads, and context management affect Bob's performance and output quality.

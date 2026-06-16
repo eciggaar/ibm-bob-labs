@@ -14,6 +14,8 @@ Bob has diagnosed the problem. Now you'll ask him to fix it — reclassifying th
 
 > ⚠️ Replace the document reference with your actual document.
 
+Switch to **Content Repository Auditor Mode**
+
 ```
 Bob, go ahead and fix one document xxxxxx
 Reclassify it as HRDocument and set all the correct properties
@@ -75,4 +77,4 @@ It will appear in searches for:
 
 ## 💡 The Reclassification Risk
 
-The warning is critical. If you were reclassifying from `Contract` to `HRDocument` (two sibling classes, not parent-child), properties specific to `Contract` that don't exist in `HRDocument` would be **permanently lost**. Always check the class hierarchy before reclassifying. Bob knows this and will warn you.
+If you were reclassifying from `Contract` to `HRDocument` (two sibling classes, not parent-child), properties specific to `Contract` that don't exist in `HRDocument` would be **permanently lost**. Always check the class hierarchy before reclassifying.

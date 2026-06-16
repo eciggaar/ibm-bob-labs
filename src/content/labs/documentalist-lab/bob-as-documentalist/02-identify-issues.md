@@ -12,6 +12,8 @@ Now that you have the full list, you want Bob to flag anything suspicious — du
 
 ## 💬 Prompt to Bob
 
+Switch to **Ask Mode**
+
 ```
 Bob, looking at that class inventory, which classes look like duplicates, 
 legacy classes, or things we should clean up? 
@@ -71,4 +73,4 @@ Bob should return a structured catalog similar to:
 
 ## 💡 Key Insight
 
-Bob identified **~5 classes** that are candidates for consolidation or removal. This is the "historical debt" — classes created over time without governance, by different teams, for overlapping purposes. In a well-governed repository, you'd have **fewer than 50 classes** with clear ownership.
+Bob identified **~5 classes** that are candidates for consolidation or removal. This is the "historical debt" — classes created over time without governance, by different teams, for overlapping purposes. In a well-governed repository, you'd most likely have **fewer than 50 classes** with clear ownership.

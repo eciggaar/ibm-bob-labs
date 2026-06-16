@@ -3,20 +3,20 @@ title: "Verify Documents"
 lab_series: "generate-sample-content"
 section_number: 5
 duration: "~5 minutes"
-description: "Check that documents were created correctly"
+description: "Check that the HR documents were created correctly"
 ---
 
 ## The Situation
 
-Before moving on, you want to verify that a specific document was uploaded correctly. Check the payslip for your first employee.
+Before moving on, you want to verify that the documents were uploaded correctly. For this, check the payslip for your first employee.
 
 ## 💬 Prompt to Bob
 
-> ⚠️ Replace the example values below with **your actual data** from the script output.
+> ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
 ```
 Bob, can you verify that DUP001's January 2024 payslip was uploaded correctly? 
-Show me its properties. My namespace is DUPONT.
+Show me its properties. My folder is <YOUR_LASTNAME>.
 ```
 
 ## 🔍 What Bob Does Behind the Scenes

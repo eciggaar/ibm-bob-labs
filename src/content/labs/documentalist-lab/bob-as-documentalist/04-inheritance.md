@@ -12,6 +12,8 @@ A business analyst in the room asks: "Why does HRDocument have 109 properties? T
 
 ## 💬 Prompt to Bob
 
+Switch to **Ask Mode**
+
 ```
 Bob, can you explain the relationship between the base Document class and HRDocument? 
 Why does HRDocument have so many properties? 
@@ -63,7 +65,7 @@ Instead of "Why so many?", ask:
 
 ## 💡 The "Class vs Property" Design Decision
 
-This is a fundamental IBM Content Services design question: **Should I create a new class, or add a property to an existing class?**
+This is a fundamental IBM Content Services design question: *"Should I create a new class, or add a property to an existing class?"*
 
 ### Create a new class when:
 - The document type has fundamentally different properties
@@ -76,4 +78,4 @@ This is a fundamental IBM Content Services design question: **Should I create a 
 - The same properties apply, just with different values
 - You want to avoid class proliferation
 
-The number of class problems in this repository are largely caused by teams choosing "create a new class" when they should have added a property.
+In case you find a lot of duplicate classes in your repository this is largely caused by teams choosing *"Create a new class"* when they also chould have added a property to a matching existing class.

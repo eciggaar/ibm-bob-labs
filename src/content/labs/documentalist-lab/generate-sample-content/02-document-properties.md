@@ -12,6 +12,8 @@ Before uploading anything, you want Bob to tell you exactly which properties mat
 
 ## 💬 Prompt to Bob
 
+Switch to **Code Mode**
+
 ```
 Bob, before we upload HR documents to the repository,
 can you tell me which properties I should set on each document?
@@ -21,7 +23,7 @@ What's the difference between mandatory and optional properties for HRDocument?
 ## 🔍 What Bob Does Behind the Scenes
 
 1. Calls `determine_class` with keyword `"HRDocument"` → confirms symbolic name
-2. Calls `get_class_property_descriptions HRDocument` → retrieves all 40 HR-specific properties
+2. Calls `get_class_property_descriptions` on `"HRDocument"` → retrieves all HR-specific properties
 3. Categorizes them by importance for document creation
 
 ## ✅ Expected Output from Bob
@@ -65,4 +67,6 @@ What's the difference between mandatory and optional properties for HRDocument?
 
 ## 💡 Key Insight
 
-Notice that `DocType` is what distinguishes a Payslip from a Performance Review — they're both `HRDocument` instances. This is the design pattern we discussed in Lab 1: **use properties to differentiate, not separate classes**. When we search for "all payslips for employee DUP001", we'll search for `HRDocument` where `EmployeeID = DUP001` AND `DocType = Payslip`.
+Notice that `DocType` is what distinguishes a Payslip from a Performance Review — they're both `HRDocument` instances. This is the design pattern we discussed in Lab 1: *"use properties to differentiate, not separate classes"*. 
+
+When we search for "all payslips for employee DUP001", we'll search for `HRDocument` where `EmployeeID = DUP001` AND `DocType = Payslip`.

@@ -160,9 +160,9 @@ In this lab, Bob helped you:
 
 | What Bob Did | MCP Tool Used |
 |-------------|--------------|
-| Inventoried all 61 document classes | `list_root_classes` + `determine_class` |
+| Inventoried all document classes | `list_root_classes` + `determine_class` |
 | Identified duplicates and legacy classes | `get_class_property_descriptions` (comparative) |
-| Deep-dived into HRDocument (109 properties) | `get_class_property_descriptions HRDocument` |
+| Deep-dived into the HRDocument document class | `get_class_property_descriptions HRDocument` |
 | Explained the inheritance model | AI reasoning on property metadata |
 | Produced a prioritized cleaning roadmap | AI synthesis of all findings |
 
@@ -177,4 +177,4 @@ In this lab, Bob helped you:
 
 Proceed to [**Lab 2 — Feeding Bob: Generate Sample Content**](/labs/generate-sample-content/)
 
-In Lab 2, you'll generate 40 realistic HR documents and upload them to the repository using Bob — with a few deliberate mistakes that you'll fix in Lab 3.
+In Lab 2, you'll generate 55 realistic HR documents and upload them to the repository using Bob — with a few deliberate mistakes that you'll fix in Lab 3.

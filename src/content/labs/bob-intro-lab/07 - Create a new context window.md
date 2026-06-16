@@ -19,16 +19,6 @@ The context window holds everything: instructions, file contents, conversation h
 In this tutorial, you learn how to manage the context window effectively by starting a new conversation.
 
 
-## 📋 Prerequisites
-* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
-
-```text
-git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
-```
-
-* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
-
 ## 🔍 Why context management matters
 
 ### Token cost

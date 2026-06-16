@@ -14,6 +14,8 @@ All 5 misclassified documents have been fixed. You want a final governance healt
 
 > ⚠️ Replace `DUPONT` with your actual namespace.
 
+Switch to **Content Repository Auditor Mode**
+
 ```
 Bob, now that we've fixed all the misclassified documents in my namespace /BOB_LAB/DUPONT/,
 can you give me a final classification health report for my HR documents?
@@ -100,7 +102,14 @@ Total HR documents in your namespace: 55
 
 ## 💡 The Governance Lesson
 
-Notice recommendation #3: **restrict the base Document class from user-facing interfaces**. This is the single most impactful governance change you can make. If users can only select specific subclasses, they're forced to think about classification at upload time — which is always easier than fixing it later.
+Bob's health report will provide governance recommendations tailored to your repository's current state. Common recommendations include:
+
+- **Preventing misclassification at upload time** through entry templates and required fields
+- **Restricting base Document class usage** in user-facing interfaces to force specific subclass selection
+- **Scheduling regular audits** to maintain classification quality over time
+- **Implementing automated validation** to catch issues before they accumulate
+
+The key insight: **prevention is always easier than remediation**. Governance controls that enforce proper classification at document creation time eliminate the need for cleanup audits later.
 
 ## 🏁 Lab Summary
 
@@ -126,7 +135,3 @@ In this lab, Bob helped you:
 ## 🎓 Lab Series Complete
 
 You have completed all 3 labs in the Documentalist series! You've learned how to use Bob as an AI documentalist to inventory, classify, and govern documents in IBM Content Services.
-
-## ➡️ What's Next?
-
-Explore other Bob labs to learn more about AI-powered development and content management workflows.

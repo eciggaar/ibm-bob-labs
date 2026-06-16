@@ -1,6 +1,6 @@
 ---
 title: "Feeding Bob: generate sample content"
-description: "Create realistic HR documents to populate the repository. Generate and upload 55 documents with proper metadata."
+description: "Create realistic HR documents to populate the repository. Generate and upload 55 sample documents with proper metadata."
 lab_series: "generate-sample-content"
 section_number: 2
 total_sections: 6
@@ -82,4 +82,4 @@ This lab is divided into 6 sections:
 5. **Verify Documents** - Check that documents were created correctly
 6. **Review in Navigator** - Browse your documents in the web interface
 
-Ready to begin? Start with Section 1 below.
+Ready to begin? Click the *"Generate Sample Documents"* link below to get started.

@@ -9,11 +9,11 @@ estimated_duration: "45 minutes"
 
 ## Overview
 
-> **⚠️ Multi-User Lab:** This lab works in your personal namespace (`/BOB_LAB/YOURLASTNAME/`) created in Lab 2. You can run this lab in parallel with other participants without conflicts.
+> **⚠️ Multi-User Lab:** This lab works in your personal folder (`/BOB_LAB/<YOUR_LASTNAME>/`) created in Lab 2. You can run this lab in parallel with other participants without conflicts.
 
-> **Don't forget:** Start a new task at the beginning of this lab.
+> Don't forget: Start a new task at the beginning of this lab.
 
-Lab 2 went well — mostly. You uploaded 55 HR documents for your 5 employees to your personal namespace. But in the rush to get everything in, a few mistakes crept in: one payslip ended up as a generic Document with no employee metadata, a contract was filed under the wrong class, a performance review has the wrong employee ID, a disciplinary record has no metadata at all, and an exit document is missing its DocType.
+Lab 2 went well — mostly. You uploaded 55 HR documents for your 5 employees to your personal folder. But in the rush to get everything in, a few mistakes crept in: one payslip ended up as a generic Document with no employee metadata, a contract was filed under the wrong class, a performance review has the wrong employee ID, a disciplinary record has no metadata at all, and an exit document is missing its DocType.
 
 In a real repository with thousands of documents, these errors would be invisible — until someone searches for "all payslips for your first employee" and gets zero results, or a compliance audit finds documents with no retention metadata.
 
@@ -21,7 +21,7 @@ In a real repository with thousands of documents, these errors would be invisibl
 
 By the end of this lab, you will be able to:
 
-1. Use Bob to **search for documents with missing or incorrect metadata**
+1. Use Bob to **search for documents** with **missing** or **incorrect metadata**
 2. Ask Bob to **read document content** and reason about what class it should be
 3. Execute the **reclassification workflow**: `update_document_class` + `update_document_properties`
 4. Understand the **risk of reclassification** — what happens to properties when you change a document's class
@@ -30,7 +30,7 @@ By the end of this lab, you will be able to:
 ## Prerequisites
 
 * Completed Lab 2: Feeding Bob: Generate Sample Content
-* 55 documents uploaded to your personal namespace
+* 55 documents uploaded to your personal folder
 * Access to IBM Content Navigator
 
 ## MCP Tools Used
@@ -55,4 +55,4 @@ This lab is divided into 6 sections:
 5. **Fix All Documents** - Batch process remaining issues
 6. **Generate Health Report** - Create final governance report
 
-Ready to begin? Start with Section 1 below.
+Ready to begin? Click the *"Run a Classification Audit"* link below to get started.

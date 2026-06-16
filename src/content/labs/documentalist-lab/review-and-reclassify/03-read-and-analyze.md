@@ -69,4 +69,4 @@ Recommended Correct State:
 
 ## 💡 AI Content Reasoning
 
-Bob didn't just look at the filename — he **read the document content** and extracted the employee information from it. This is the power of `get_document_text_extract` combined with AI reasoning. Even if the filename had been `document_001.txt` with no clues, Bob could still determine the correct classification from the content.
+Bob didn't just look at the filename — he **read the document content** and extracted the employee information from it. This is the power of the MCP tool `get_document_text_extract` combined with AI reasoning. Even if the filename had been `document_001.txt` with no clues, Bob could still determine the correct classification from the content.

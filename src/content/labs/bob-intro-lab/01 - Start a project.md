@@ -1,8 +1,8 @@
 ---
-title: "Start a Project with /init and AGENTS"
+title: "Start a Project with /init and AGENTS.md"
 lab_series: "bob-intro"
 section_number: 1
-duration: "20 min"
+duration: "5 min"
 description: "Give Bob persistent project context across conversations and modes with /init, which automatically generates AGENTS.md files."
 ---
 
@@ -16,18 +16,6 @@ Large language models are stateless. Each new conversation starts with no memory
 
 In this tutorial, you initialize Bob in a demo application's root directory, explore the context that Bob gains about the application, and learn about Bob's structure for mode-specific context.
 
-
-## 📋 Prerequisites
-To complete this tutorial, you need the following:
-
-* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
-
-```text
-git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
-```
-
-* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
 
 ## 🚀 Run /init
 To initialize the project context, open the agentic chat sidebar in Bob IDE, switch to **Code mode** on the bottom right corner of the screen.

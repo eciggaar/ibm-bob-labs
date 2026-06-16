@@ -3,7 +3,7 @@ title: "Upload First Employee"
 lab_series: "generate-sample-content"
 section_number: 3
 duration: "~10 minutes"
-description: "Upload documents for your first employee"
+description: "Upload the HR documents for your first employee"
 ---
 
 ## The Situation
@@ -12,11 +12,11 @@ The files are ready. Now you'll ask Bob to upload the first employee's documents
 
 ## 💬 Prompt to Bob
 
-> ⚠️ Replace the example values below with **your actual employee data** from the script output.
+> ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
 ```
-Bob, please upload all HR documents for my first employee to the repository. The files are in HR_DUPONT/.
-Please file them under /BOB_LAB/DUPONT/ in the repository, including the employee folder structure.
+Bob, please upload all HR documents for my first employee to the repository. The files are in HR_<YOUR_LASTNAME>/. 
+Please file them under /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder structure.
 ```
 
 ## 🔍 What Bob Does Behind the Scenes
@@ -61,11 +61,11 @@ Documents Created:
 
 ## 💡 What Happens at Creation
 
-When Bob calls `create_document`, the FNCM repository:
-1. Creates a new document object with a unique GUID
-2. Sets the class to `HRDocument` (inheriting all 109 properties)
-3. Stores the text content
-4. Sets all the metadata properties (EmployeeID, DocType, etc.)
-5. Creates version 1.0 of the document
+When Bob calls `create_document`, in the live FNCM repository:
+1. A new document object is created with a unique GUID
+2. The class is set to `HRDocument` (inheriting all 109 properties)
+3. The text content is stored
+4. The metadata properties are set (EmployeeID, DocType, etc.)
+5. Major version 1.0 of the document is created
 
 The document is now searchable by any of its properties — you can find it by EmployeeID, by DocType, by Department, or by full-text content search.

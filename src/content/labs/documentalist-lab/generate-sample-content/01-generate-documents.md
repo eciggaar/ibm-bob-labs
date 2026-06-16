@@ -8,14 +8,16 @@ description: "Run the script to create your personal document set"
 
 ## The Situation
 
-You need to create sample HR documents to work with, but you're not sure how the generation script works or what it will create. You ask Bob to explain the process.
+You need to create sample HR documents to work with, but you're not sure how the generation script works or what it will create. You ask Bob to explain the code and the process.
 
 ## 💬 Prompt to Bob
+
+Switch to **Code Mode**
 
 ```
 Bob, I need to generate sample HR documents for this lab.
 Can you explain how the generate_hr_documents.py script works?
-What will it create, and can you run it for me?
+What will it create, what are the parameters I can provide and can you run it for me?
 ```
 
 ## 🔍 What Bob Does Behind the Scenes
@@ -105,4 +107,4 @@ metadata (EmployeeID, DocType, Department, etc.).
 
 ## 💡 Key Insight
 
-Notice how Bob can **read the script**, **explain how it works**, and **run it on the participant's behalf**. This is a key pattern in AI-assisted labs: participants don't need to understand Python or command-line tools — they just ask Bob, and Bob handles the technical details.
+Notice how Bob can **read the script**, **explain how it works**, and **run it on the participant's behalf**. This is a key pattern in AI-assisted labs and when working with AI coding agents like Bob: participants don't need to have an in-depth understanding of (in this case) Python or command-line tools — they just ask Bob, and Bob handles the technical details.

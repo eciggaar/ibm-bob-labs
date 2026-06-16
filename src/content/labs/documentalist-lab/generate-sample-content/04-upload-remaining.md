@@ -12,11 +12,11 @@ Your first employee's documents are in. Now you'll upload the remaining 4 employ
 
 ## 💬 Prompt to Bob
 
-> ⚠️ Replace the example values below with **your actual employee data** from the script output.
+> ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
 ```
-Bob, now please upload the HR documents for my remaining 4 employees, files are in HR_DUPONT/.
-Please file all documents under /BOB_LAB/DUPONT/ in the repository, including the employee folder structure.
+Bob, now please upload the HR documents for my remaining 4 employees. The files are in HR_<YOUR_LASTNAME>/.
+Please file all documents under /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder structure.
 ```
 
 ## ✅ Expected Output from Bob

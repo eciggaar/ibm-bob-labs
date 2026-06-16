@@ -17,19 +17,6 @@ You will use multiple [modes](https://bob.ibm.com/docs/ide/features/modes) when 
 In this tutorial, you use the agentic chat to create multiple seat classes such as Business and Galaxium class. The agentic chat edits multiple files, including the database.
 
 
-## 📋 Prerequisites
-To complete this tutorial, you need the following:
-
-* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
-
-```text
-git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
-```
-
-* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* Consider configuring [auto-approve](https://bob.ibm.com/docs/ide/features/auto-approving-actions) for the Read, Write, and MCP actions for the purposes of this tutorial.
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
-
 ### Use Plan mode to generate new features
 Use Plan mode to create a plan that Bob will follow to implement the multiple classes feature.
 
@@ -100,4 +87,4 @@ You have added a feature to show the class seat in the booking UI, with Economy,
 ## ➡️ Next steps
 In this tutorial, you learned how Bob's agentic chat interface helps you develop complex, multi-file features end-to-end. You used Plan mode to create and review an implementation plan, then started a new conversation and switched to Code mode so Bob could build the approved feature with a clean, focused context window.
 
-Advance to [Standardize Bob's behavior](https://bob.ibm.com/docs/ide/getting-started/tutorials/standardize-bobs-behavior) to learn about creating custom rules to control Bob's behavior.
+Advance to [Standardize Bob's behavior](/labs/bob-intro/05---standardize-bobs-behavior) to learn about creating custom rules to control Bob's behavior.

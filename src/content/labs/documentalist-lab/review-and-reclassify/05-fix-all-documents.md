@@ -12,6 +12,8 @@ One document is fixed. Now you'll ask Bob to process the remaining misclassified
 
 ## 💬 Prompt to Bob
 
+Switch to **Content Repository Auditor Mode**
+
 ```
 Bob, now fix the remaining misclassified documents using the same approach — 
 read each one, determine the correct classification, and fix it. 
@@ -71,4 +73,4 @@ Document #5: DUP002_Employment_Contract.txt
 
 ## 💡 Key Insight
 
-Bob can process multiple documents in a single batch operation, applying the same AI-powered analysis and correction workflow to each one. This makes large-scale classification cleanup feasible even for repositories with thousands of misclassified documents.
+Bob can assist processing multiple documents in a single batch operation, applying the same AI-powered analysis and correction workflow to each one. This makes large-scale classification cleanup feasible even for repositories with thousands of misclassified documents.

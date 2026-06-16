@@ -21,20 +21,6 @@ Project-level rules in `galaxium-travels/.bob` are version-controlled alongside 
 In this tutorial, you tell Bob to speak concisely, document its code, and remember its previous actions by adding rules files in the .bob directory. Because you will include these files in version control, Bob will apply them across your team.
 
 
-## 📋 Prerequisites
-To complete this tutorial, you need the following:
-
-* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
-
-```text
-git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
-```
-
-* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* Complete the [Start a project](https://bob.ibm.com/docs/ide/getting-started/tutorials/start-a-project) tutorial to create the `.bob` folder.
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
-* Python or Python 3. You can download Python from the [official website](https://www.python.org/downloads/).
-
 ### Create a custom Bob rules file
 The Bob `/init` command creates a `.bob` folder with AGENTS.md files for each Bob mode which directs the behavior of Bob in each mode. Create your own [custom rules](https://bob.ibm.com/docs/ide/configuration/rules) by adding a new file to the `rules` folder. Bob will read the content of the rules file, which means that the instructions you add will apply to all interactions with Bob.
 
@@ -90,4 +76,4 @@ Bob updates the `README.md` and creates a folder called `internal-monologue` and
 ## ➡️ Next steps
 In this tutorial, you learned how Bob rules let you define persistent instructions that apply across every conversation and mode. Project-level rules are version-controlled alongside your code, so your team shares the same standards automatically. The internal monologue pattern gives you an audit trail of Bob's actions across all sessions.
 
-Advance to [Add Bob capabilities](https://bob.ibm.com/docs/ide/getting-started/tutorials/add-bob-capabilities) to learn about creating custom modes that define specialized personas with tailored instructions and specific tool access.
+Advance to [Add Bob capabilities](/labs/bob-intro/06---add-bob-capabilities) to learn about creating custom modes that define specialized personas with tailored instructions and specific tool access.

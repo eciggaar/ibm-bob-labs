@@ -1,11 +1,10 @@
 ---
 title: "Meet Bob, your AI documentalist"
-description: "Explore the document class model, relationships, and cleaning recommendations. Learn to inventory 91 document classes and identify historical debt."
+description: "Explore the document class model, relationships, and cleaning recommendations. Learn to inventory document classes and identify the historical debt of your repository."
 lab_series: "bob-as-documentalist"
 section_number: 1
 total_sections: 5
 estimated_duration: "30 minutes"
-bob_mode: "Advance"
 ---
 
 ## Overview
@@ -53,4 +52,4 @@ This lab is divided into 5 sections:
 4. **"Bob, Explain the Inheritance"** - Understand the class hierarchy model
 5. **"Bob, Give Me a Cleaning Roadmap"** - Get a prioritized action plan
 
-Ready to begin? Start with Section 1 below.
+Ready to begin? Click the *"Bob, What Do Have?"* link below to get started.

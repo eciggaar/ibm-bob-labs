@@ -8,9 +8,11 @@ description: "Deep-dive into the HRDocument class to see all its properties"
 
 ## The Situation
 
-The HR team is your biggest user group. You want to understand the `HRDocument` class deeply — all its properties, what's searchable, what's inherited from the base class, and what's HR-specific.
+In our sample scenario, the HR team is your biggest user group. You want to understand the `HRDocument` class deeply — all its properties, what's searchable, what's inherited from the base class, and what's HR-specific.
 
 ## 💬 Prompt to Bob
+
+Switch to **Ask Mode**
 
 ```
 Bob, show me everything about the HRDocument class. 
@@ -80,4 +82,4 @@ I've created a comprehensive analysis of the HRDocument class with all 109 prope
 Notice the `DocType` property — this is how we distinguish between a Job Application, a Payslip, a Performance Review, and an Employment Contract. They're all `HRDocument` instances, but `DocType` tells you which kind. This is a key design pattern in IBM Content Services: **use properties to differentiate, not separate classes**.
 
 ### For Administrators
-The SAP integration properties (`SAPDocId`, `SapLinkTrigger`, `sapLinked`) show that this class is connected to an external system. Before modifying or deprecating this class, you'd need to check with the SAP integration team. Bob can help you identify these dependencies.
+The SAP integration properties (`SAPDocId`, `SapLinkTrigger`, `sapLinked`) show that this class is likely connected to an external system. So, before modifying or deprecating this class, you'd need to check with the SAP integration team. Bob can help you identify these dependencies.

@@ -19,17 +19,15 @@ Now that your documents are uploaded, you can review them directly in IBM Conten
 ## 📂 Navigate to Your Documents
 
 1. **Log in** to IBM Content Navigator using the credentials provided
-2. **Click the tile "Bladeren in content"**
-3. **Navigate to your namespace:**
-   - Navigate to: `/BOB_LAB/`
-4. **Select your namespace folder**, e.g. `DUPONT`
+2. **Click the tile** "Bladeren in content"**
+3. **Navigate** to your folder: `/BOB_LAB/<YOUR_LASTNAME>`
 
 ## 🔍 What You'll See
 
 Your namespace should contain all 55 documents organized by employee and should look similar to:
 
 ```
-/BOB_LAB/DUPONT/
+/BOB_LAB/<YOUR_LASTNAME>/
 ├── DUP001_Antoine Muller/
 │   ├── DUP001_Job_Application.txt
 │   ├── DUP001_Interview_Notes.txt
@@ -52,13 +50,13 @@ Your namespace should contain all 55 documents organized by employee and should 
 
 Use Navigator to verify:
 
-- [ ] All 55 documents are present in your namespace
-- [ ] Documents are organized by employee folder
-- [ ] Each document shows `HRDocument` as its class
-- [ ] `EmployeeID` property is correctly set
-- [ ] `DocType` property matches the document type
-- [ ] `Department`, `FirstName`, `LastName` are populated
-- [ ] Content is readable (click to view document content)
+- All 55 documents are present in your namespace
+- Documents are organized by employee folder
+- Each document shows `HRDocument` as its class
+- `EmployeeID` property is correctly set
+- `DocType` property matches the document type
+- `Department`, `FirstName`, `LastName` are populated
+- Content is readable (click to view document content)
 
 ## 💡 Navigator vs. Bob
 
@@ -113,4 +111,4 @@ In this lab, you:
 
 Proceed to [**Lab 3 — Bob the Classifier: Review & Reclassify**](/labs/review-and-reclassify/)
 
-In Lab 3, Bob will search within **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the 5 misclassified documents, read their content, reason about what they should be, and fix them — demonstrating the full AI-powered classification pipeline.
+In Lab 3, Bob will help you search **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating the full AI-powered classification pipeline.
