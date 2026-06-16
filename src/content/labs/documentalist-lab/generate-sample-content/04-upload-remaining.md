@@ -14,9 +14,11 @@ Your first employee's documents are in. Now you'll upload the remaining 4 employ
 
 > ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
+Switch to **Code Mode**
+
 ```
 Bob, now please upload the HR documents for my remaining 4 employees. The files are in HR_<YOUR_LASTNAME>/.
-Please file all documents under /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder structure.
+Please file all documents under /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder structure. Use available code if possible.
 ```
 
 ## ✅ Expected Output from Bob

@@ -14,6 +14,8 @@ The files are ready. Now you'll ask Bob to upload the first employee's documents
 
 > ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
+Switch to **Code Mode**
+
 ```
 Bob, please upload all HR documents for my first employee to the repository. The files are in HR_<YOUR_LASTNAME>/. 
 Please file them under /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder structure.

@@ -14,6 +14,8 @@ Before moving on, you want to verify that the documents were uploaded correctly.
 
 > ⚠️ Important - Replace the example values below with your actual employee data from the script output.
 
+Switch to **Code Mode**
+
 ```
 Bob, can you verify that DUP001's January 2024 payslip was uploaded correctly? 
 Show me its properties. My folder is <YOUR_LASTNAME>.
