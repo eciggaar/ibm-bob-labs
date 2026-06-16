@@ -2,7 +2,7 @@
 title: "Create a new context window"
 lab_series: "bob-intro"
 section_number: 7
-duration: "20 min"
+duration: "5 min"
 description: "Understand how to manage the context window effectively to maintain quality and reduce cost."
 ---
 

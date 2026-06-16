@@ -3,7 +3,7 @@ title: "Bob Intro Lab"
 description: "Get started with IBM Bob and the Galaxium Travels demo app by learning the tutorial flow, setup requirements, and application architecture."
 lab_series: "bob-intro"
 total_sections: 7
-estimated_duration: "2-3 hours"
+estimated_duration: "1 hour"
 ---
 
 ## ℹ️ Overview
@@ -37,7 +37,6 @@ git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
 ```
 
 * [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
-* While not required, consider doing the [Quickstart tutorial](https://bob.ibm.com/docs/ide/getting-started/quickstart) to familiarize yourself with Bob's interface and features.
 
 ## 🔬 Lab Environment
 

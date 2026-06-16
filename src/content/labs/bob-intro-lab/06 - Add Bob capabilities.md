@@ -2,7 +2,7 @@
 title: "Add Bob capabilities"
 lab_series: "bob-intro"
 section_number: 6
-duration: "25 min"
+duration: "10 min"
 description: "Create custom modes to help with specialized tasks like product management."
 ---
 

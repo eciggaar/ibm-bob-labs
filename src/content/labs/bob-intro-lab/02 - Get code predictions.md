@@ -23,6 +23,16 @@ Next edit prediction anticipates where you need to make related changes after ac
 
 In this tutorial, you use next edit prediction and tab completion to add a new `validateEmail` function to the `UserIdentification.tsx` file.
 
+## Prerequisites
+* If you do not already have it, clone the [Galaxium Travels](https://github.com/IBM/galaxium-travels) demo code. The clone command also checks out the `bob-learning-path-branch` that contains the code you use in the tutorials.
+
+```text
+git clone -b bob-learning-path-branch https://github.com/IBM/galaxium-travels
+```
+
+* [Bob IDE](https://bob.ibm.com/docs/ide/getting-started/install) with the Galaxium Travels demo code open
+* Enable [next edit prediction](https://bob.ibm.com/docs/ide/features/next-edit) in Bob settings
+* Restart Bob to ensure next edit prediction is active
 
 ### Add validate email function
 Use next edit prediction and tab completion to add a new `validateEmail` function to the `UserIdentification.tsx` file. This function should take an email string as input and return a boolean indicating whether the email is valid based on a simple regex pattern.

@@ -2,7 +2,7 @@
 title: "Plan and implement complex features"
 lab_series: "bob-intro"
 section_number: 4
-duration: "25 min"
+duration: "20 min"
 description: "Use Bob's agentic capabilities to have Bob run prompts and perform actions on your behalf."
 ---
 

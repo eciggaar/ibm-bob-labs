@@ -2,7 +2,7 @@
 title: "Standardize Bob's behavior"
 lab_series: "bob-intro"
 section_number: 5
-duration: "20 min"
+duration: "5 min"
 description: "Create custom rules to guide Bob's responses and standardize behavior across your team."
 ---
 
