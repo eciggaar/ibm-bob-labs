@@ -1,19 +1,6 @@
-# Build output
-dist/
-.astro/
-
-# Dependencies
-node_modules/
-
-# Env files
-.env
-.env.*
-!.env.example
-
-# Editor
-.vscode/
-.idea/
-
-# OS
 .DS_Store
-Thumbs.db
+node_modules/
+docs/.vitepress/dist/
+docs/.vitepress/cache/
+.env
+.venv/
