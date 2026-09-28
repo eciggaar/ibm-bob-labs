@@ -5,6 +5,7 @@ import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 export default defineConfig({
   title: "IBM Client Engineering",
   description: "IBM Bob and IBM FileNet Content Manager",
+  base: '/ibm-bob-labs/',
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
