@@ -109,6 +109,4 @@ In this lab, you:
 
 ## ➡️ Next Step
 
-Proceed to [**Lab 3 — Bob the Classifier: Review & Reclassify**](/labs/review-and-reclassify/)
-
 In Lab 3, Bob will help you search **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating the full AI-powered classification pipeline.
