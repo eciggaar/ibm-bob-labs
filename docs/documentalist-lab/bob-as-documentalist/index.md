@@ -9,47 +9,53 @@ estimated_duration: "30 minutes"
 
 ## Overview
 
-> **Note:** Bob's responses might vary slightly from the examples in this tutorial, but its key actions should be the same.
+In this lab you learn how to use IBM Bob with IBM Content Services to inventory, classify, and govern documents in a live FNCM repository. You'll explore the document class model, understand class hierarchies, and get AI-powered recommendations for cleaning up your repository.
 
-Learn how to use IBM Bob with IBM Content Services to inventory, classify, and govern documents in a live FNCM repository. In this lab, you'll explore the document class model, understand class hierarchies, and get AI-powered recommendations for cleaning up your repository.
+::: tip NOTE
+IBM Bob is powered by generative AI and LLMs, and a defining trait of these systems is that they are *non-deterministic* — unlike the *deterministic* tools most developers are accustomed to. In practice, that means the same prompt can produce different output from one run to the next. This is both a strength and a quirk of the technology, and it is something to work *with* rather than against.
 
-## What You Will Learn
+**Precision is what tips the odds in your favor.** The more clearly you describe what you want, the more closely Bob's output will mirror your intent. Throughout this lab, your results may slightly differ from the examples shown — and that is expected, not a defect. Human review remains essential at every step, and never more so than while you are still learning the tool.
+:::
 
-By the end of this lab, you will be able to:
 
-1. Use Bob to **inventory all document classes** in a live IBM Content Services repository
-2. Understand the **class hierarchy** — how `Document` is the root and all other classes inherit from it
-3. **Deep-dive into a specific class** (HRDocument) to see all its properties, types, and searchability
-4. Ask Bob to **identify historical debt** — duplicates, legacy classes, naming inconsistencies
-5. Get a **prioritized cleaning roadmap** from Bob based on what he finds
 
 ## Prerequisites
 
 Before starting this lab, ensure you have:
 
-* Bob IDE installed and running
-* Cloned the Git repository from https://github.com/eciggaar/Bob-AI-Documentalist and opened it in IBM Bob
-* Edited the `mcp.json` file in the `.bob` directory with the GraphQL endpoint (`SERVER_URL`), username (`USERNAME`), and password (`PASSWORD`) provided by your lab administrator
+- Bob IDE installed and running.
+- Cloned the Git repository and opened it in IBM Bob — follow the steps below.
+- Python environment for running the script in the skill `class_property_report`.
+- Downloaded the `mcp.json` file from the Box Note link provided by your lab facilitator and placed it in the `.bob` directory of the cloned repository.
 
-## MCP Tools Used
+1. Next, navigate to your preferred working directory,
 
-Throughout this lab, Bob will use the following IBM Content Services MCP tools:
+    ::: tabs key:MacOS/LinuxWindows
+    == Windows
+    ```powershell
+    cd <YOUR_PREFERRED_WORKING_DIRECTORY>
+    ```
+    == MacOS / Linux
+    ```bash
+    cd <YOUR_PREFERRED_WORKING_DIRECTORY>
+    ```
+    :::
 
-| Tool | What It Does |
-|------|-------------|
-| `list_root_classes` | Lists all root class types in the repository (Document, Folder, etc.) |
-| `determine_class` | Finds classes matching keywords — used to explore the class catalog |
-| `get_class_property_descriptions` | Returns all properties of a specific class with full metadata |
-| `get_searchable_property_descriptions` | Returns only the searchable properties of a class |
+2. and clone the repository.
 
-## Lab Sections
+    ::: tabs key:MacOS/LinuxWindows
+    == Windows
+    ```powershell
+    git clone https://github.com/eciggaar/Bob-AI-Documentalist
+    ```
+    == MacOS / Linux
+    ```bash
+    git clone https://github.com/eciggaar/Bob-AI-Documentalist
+    ```
+    :::
 
-This lab is divided into 5 sections:
+3. Open the cloned `Bob-AI-Documentalist` folder in Bob IDE via **File → Open Folder…**.
 
-1. **"Bob, What Do We Have?"** - Get a complete inventory of all document classes
-2. **"Bob, What Looks Wrong?"** - Identify duplicates, legacy classes, and naming issues
-3. **"Bob, Show Me HRDocument in Detail"** - Deep-dive into a specific class
-4. **"Bob, Explain the Inheritance"** - Understand the class hierarchy model
-5. **"Bob, Give Me a Cleaning Roadmap"** - Get a prioritized action plan
+4. Finally, download the `mcp.json` file from the Box Note link provided by your lab facilitator and place it in the `.bob` directory inside the cloned repository.
 
 Ready to begin? Click the *"Bob, What Do Have?"* link below to get started.

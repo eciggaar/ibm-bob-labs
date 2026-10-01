@@ -30,6 +30,7 @@ export default defineConfig({
       
       {
         text: 'Meet Bob, your AI Documentalist',
+        collapsed: true,
         items: [
           { text: 'Overview', link: '/documentalist-lab/bob-as-documentalist/'},
           { text: 'Bob, What Do We Have?', link: '/documentalist-lab/bob-as-documentalist/01-inventory' },
@@ -42,6 +43,7 @@ export default defineConfig({
 
       {
         text: 'Feeding Bob: Generate Sample Content',
+        collapsed: true,
         items: [
           { text: 'Overview', link: '/documentalist-lab/generate-sample-content/'},
           { text: 'Generate Sample Documents', link: '/documentalist-lab/generate-sample-content/01-generate-documents' },
@@ -55,6 +57,7 @@ export default defineConfig({
 
       {
         text: 'Bob the Classifier: Review & Reclassify',
+        collapsed: true,
         items: [
           { text: 'Overview', link: '/documentalist-lab/review-and-reclassify/'},
           { text: 'Run a Classification Audit', link: '/documentalist-lab/review-and-reclassify/01-classification-audit' },

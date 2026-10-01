@@ -6,62 +6,106 @@ duration: "~5 minutes"
 description: "Understand the class hierarchy and inheritance model"
 ---
 
-## The Situation
+## 📋 The Situation
 
-A business analyst in the room asks: "Why does HRDocument have 109 properties? That seems like a lot." You ask Bob to explain the inheritance model.
+A business analyst in the room asks: *"Why does HRDocument have 108 properties? That seems like a lot."* You ask Bob to explain the inheritance model.
 
 ## 💬 Prompt to Bob
 
-Switch to **Ask Mode**
+1. For this, switch to **Ask Mode** and enter the following prompt:
 
-```
-Bob, can you explain the relationship between the base Document class and HRDocument? 
-Why does HRDocument have so many properties? 
-What does it inherit and what does it add?
-```
+    ```
+    Can you explain the relationship between the base Document class and 
+    HRDocument? Why does HRDocument have so many properties? What does it 
+    inherit and what does it add?
+    ```
 
 ## ✅ Expected Output from Bob
 
-Bob should explain:
+Bob should provide an explaination similar to:
 
-```
-I've created a comprehensive analysis explaining the Document → HRDocument inheritance relationship.
+::: info
 
-## Key Insights:
+Based on the property data in the file:
 
-### **The 109 Properties Breakdown:**
+---
 
-**67 Properties Inherited from Base Document Class (61%):**
-- These are **standard FileNet system properties** that EVERY document class gets
-- Include: Security (7), Timestamps (5), Version Control (13), Content Management (12), Search & Indexing (4), Records Management (4), Workflow & Lifecycle (4), Filing (3), WebDAV (3), System Metadata (12)
-- **You cannot avoid these** - they're core FileNet functionality
+#### `Document` → `HRDocument` Inheritance
 
-**42 Properties Added by HRDocument (39%):**
-- Employee Identity (5): FirstName, LastName, PersonalID, EmployeeID, Birthdate
-- Job Information (9): JobRole, JobFunction, JobCode, JobLevel, JobStatus, etc.
-- Organization Structure (8): Company, BusinessUnit, Division, Department, etc.
-- SAP Integration (7): SAPEmployeeID, SapLinkTrigger, SAPDocId, etc.
-- Salesforce Integration (2): SFLinkTrigger, SfSalesforceRelationships
-- Docuflow Integration (2): docuflowTimestamp, docuflowUsername
-- AI/GenAI (2): GenaiDateIndexed, GenaiWatsonxSummary
-- Document Classification (3): DocType, DocumentCategory, ClassDocType
+---
 
-### **Why So Many Properties?**
+##### The base `Document` class — 63 inherited system properties
 
-**Answer:** It's **NOT excessive** - it's **inheritance + specialization**
+Every FileNet class is a subclass of `Document`. You get 63 system-owned properties automatically — IBM manages them, you cannot remove or rename any of them:
 
-1. **67 system properties are FileNet overhead** - necessary for enterprise document management (security, versioning, lifecycle, workflow, records management)
-2. **42 custom properties are reasonable** for comprehensive HR document management with multiple integrations
+| Group | Examples |
+|---|---|
+| **Identity & audit** | `Id`, `Creator`, `DateCreated`, `LastModifier`, `DateLastModified` |
+| **Security** | `Owner`, `Permissions`, `SecurityPolicy`, `SecurityFolder`, `ActiveMarkings` |
+| **Versioning** | `IsCurrentVersion`, `MajorVersionNumber`, `MinorVersionNumber`, `VersionStatus`, `IsReserved` |
+| **Content & storage** | `ContentSize`, `MimeType`, `ContentElements`, `StoragePolicy`, `StorageArea` |
 
-### **The Real Questions:**
+---
 
-Instead of "Why so many?", ask:
-- ✅ Are all 42 custom properties actually being used?
-- ✅ Are property descriptions clear? (many are empty)
-- ✅ Do we need choice lists for data quality?
-- ✅ Are we missing properties for recruitment, performance, training?
-- ✅ Is the UI organized with property grouping?
-```
+#### What `HRDocument` adds — 45 custom properties
+
+On top of the 63 inherited ones, `HRDocument` carries 45 custom properties. But **not all 45 were defined by the HR team**.
+
+---
+
+##### ✅ Genuine HR-domain properties (36)
+
+These were defined specifically for HR business use:
+
+| Group | Properties | Count |
+|---|---|---|
+| **Employee identity** | `FirstName`, `LastName`, `PersonalID`, `Birthdate`, `EmployeeID` | 5 |
+| **Job & employment** | `JobRole`, `JobFunction`, `JobCode`, `JobLevel`, `JobStatus`, `EmploymentType`, `CurrentStatus`, `StartDate`, `TerminationDate` | 9 |
+| **Organisation** | `Company`, `CompanyCode`, `BusinessUnit`, `Division`, `Department`, `CostCenter`, `Location` | 7 |
+| **SAP integration** | `SAPEmployeeID`, `SapLinkTrigger`, `sapLinked`, `SAPDocId`, `SAPDocProt`, `SAPComps`, `SAPContType`, `SAPCompVersion` | 8 |
+| **Salesforce integration** | `SFLinkTrigger`, `SfSalesforceRelationships` | 2 |
+| **DocuFlow integration** | `docuflowTimestamp`, `docuflowUsername` | 2 |
+| **Classification** | `DocType`, `DocumentCategory`, `ClassDocType` | 3 |
+
+---
+
+##### ⚙️ Platform-level or integration properties (9)
+
+These are custom (not system-owned) but were **not defined by the HR team** — they were added by the Content Services platform setup or AI infrastructure and exist across many classes:
+
+| Property | Origin |
+|---|---|
+| `DocumentTitle` | Generic CS platform metadata |
+| `ComponentBindingLabel` | IBM Content Navigator platform |
+| `IgnoreRedirect` | IBM Content Navigator platform |
+| `EntryTemplateObjectStoreName` | Entry template infrastructure |
+| `EntryTemplateLaunchedWorkflowNumber` | Entry template infrastructure |
+| `EntryTemplateId` | Entry template infrastructure |
+| `ClbSecurityController` | CLB security infrastructure |
+| `GenaiDateIndexed` | watsonx AI platform |
+| `GenaiWatsonxSummary` | watsonx AI platform |
+
+---
+
+#### Why so many properties?
+
+Two structural reasons:
+
+1. **One class, many document types.** `DocType` distinguishes a Job Application from a Payslip from a Performance Review — all stored as `HRDocument`. That single class must carry fields for every HR use case at once.
+
+2. **Three external systems integrated directly.** SAP (8 properties), Salesforce (2), and DocuFlow (2) each stamped their own linking fields onto the class.
+
+---
+
+#### Numbers at a glance
+
+| Layer | Count |
+|---|---|
+| Inherited from `Document` (system) | 63 |
+| Added by HR team (genuine HR) | 36 |
+| Added by platform/integrations | 9 |
+| **Total** | **108** |
+:::
 
 ## 💡 The "Class vs Property" Design Decision
 

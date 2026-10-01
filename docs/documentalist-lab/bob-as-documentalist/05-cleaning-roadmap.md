@@ -6,34 +6,34 @@ duration: "~10 minutes"
 description: "Get a prioritized action plan for repository cleanup"
 ---
 
-## The Situation
+## 📋 The Situation
 
 You've seen the inventory, the duplicates, the legacy classes, and the inheritance model. Now you want Bob to synthesize everything into a prioritized action plan.
 
 ## 💬 Prompt to Bob
 
-Switch to **Plan Mode**
+1. For this, switch to **Ask Mode** and enter the following prompt:
 
-```
-Bob, based on everything you've seen in our repository —
-the duplicates, the legacy classes, the naming inconsistencies — 
-what would you recommend as a cleaning plan? 
-Give me a prioritized roadmap with quick wins and longer-term actions. 
-Create a Markdown with that plan.
-```
+  ```
+  Bob, based on everything you've seen in our repository —
+  the duplicates, the legacy classes, the naming inconsistencies — 
+  what would you recommend as a cleaning plan? 
+  Give me a prioritized roadmap with quick wins and longer-term actions. 
+  Create a Markdown with that plan.
+  ```
 
 ## ✅ Expected Output from Bob
 
-Bob should produce a structured roadmap:
+Bob should produce a structured roadmap similar to:
 
-```
-# Repository Cleanup Roadmap - Executive Summary
+:::info 
+#### Repository Cleanup Roadmap - Executive Summary
 
-## 12-Week Plan | 5 Phases | 61 → 56 Classes
+#### 12-Week Plan | 5 Phases | 61 → 56 Classes
 
 ---
 
-## Phase 1: Quick Wins (Weeks 1-3)
+#### Phase 1: Quick Wins (Weeks 1-3)
 **Focus:** Low-risk consolidations + complete documentation
 
 **Actions:**
@@ -47,7 +47,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Phase 2: Investigation & Planning (Weeks 4-6)
+#### Phase 2: Investigation & Planning (Weeks 4-6)
 **Focus:** Understand before acting
 
 **Actions:**
@@ -62,7 +62,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Phase 3: Medium-Risk Changes (Weeks 7-9)
+#### Phase 3: Medium-Risk Changes (Weeks 7-9)
 **Focus:** Customs, choice lists, execute Phase 2 decisions
 
 **Actions:**
@@ -77,7 +77,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Phase 4: HR Enhancement (Weeks 10-12)
+#### Phase 4: HR Enhancement (Weeks 10-12)
 **Focus:** Build out HR domain with specialized classes
 
 **Actions:**
@@ -99,7 +99,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Phase 5: Governance & Monitoring (Ongoing)
+#### Phase 5: Governance & Monitoring (Ongoing)
 **Focus:** Maintain improvements
 
 **Actions:**
@@ -115,7 +115,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Summary: All 5 Duplicates Addressed
+#### Summary: All 5 Duplicates Addressed
 
 | Duplicate Class | Target Class | Phase | Week | Risk |
 |----------------|--------------|-------|------|------|
@@ -127,7 +127,7 @@ Bob should produce a structured roadmap:
 
 ---
 
-## Key Outcomes
+#### Key Outcomes
 
 **Class Optimization:**
 - Start: 61 classes
@@ -145,18 +145,17 @@ Bob should produce a structured roadmap:
 **Timeline:** 12 weeks  
 **Team:** 3 FTE core + part-time support  
 **ROI:** 2.5 year payback period
----
 
-**Full Roadmap:** [`audits/repository-cleanup-roadmap.md`](audits/repository-cleanup-roadmap.md)
-```
+**Full Roadmap:** `audits/repository-cleanup-roadmap.md`
+:::
 
 ## 💡 The Governance Lesson
 
-Bob's roadmap mirrors what's already documented in classification and cleaning plans — but Bob derived it **from the live repository**, not from a static document. This is the power of AI + MCP: the recommendations are always based on the current state of the system.
+Bob's roadmap mirrors what FileNet administrators would produce manually — but Bob derived it **from the live repository**, not from a static document or prior knowledge. The recommendations reflect the current state of the system at the moment you asked.
 
 ## 🏁 Lab Summary
 
-In this lab, Bob helped you:
+In this lab, Bob helped you to:
 
 | What Bob Did | MCP Tool Used |
 |-------------|--------------|
@@ -166,13 +165,13 @@ In this lab, Bob helped you:
 | Explained the inheritance model | AI reasoning on property metadata |
 | Produced a prioritized cleaning roadmap | AI synthesis of all findings |
 
-## Key Takeaways
+## 💡 Key Takeaways
 
-1. **Bob can interrogate a live repository** — no need to navigate admin consoles or read static documentation
-2. **The "class vs property" design decision** is the root cause of class proliferation
-3. **HRDocument is well-designed** — it uses `DocType` to differentiate document types rather than creating separate classes
-4. **Governance is the long-term solution** — not just a one-time cleanup
+- **Bob can interrogate a live repository** — no need to navigate admin consoles or read static documentation
+- **The "class vs property" design decision** is the root cause of class proliferation
+- **HRDocument is well-designed** — it uses `DocType` to differentiate document types rather than creating separate classes
+- **Governance is the long-term solution** — not just a one-time cleanup
 
 ## ➡️ Next Step
 
-In Lab 2, you'll generate 55 realistic HR documents and upload them to the repository using Bob — with a few deliberate mistakes that you'll fix in Lab 3.
+In the next lab, you'll generate 55 realistic HR documents and upload them to the repository using Bob — with a few deliberate mistakes that you'll fix in the last lab.

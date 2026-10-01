@@ -6,69 +6,79 @@ duration: "~5 minutes"
 description: "Identify duplicates, legacy classes, and naming inconsistencies"
 ---
 
-## The Situation
+## 📋 The Situation
 
 Now that you have the full list, you want Bob to flag anything suspicious — duplicates, legacy classes, naming inconsistencies, demo classes that shouldn't be in production.
 
 ## 💬 Prompt to Bob
 
-Switch to **Ask Mode**
+1. For this, switch to **Ask Mode** and enter the following prompt:
 
-```
-Bob, looking at that class inventory, which classes look like duplicates, 
-legacy classes, or things we should clean up? 
-I'm particularly worried about classes that seem to serve the same purpose.
-```
+   ```
+   Looking at that class inventory, which classes look like duplicates, 
+   legacy classes, or things we should clean up? I'm particularly worried 
+   about classes that seem to serve the same purpose.
+   ```
 
 ## 🔍 What Bob Does Behind the Scenes
 
-1. Analyzes the class names for patterns: prefix groups (`LG_`, `usr1_`, `usr2_`, `wel`, `ZV_`), naming inconsistencies, obvious demo names
-2. Calls `get_class_property_descriptions` on suspect classes to compare their property sets
-3. Identifies classes with identical or near-identical property structures
+- Analyzes the class names for patterns: prefix groups (e.g. `LG_`, `usr1_`, `usr2_`, `wel`, `ZV_`), naming inconsistencies and obvious demo names.
+- Calls `get_class_property_descriptions` on suspect classes to compare their property sets
+- Identifies classes with identical or near-identical property structures
 
 ## ✅ Expected Output from Bob
 
 Bob should return a structured catalog similar to:
 
-```
-## Critical Findings:
+::: info 
 
-### **5 Confirmed Duplicates** (Immediate Action Required):
+All 5 consolidation candidates have **zero documents**. Here is the complete cleanup analysis:
 
-1. **`AangifteBTWKwartaal`** → Merge into `AangifteBTW`
-   - Same purpose: VAT returns
-   - Fix: Add "Period" property (Monthly/Quarterly/Annual)
-   - Risk: LOW | Priority: HIGH
+#### Cleanup Analyse: Duplicaten & Consolidatiekandidaten
 
-2. **`CorrectieAangifteLoonheffingen`** → Merge into `AangifteLoonheffingen`
-   - Corrections should be a flag, not separate class
-   - Fix: Add "IsCorrection" boolean property
-   - Risk: LOW | Priority: HIGH
+---
 
-3. **`VoortaxatieVennootschapsbelasting`** → Merge into `AangifteVennootschapsbelasting`
-   - Provisional vs. Final should be a property
-   - Fix: Add "AssessmentType" property
-   - Risk: LOW | Priority: HIGH
+##### 🔴 Prioriteit 1 — Lege klassen die dezelfde entiteit modelleren als een bestaande klasse
 
-4. **`VereenvoudigdeDouaneaangifte`** → Merge into `Douaneaangifte`
-   - Simplified vs. Standard is a procedure type
-   - Fix: Add "DeclarationType" property
-   - Risk: MEDIUM | Priority: MEDIUM
+These 5 classes have **0 documents** and are structurally redundant. They can be removed without data migration.
 
-5. **`MotorrijtuigenbelastingAangifte`** → Review for consolidation
-   - May be redundant or legacy
-   - Needs document count and usage analysis
-   - Risk: MEDIUM | Priority: MEDIUM
+| Klasse (verwijderen) | Samenvoegen met | Reden |
+|---|---|---|
+| `AangifteBTWKwartaal` | `AangifteBTW` | Zelfde document, andere periodiciteit — voeg eigenschap `Periode` (Maandelijks/Kwartaal/Jaarlijks) toe |
+| `CorrectieAangifteLoonheffingen` | `AangifteLoonheffingen` | Correctie is een kenmerk, geen aparte documentsoort — voeg boolean `IsCorrectie` toe |
+| `VoortaxatieVennootschapsbelasting` | `AangifteVennootschapsbelasting` | Voorlopig vs. definitief is een aanslageigenschap — voeg `AanslagType` toe |
+| `MotorrijtuigenbelastingAangifte` | *(onderzoek vereist)* | Mogelijk verouderd/ongebruikt — geen documenten, geen duidelijke pendant |
+| `VereenvoudigdeDouaneaangifte` | `Douaneaangifte` | AEO-vereenvoudiging is een proceduretype — voeg eigenschap `AangifteType` (Standaard/Vereenvoudigd) toe |
 
-### **Suspicious Classes** (Investigation Required):
+---
 
-- **`AangifteDocument`** - Empty description, unclear if parent class or catch-all
-- **`BTWControlerapport`** - Audit reports may need separate hierarchy
+##### 🟡 Prioriteit 2 — Overlappende domaanklassen (nader onderzoek)
 
-## Impact:
-- **Potential reduction:** 61 → 56 classes (8% reduction)
-- **Tax return classes:** 15 → 10-11 classes (27-33% reduction)
-```
+| Klasse | Probleem | Aanbeveling |
+|---|---|---|
+| `AangifteBTW` + `BTWCorrectiemelding` + `BTWTeruggaafVerzoek` | Drie aparte klassen voor één BTW-levenscyclus | Overweeg één klasse `BTWDocument` met eigenschap `Documenttype` |
+| `VoorlopigAanslagIB` + `AanslagBiljet` | Zowel voorlopige als definitieve aanslag als aparte klassen | Prima als ze echt andere eigenschappen hebben — anders samenvoegen met `AanslagType` |
+| `Douaneaangifte` + `InvoerAangifte` + `UitvoerAangifte` | In-/uitvoer zijn varianten van dezelfde douaneaangifte | Overweeg consolidatie met eigenschap `Richting` (Invoer/Uitvoer/Doorvoer) |
+
+---
+
+##### 🟢 Prioriteit 3 — Eigenschapcontrole aanbevolen
+
+Both `AangifteBTW` and `AangifteBTWKwartaal` have **identical property sets** — only system properties, no domain-specific custom properties at all. This confirms they were differentiated by class name instead of by data, which is the core structural problem throughout this schema.
+
+---
+
+##### Samenvatting
+
+| Categorie | Aantal klassen | Actie |
+|---|---|---|
+| Lege redundante klassen | 5 | Verwijderen + samenvoegen |
+| Overlappende levenscycluskansen | 6–8 | Nader onderzoek + eventueel consolideren |
+| Klassen zonder eigen eigenschappen | Minstens 2 bevestigd | Voeg domeinspecifieke properties toe |
+
+The root cause across all cases is the same: **document variants are modelled as separate classes instead of as property values**. Fixing this will reduce the business class count from 31 to roughly 18–20 well-structured classes.
+
+:::
 
 
 ## 💡 Key Insight
