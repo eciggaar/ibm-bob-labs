@@ -6,105 +6,132 @@ duration: "~5 minutes"
 description: "Run the script to create your personal document set"
 ---
 
-## The Situation
+## 📋 The Situation
 
 You need to create sample HR documents to work with, but you're not sure how the generation script works or what it will create. You ask Bob to explain the code and the process.
 
 ## 💬 Prompt to Bob
 
-Switch to **Code Mode**
+1. Switch to **Agent Mode** and enter the following prompt:
 
-```
-Bob, I need to generate sample HR documents for this lab.
-Can you explain how the generate_hr_documents.py script works?
-What will it create, what are the parameters I can provide and can you run it for me?
-```
+    ```
+    I need to generate sample HR documents for this lab. Can you explain 
+    how the generate_hr_documents.py script works? What will it create, what 
+    are the parameters I can provide and can you run it for me?
+    ```
+
+    When asked to provide your last name, enter your last name and mention that you want the script to seed some missclassifications:
+  
+    ```
+    Use DUPONT as last name and use the seed-miclassification flag  
+    ```
+
 
 ## 🔍 What Bob Does Behind the Scenes
 
-1. Reads the script's docstring and help text
-2. Explains the multi-user isolation approach
-3. Offers to run the script on your behalf with your last name
+- Reads the script's docstring and help text
+- Explains the multi-user isolation approach
+- Offers to run the script on your behalf with your last name
+- Seed missclassifications in the documents
 
 ## ✅ Expected Output from Bob
 
-```
-📄 HR Document Generation Script — How It Works
-═══════════════════════════════════════════════════════
+::: info
 
-The generate_hr_documents.py script creates a personal set of realistic
-HR documents for you to work with in this lab.
+Done. Here's a summary of what was generated and what the script does.
 
-🔑 Key Features:
-  • Multi-user safe — each participant gets their own namespace
-  • Deterministic — your last name generates a unique but reproducible
-    set of 5 fictional employees
-  • Isolated — your files and repository paths won't conflict with others
+---
 
-📂 What It Creates:
-  • 5 fictional employees with realistic names, departments, and roles
-  • 11 documents per employee (55 total):
-    - Job Application, Interview Notes
-    - Employment Contract
-    - ID Documents, Personal Info
-    - Payslip, Salary Info
-    - Performance Review
-    - Training Record
-    - Disciplinary Record
-    - Exit Notes
+#### How `generate_hr_documents.py` works
 
-🏷️ Namespace Example:
-  If your last name is DUPONT:
-    • Local folder: HR_DUPONT/
-    • Repository path: /BOB_LAB/DUPONT/
-    • Employee IDs: DUP001, DUP002, DUP003, DUP004, DUP005
+---
 
-📋 Usage:
-  Interactive:  python generate_hr_documents.py
-  Direct:       python generate_hr_documents.py --user YOURLASTNAME
+##### What it creates
 
-Would you like me to run this script for you?
-If so, please provide your last name and I'll generate your personal document set.
-```
+**55 text files** in `HR_DUPONT/`, organised into one sub-folder per employee, each with 8 sub-folders (one per document category):
+
+| Folder | Document type |
+|---|---|
+| `01_Recruitment` | Job Application, Interview Notes |
+| `02_Employment_Contract` | Employment Contract |
+| `03_Personal_Administration` | ID Documents, Personal Info |
+| `04_Payroll` | Payslip, Salary Info |
+| `05_Performance` | Performance Review |
+| `06_Training` | Training Record |
+| `07_Disciplinary` | Disciplinary Record |
+| `08_Exit` | Exit Notes |
+
+Each file also contains a **metadata comment block** at the bottom specifying the `HRDocument` class properties (EmployeeID, FirstName, LastName, DocType, Department, etc.) that should be set when uploading to the repository.
+
+---
+
+##### Multi-user isolation
+
+Your last name (`DUPONT`) is hashed with SHA-256 to produce a deterministic seed — so you always get the **same 5 fictional employees**, and your files never collide with another participant's. Output goes to `HR_DUPONT/` and the target repository path is `/BOB_LAB/DUPONT/`.
+
+---
+
+##### Your 5 employees
+
+| # | ID | Name | Department | Role |
+|---|---|---|---|---|
+| 1 | DUP001 | Antoine Muller | Human Resources | HR Specialist |
+| 2 | DUP002 | Lina Girard | Finance | Financial Analyst |
+| 3 | DUP003 | Lucas Mercier | Marketing | Marketing Manager |
+| 4 | DUP004 | Mia Renard | IT | Senior Developer |
+| 5 | DUP005 | Amira Dubois | Sales | Sales Representative |
+
+---
+
+##### CLI parameters
+
+| Flag | Description |
+|---|---|
+| `--user LASTNAME` | Set the lab namespace non-interactively (e.g. `DUPONT`) |
+| `--seed-misclassifications` | Inject 5 deliberate errors for Lab 3 |
+| `--dry-run` | Preview what would be generated without writing any files |
+| `--employee N` | Generate documents for only one employee (1-based index) |
+
+---
+
+##### The 5 seeded errors (Lab 3)
+
+| Employee | Document | Error |
+|---|---|---|
+| DUP001 Antoine Muller | `DUP001_Payslip_2024_01.txt` | Uploaded as base `Document` class — no EmployeeID |
+| DUP002 Lina Girard | `DUP002_Employment_Contract.txt` | Wrong class (`Contract` instead of `HRDocument`), missing Department |
+| DUP003 Lucas Mercier | `DUP003_Performance_Review_2024.txt` | Wrong EmployeeID (`000000` instead of `DUP003`) |
+| DUP004 Mia Renard | `DUP004_Disciplinary_Record.txt` | Uploaded as base `Document` class — no metadata at all |
+| DUP005 Amira Dubois | `DUP005_Exit_Notes.txt` | Correct class but missing `Department` and `DocType` |
+
+These are the documents Bob will need to detect and fix in the Lab 3 reclassification exercise.
+
+:::
 
 ## 💬 Follow-up Prompt to Bob
 
-```
-Show me what employees were generated?
-```
-
+1. After the `generate_hr_documents.py` script successfully completed, enter the following prompt:
+    ```
+    Show me what employees were generated
+    ```
+  
 ## ✅ Expected Output from Bob
 
-```
-✅ Document Generation Complete
-═══════════════════════════════════════════════════════
+::: info
 
-I've generated your personal HR document set using namespace: DUPONT
+The employee list was already printed in the previous run output. Here it is:
 
-📂 Output folder: HR_DUPONT/
-🗂️  Repository path: /BOB_LAB/DUPONT/
+| # | ID | Name | Department | Role |
+|---|---|---|---|---|
+| 1 | DUP001 | Antoine Muller | Human Resources | HR Specialist |
+| 2 | DUP002 | Lina Girard | Finance | Financial Analyst |
+| 3 | DUP003 | Lucas Mercier | Marketing | Marketing Manager |
+| 4 | DUP004 | Mia Renard | IT | Senior Developer |
+| 5 | DUP005 | Amira Dubois | Sales | Sales Representative |
 
-Your 5 employees for this lab:
-┌────┬──────────┬────────────────────────┬─────────────────────┬───────────────────────┐
-│ #  │ ID       │ Name                   │ Department          │ Role                  │
-├────┼──────────┼────────────────────────┼─────────────────────┼───────────────────────┤
-│ 1  │ DUP001   │ Antoine Muller         │ Human Resources     │ HR Specialist         │
-│ 2  │ DUP002   │ Lina Girard            │ Finance             │ Financial Analyst     │
-│ 3  │ DUP003   │ Lucas Mercier          │ Marketing           │ Marketing Manager     │
-│ 4  │ DUP004   │ Mia Renard             │ IT                  │ Senior Developer      │
-│ 5  │ DUP005   │ Amira Dubois           │ Sales               │ Sales Representative  │
-└────┴──────────┴────────────────────────┴─────────────────────┴───────────────────────┘
-
-✅ 55 documents created successfully in HR_DUPONT/
-
-These employees are unique to you and deterministically generated from your
-last name. Running the script again with "DUPONT" will always give you the
-same employees.
-
-Next: I'll help you upload these documents to the repository with the correct
-metadata (EmployeeID, DocType, Department, etc.).
-```
+5 employees total, all fictional and deterministically derived from the `DUPONT` namespace seed.
+:::
 
 ## 💡 Key Insight
 
-Notice how Bob can **read the script**, **explain how it works**, and **run it on the participant's behalf**. This is a key pattern in AI-assisted labs and when working with AI coding agents like Bob: participants don't need to have an in-depth understanding of (in this case) Python or command-line tools — they just ask Bob, and Bob handles the technical details.
+You didn't need to read the Python source, look up the CLI flags, or figure out the right command to run — you just described what you wanted in plain language. This is the core shift that AI coding agents like IBM Bob enable: the mental overhead of *how to run a tool* is replaced by simply stating *what you need*. The same principle applies throughout this lab.

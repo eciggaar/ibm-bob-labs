@@ -6,21 +6,23 @@ duration: "~10 minutes"
 description: "Browse your documents in the web interface"
 ---
 
-## The Situation
+## 📋 The Situation
 
 Now that your documents are uploaded, you can review them directly in IBM Content Navigator's web interface. This gives you a visual way to browse your namespace, view document properties, and verify the upload was successful.
 
 ## 🌐 Access IBM Content Navigator
 
-**Portal URL:** Obtain from your lab administrator
+**Portal URL:** Can be found in the Box note (link provided by your lab facilitator)
 
-**Login Credentials:** Obtain from your lab administrator
+**Login Credentials:** Can be found in the Box note (link provided by your lab facilitator)
 
 ## 📂 Navigate to Your Documents
 
-1. **Log in** to IBM Content Navigator using the credentials provided
-2. **Click the tile** "Bladeren in content"**
-3. **Navigate** to your folder: `/BOB_LAB/<YOUR_LASTNAME>`
+1. Log in to IBM Content Navigator using the credentials provided
+
+1. Click the tile **Bladeren in content**.
+
+1. Navigate to your folder: `/BOB_LAB/<YOUR_LASTNAME>`
 
 ## 🔍 What You'll See
 
@@ -52,10 +54,11 @@ Use Navigator to verify:
 
 - All 55 documents are present in your namespace
 - Documents are organized by employee folder
-- Each document shows `HRDocument` as its class
-- `EmployeeID` property is correctly set
-- `DocType` property matches the document type
-- `Department`, `FirstName`, `LastName` are populated
+- Most documents show `HRDocument` as their class — 3 will not (DUP001's payslip and DUP004's disciplinary record are bare `Document`; DUP002's employment contract is `Contract`)
+- For correctly classified documents: `EmployeeID`, `DocType`, `Department`, `FirstName`, and `LastName` are populated
+- For DUP003's performance review: class is `HRDocument` but `EmployeeID` is `000000`
+- For DUP005's exit notes: class is `HRDocument` but `Department` and `DocType` are missing
+- These 5 errors are intentional — they will be detected and corrected in Lab 3
 - Content is readable (click to view document content)
 
 ## 💡 Navigator vs. Bob
@@ -79,12 +82,17 @@ IBM Content Navigator provides a **visual interface** for browsing and managing 
 Try using Navigator's search feature:
 
 1. Navigate to the search interface
-2. Click **Search Content** in the HomePage navigation
-3. Search for the saved search "BOB HR Search" and click on it
-4. Add search criteria:
+
+1. Click **Search Content** in the HomePage navigation
+
+1. Search for the saved search "BOB HR Search" and click on it
+
+1. Add search criteria:
    - **EmployeeID:** `DUP001` (or your first employee's ID)
-5. Click **Search**
-6. You should see all documents for that employee
+
+1. Click **Search**
+
+1. You should see all documents for that employee
 
 ## 🏁 Lab Summary
 
@@ -97,16 +105,16 @@ In this lab, you:
 | Generated 55 realistic HR documents | `python generate_hr_documents.py --user YOURLASTNAME` |
 | Uploaded your first employee's 11 documents | Bob called `create_document` × 11 |
 | Uploaded remaining 44 documents | Bob called `create_document` × 44 |
-| Verified a document's properties | Bob called `lookup_documents_by_name` + `get_document_properties` |
+| Verified a document's properties | Bob called `lookup_documents_by_path` + `get_document_properties` |
 | Reviewed documents in Navigator | Browsed `/BOB_LAB/YOURLASTNAME/` in IBM Content Navigator web UI |
 
-## Key Takeaways
+## 💡 Lessons Learned
 
-1. **`create_document` requires class + properties** — the class determines which properties are available; the properties give the document its business meaning
-2. **`DocType` is the discriminator** — all HR documents share the same class; `DocType` tells you what kind of document it is
-3. **Personal namespace = no conflicts** — your last name isolates your work from other participants in the shared repository
-4. **Metadata at creation time** — it's much easier to set properties when creating a document than to fix them later (as you'll see in Lab 3)
+- **`create_document` requires class + properties** — the class determines which properties are available; the properties give the document its business meaning
+- **Properties are only as good as what you set** — a document filed under the wrong class loses all its HR metadata. The verification in step 5 made this tangible: the payslip existed in the right folder but was invisible to any HR query
+- **Personal namespace = no conflicts** — your last name isolates your work from other participants in the shared repository
+- **Metadata at creation time** — it's much easier to set properties when creating a document than to fix them later (as you'll see in Lab 3)
 
 ## ➡️ Next Step
 
-In Lab 3, Bob will help you search **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating the full AI-powered classification pipeline.
+In the next lab, Bob will help you search **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating a full AI-powered classification pipeline.
