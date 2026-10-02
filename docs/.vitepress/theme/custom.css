@@ -1,0 +1,18 @@
+.VPFeatures ul.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.VPFeatures ul.items > li.item,
+.VPFeatures ul.items > li.item > .VPFeature,
+.VPFeatures ul.items > li.item > .VPFeature > .box {
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  width: auto;
+  height: auto;
+}
+
+.VPFeatures ul.items > li.item .details {
+  margin-top: 8px;
+}
