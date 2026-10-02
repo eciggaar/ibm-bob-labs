@@ -3,16 +3,13 @@
 layout: home
 
 hero:
-  name: "IBM Client Engineering"
-  text: "IBM Bob and IBM FileNet Content Manager"
-  tagline: My great project tagline
+  name: "IBM Bob and IBM FileNet Content Manager"
+  text: ""
+  tagline: ""
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Start Here →
+      link: /ibm-bob-labs
 
 features:
   - title: Feature A
@@ -22,4 +19,3 @@ features:
   - title: Feature C
     details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
 ---
-
