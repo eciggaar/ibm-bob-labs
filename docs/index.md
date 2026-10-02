@@ -12,10 +12,16 @@ hero:
       link: /ibm-bob-labs
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 🛠️ Get Started with IBM Bob
+    details: Install IBM Bob, set up your environment, and learn the IDE basics — including modes, MCP servers, and skills — before diving into the labs.
+    link: /ibm-bob/
+  - title: 🗂️ Lab 1 — Meet Bob, your AI Documentalist
+    details: Use Bob to inventory all document classes in a live FNCM repository, explore the class hierarchy, deep-dive into HRDocument, and get a prioritised cleanup roadmap.
+    link: /documentalist-lab/bob-as-documentalist/
+  - title: 📄 Lab 2 — Feeding Bob — Generate Sample Content
+    details: Generate a personal set of 55 HR documents across 5 employees, upload them to the repository with correct metadata, and verify their classification.
+    link: /documentalist-lab/generate-sample-content/
+  - title: 🔍 Lab 3 — Bob the Classifier — Review & Reclassify
+    details: Find misclassified documents using AI-powered content reasoning, reclassify them with the correct class and properties, and produce a final governance health report.
+    link: /documentalist-lab/review-and-reclassify/
 ---
