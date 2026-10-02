@@ -1,11 +1,3 @@
----
-title: "Verify Documents"
-lab_series: "generate-sample-content"
-section_number: 5
-duration: "~5 minutes"
-description: "Check that the HR documents were created correctly"
----
-
 ## 📋 The Situation
 
 Before moving on, you want to verify that the documents were uploaded correctly. For this, check the payslip for your first employee.

@@ -1,11 +1,3 @@
----
-title: "Upload First Employee"
-lab_series: "generate-sample-content"
-section_number: 3
-duration: "~10 minutes"
-description: "Upload the HR documents for your first employee"
----
-
 ## 📋 The Situation
 
 The files are ready. Now you'll ask Bob to upload the first employee's documents. Adapt the prompt below using **your own employee names and IDs** from the script output.

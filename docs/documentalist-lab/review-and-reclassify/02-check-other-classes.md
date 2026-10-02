@@ -1,53 +1,43 @@
----
-title: "Check Other Classes"
-lab_series: "review-and-reclassify"
-section_number: 2
-duration: "~5 minutes"
-description: "Find documents in wrong classes"
----
-
-## The Situation
+## 📋 The Situation
 
 The audit found 2 issues in `HRDocument`. But what about documents in your namespace that should be `HRDocument` but were accidentally filed under the wrong class entirely — like the base `Document` class or the `Contract` class?
 
 ## 💬 Prompt to Bob
 
-> ⚠️ Replace `DUPONT` and `DUP` with your actual namespace and employee ID prefix.
+::: warning ⚠️ Important
+- Replace `DUP` with your actual employee ID prefix. Remember, your actual prefix are the first three chars of your lastname (e.g. `DUPONT`) which is used as namespace.
 
-Switch to **Ask Mode**
+- Furthermore, keep the chat open and **approve each step** when prompted. Bob will ask for confirmation before e.g. invoking skills, executing commands and creating files.
 
-```
-Check the document classes of the documents starting with CIG001 and see if there are mismatches
-```
+:::
+
+1. Make sure **Agent Mode** is selected and enter the following prompt:
+
+    ```
+    Check the document classes of the documents starting with DUP001 and see 
+    if there are mismatches.
+    ```
 
 ## 🔍 What Bob Does Behind the Scenes
 
-1. Calls `lookup_documents_by_name` with keyword `"CIG001"` looking for documents in your namespace that start with CIG001.  with names matching your employee ID pattern (e.g., `DUP[0-9]{3}_*`)
-2. Analyses their classifications
+- Calls `lookup_documents_by_name` with keyword `"DUP001"` looking for documents in your namespace that start with CIG001.  with names matching your employee ID pattern (e.g., `DUP[0-9]{3}_*`)
+- Analyses their classifications
 
 ## ✅ Expected Output from Bob
 
-```
-I found 11 documents starting with CIG001 and identified **one classification mismatch**:
+::: info
 
-**Misclassified Document:**
-- [`CIG001_Payslip_2024_01.txt`]({9ED04420-0000-C109-8C2D-F73C3D0151F5}) - Currently classified as generic `Document` instead of `HRDocument`
+`DUP001_Payslip_2024_01` is in the `class_issues` list. Here is the class mismatch report, filtered to what you asked about:
 
-**Correctly Classified (10 documents):**
-All other CIG001 documents are properly classified as `HRDocument`:
-- CIG001_Job_Application.txt
-- CIG001_Interview_Notes.txt
-- CIG001_Employment_Contract.txt
-- CIG001_Personal_Info.txt
-- CIG001_ID_Documents.txt
-- CIG001_Salary_Info.txt
-- CIG001_Performance_Review_2024.txt
-- CIG001_Training_Record.txt
-- CIG001_Disciplinary_Record.txt
-- CIG001_Exit_Notes.txt
+| Document Name | Actual Class | Expected Class | Document ID |
+|---|---|---|---|
+| `DUP001_Payslip_2024_01` | `Document` | `HRDocument` | `{A0F70520-0000-C139-8A2E-AD79B79AB60E}` |
 
-**Summary:** 90.9% correctly classified (10/11). The payslip document should be reclassified to HRDocument to align with the other HR documents in this series.
-```
+**1 document starting with `DUP001` is misclassified** — it is filed under the base `Document` class instead of `HRDocument`.
+
+Would you like me to triage it (read its content to confirm the correct classification) and fix it?
+
+:::
 
 ## 💡 The Iceberg Problem
 

@@ -1,11 +1,3 @@
----
-title: "Bob, Explain the Inheritance"
-lab_series: "bob-as-documentalist"
-section_number: 4
-duration: "~5 minutes"
-description: "Understand the class hierarchy and inheritance model"
----
-
 ## 📋 The Situation
 
 A business analyst in the room asks: *"Why does HRDocument have 108 properties? That seems like a lot."* You ask Bob to explain the inheritance model.

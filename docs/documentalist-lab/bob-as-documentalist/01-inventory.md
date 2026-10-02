@@ -1,11 +1,3 @@
-<!-- ---
-title: "Bob, What Do We Have?"
-lab_series: "bob-as-documentalist"
-section_number: 1
-duration: "~5 minutes"
-description: "Get a complete inventory of all document classes in the repository"
---- -->
-
 ::: info 🎬 The Story
 *It's Monday morning. You've just been handed a spreadsheet with 48 document class names and told: "We  need to clean this up." You don't know what half of them do. Some were created years ago by people who have since left. Some look like duplicates. Some are clearly demo classes that somehow ended up in production*.
 

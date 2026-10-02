@@ -1,11 +1,3 @@
----
-title: "Bob, What Looks Wrong?"
-lab_series: "bob-as-documentalist"
-section_number: 2
-duration: "~5 minutes"
-description: "Identify duplicates, legacy classes, and naming inconsistencies"
----
-
 ## 📋 The Situation
 
 Now that you have the full list, you want Bob to flag anything suspicious — duplicates, legacy classes, naming inconsistencies, demo classes that shouldn't be in production.

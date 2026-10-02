@@ -1,12 +1,3 @@
----
-title: "Meet Bob, your AI documentalist"
-description: "Explore the document class model, relationships, and cleaning recommendations. Learn to inventory document classes and identify the historical debt of your repository."
-lab_series: "bob-as-documentalist"
-section_number: 1
-total_sections: 5
-estimated_duration: "30 minutes"
----
-
 ## Overview
 
 In this lab you learn how to use IBM Bob with IBM Content Services to inventory, classify, and govern documents in a live FNCM repository. You'll explore the document class model, understand class hierarchies, and get AI-powered recommendations for cleaning up your repository.

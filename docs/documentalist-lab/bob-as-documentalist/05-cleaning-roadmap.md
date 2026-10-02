@@ -1,11 +1,3 @@
----
-title: "Bob, Give Me a Cleaning Roadmap"
-lab_series: "bob-as-documentalist"
-section_number: 5
-duration: "~10 minutes"
-description: "Get a prioritized action plan for repository cleanup"
----
-
 ## 📋 The Situation
 
 You've seen the inventory, the duplicates, the legacy classes, and the inheritance model. Now you want Bob to synthesize everything into a prioritized action plan.

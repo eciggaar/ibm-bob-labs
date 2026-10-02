@@ -1,11 +1,3 @@
----
-title: "Upload Remaining Employees"
-lab_series: "generate-sample-content"
-section_number: 4
-duration: "~10 minutes"
-description: "Batch upload the remaining 4 employees"
----
-
 ## 📋 The Situation
 
 Your first employee's documents are in. Now you'll upload the remaining 4 employees in one go.

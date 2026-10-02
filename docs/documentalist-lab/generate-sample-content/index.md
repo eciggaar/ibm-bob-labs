@@ -1,12 +1,3 @@
----
-title: "Feeding Bob: generate sample content"
-description: "Create realistic HR documents to populate the repository. Generate and upload 55 sample documents with proper metadata."
-lab_series: "generate-sample-content"
-section_number: 2
-total_sections: 6
-estimated_duration: "45 minutes"
----
-
 ## Overview
 
 > **Note:** Bob's responses might vary slightly from the examples in this tutorial, but its key actions should be the same.

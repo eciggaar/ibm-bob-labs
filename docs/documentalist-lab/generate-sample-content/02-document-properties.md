@@ -1,11 +1,3 @@
----
-title: "Understand Document Properties"
-lab_series: "generate-sample-content"
-section_number: 2
-duration: "~5 minutes"
-description: "Learn which metadata to set on HR documents"
----
-
 ## 📋 The Situation
 
 Before uploading anything, you want Bob to tell you exactly which properties matter for HR documents — so you know what metadata to include when creating each document.

@@ -1,11 +1,3 @@
----
-title: "Review in Navigator"
-lab_series: "generate-sample-content"
-section_number: 6
-duration: "~10 minutes"
-description: "Browse your documents in the web interface"
----
-
 ## 📋 The Situation
 
 Now that your documents are uploaded, you can review them directly in IBM Content Navigator's web interface. This gives you a visual way to browse your namespace, view document properties, and verify the upload was successful.

@@ -1,76 +1,50 @@
----
-title: "Fix All Documents"
-lab_series: "review-and-reclassify"
-section_number: 5
-duration: "~10 minutes"
-description: "Batch process remaining issues"
----
-
-## The Situation
+## 📋 The Situation
 
 One document is fixed. Now you'll ask Bob to process the remaining misclassified documents in one go.
 
 ## 💬 Prompt to Bob
+::: warning ⚠️ Important
+- Keep the chat open and **approve each step** when prompted. Bob will ask for confirmation before e.g. invoking skills, executing commands and creating files.
+:::
 
-Switch to **Content Repository Auditor Mode**
+1. Make sure **Agent Mode** is selected and enter the following prompt:
 
-```
-Bob, now fix the remaining misclassified documents using the same approach — 
-read each one, determine the correct classification, and fix it. 
-Show me a summary when you're done.
-```
+    ```
+    Now fix the remaining misclassified documents using the same approach. 
+    That is, read each one, determine the correct classification, and fix it. 
+    Show me a summary when you're done.
+    ```
 
 ## 🔍 What Bob Does Behind the Scenes
 
-For each of the remaining documents:
-1. Calls `get_document_text_extract` → reads content
-2. Calls `get_document_properties` → checks current state
-3. Determines correct class and properties from content
-4. Calls `update_document_class` if class needs changing
-5. Calls `update_document_properties` to set correct metadata
+- **Follows the `hr-classification-workflow` skill's bulk fix instructions** — the skill defines the exact sequence: read content, change class if needed, then set properties. Bob loads the generated file `audit_results_dupont.json` to get the remaining issues, then for each document:
+- **MCP tool `property-extraction-cs-mcp-server` → `property_extraction`** — reads the document's content and current properties in one call.
+- **MCP tool `core-cs-mcp-server` → `update_document_class`** — reclassifies to `HRDocument` if the class is wrong (skipped for documents already correctly classed).
+- **MCP tool `core-cs-mcp-server` → `update_document_properties`** — sets `EmployeeID`, `Department`, `DocType`, and name fields from the document content.
 
 ## ✅ Expected Output from Bob
 
-```
-🔄 Batch Reclassification Complete (Namespace: /BOB_LAB/DUPONT/)
-════════════════════════════════════════════════════════════════════
+::: info 
 
-Document #1: DUP003_Performance_Review_2024.txt
-  Issue:  EmployeeID was 000000 (wrong)
-  Fix:    Updated EmployeeID: 000000 → DUP003
-  Class:  HRDocument (unchanged — already correct)
-  Status: ✅ Fixed
+#### Remediation Summary — DUPONT
 
-Document #2: DUP005_Exit_Notes.txt
-  Issue:  Missing EmployeeID and DocType
-  Fix:    Set EmployeeID=DUP005, DocType=ExitDocument, Department=Sales
-  Class:  HRDocument (unchanged — already correct)
-  Status: ✅ Fixed
+| Document | Previous Class | New Class | EmployeeID set | DocType | Status |
+|---|---|---|---|---|---|
+| `DUP002_Employment_Contract.txt` | `Contract` | `HRDocument` | `DUP002` | `EmploymentContract` | ✅ Fixed |
+| `DUP004_Disciplinary_Record.txt` | `Document` | `HRDocument` | `DUP004` | `DisciplinaryRecord` | ✅ Fixed |
+| `DUP003_Performance_Review_2024.txt` | `HRDocument` | `HRDocument` | `DUP003` *(was `000000`)* | `PerformanceReview` | ✅ Fixed |
+| `DUP005_Exit_Notes.txt` | `HRDocument` | `HRDocument` | `DUP005` *(was missing)* | `ExitDocument` | ✅ Fixed |
 
-Document #4: DUP004_Disciplinary_Record.txt
-  Issue:  Wrong class (Document), no metadata
-  Content analysis: Disciplinary record for Mia Renard (ID: DUP004)
-  Fix:    Reclassified Document → HRDocument
-          Set EmployeeID=DUP004, DocType=DisciplinaryRecord, Department=IT
-          Set FirstName=Mia, LastName=Renard, JobRole=Senior Developer
-  Status: ✅ Fixed
+**Fixed: 4 | Errors: 0 | Total: 4**
 
-Document #5: DUP002_Employment_Contract.txt
-  Issue:  Wrong class (Contract), missing Department
-  Content analysis: Employment contract for Lina Girard (ID: DUP002)
-  ⚠️  Warning: Changing from Contract → HRDocument
-      Contract-specific properties will be lost. Proceeding as instructed.
-  Fix:    Reclassified Contract → HRDocument
-          Set EmployeeID=DUP002, DocType=EmploymentContract, Department=Finance
-          Set FirstName=Lina, LastName=Girard, JobRole=Financial Analyst
-  Status: ✅ Fixed
+---
 
-━━━ Summary ━━━
-  5 documents audited in your namespace
-  5 documents fixed
-  0 documents remaining with issues
-```
+**Note on DUP005 `DocType`:** The initial attempt with `ExitNotes` and `ExitInterview` were rejected by the server choice list. The correct value `ExitDocument` was determined by querying existing correctly-classified exit documents in the repository.
+
+Together with `DUP001_Payslip_2024_01` fixed earlier, all **5 issues** from the original audit are now resolved. Verify each in IBM Content Navigator to confirm class shows **HR Document**.
+
+:::
 
 ## 💡 Key Insight
 
-Bob can assist processing multiple documents in a single batch operation, applying the same AI-powered analysis and correction workflow to each one. This makes large-scale classification cleanup feasible even for repositories with thousands of misclassified documents.
+Bob can assist processing multiple documents in a single batch operation, applying the same AI-powered analysis and correction workflow to each one. This makes large-scale classification cleanup feasible even for repositories with a large number of misclassified documents.

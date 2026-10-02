@@ -1,11 +1,3 @@
----
-title: "Bob, Show Me HRDocument in Detail"
-lab_series: "bob-as-documentalist"
-section_number: 3
-duration: "~5 minutes"
-description: "Deep-dive into the HRDocument class to see all its properties"
----
-
 ## 📋 The Situation
 
 In our sample scenario, the HR team is your biggest user group. You want to understand the `HRDocument` class deeply — all its properties, what's searchable, what's inherited from the base class, and what's HR-specific.

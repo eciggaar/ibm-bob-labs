@@ -1,11 +1,3 @@
----
-title: "Generate Sample Documents"
-lab_series: "generate-sample-content"
-section_number: 1
-duration: "~5 minutes"
-description: "Run the script to create your personal document set"
----
-
 ## 📋 The Situation
 
 You need to create sample HR documents to work with, but you're not sure how the generation script works or what it will create. You ask Bob to explain the code and the process.
