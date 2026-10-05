@@ -1,6 +1,6 @@
 # Installing
 
-If you haven't already done so, take the following steps to install IBM Bob. The setup takes about five minutes.
+Follow these steps to install IBM Bob. The setup takes about five minutes.
 
 ## System requirements
 
