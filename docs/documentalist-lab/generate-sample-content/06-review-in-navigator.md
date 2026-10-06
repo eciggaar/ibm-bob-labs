@@ -77,7 +77,7 @@ Try using Navigator's search feature:
 
 1. Click **Search Content** in the HomePage navigation
 
-1. Search for the saved search "BOB HR Search" and click on it
+1. Search for the saved search "Bob HR Search" and click on it
 
 1. Add search criteria:
    - **EmployeeID:** `DUP001` (or your first employee's ID)

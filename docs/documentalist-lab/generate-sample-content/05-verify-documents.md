@@ -11,8 +11,9 @@ Replace the example values below with your actual employee data from the script 
 1. Switch to **Agent Mode** and enter the following prompt:
 
     ```
-    Can you verify that DUP001's January 2024 payslip was uploaded correctly? 
-    Show me its properties. My folder is <YOUR_LASTNAME>.
+    Can you verify that <FIRST_THREE_CHARS_OF_LASTNAME>001's January 2024 
+    payslip was uploaded correctly? Show me its properties. My folder is
+    <YOUR_LASTNAME>.
     ```
 
 ## 🔍 What Bob Does Behind the Scenes

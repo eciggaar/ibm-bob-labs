@@ -4,6 +4,8 @@ You need to create sample HR documents to work with, but you're not sure how the
 
 ## 💬 Prompt to Bob
 
+1. Start a new task in IBM Bob by clicking the `+` sign on top of the Bob chat panel.
+
 1. Switch to **Agent Mode** and enter the following prompt:
 
     ```
@@ -12,7 +14,7 @@ You need to create sample HR documents to work with, but you're not sure how the
     are the parameters I can provide and can you run it for me?
     ```
 
-    When asked to provide your last name, enter your last name and mention that you want the script to seed some missclassifications:
+1. When asked to provide your last name, enter your last name and mention that you want the script to seed some missclassifications:
   
     ```
     Use DUPONT as last name and use the seed-miclassification flag  

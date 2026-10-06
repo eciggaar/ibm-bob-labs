@@ -15,7 +15,7 @@ Replace the example values below with your actual employee data from the script 
     are in HR_<YOUR_LASTNAME>/. 
 
     Please file all documents under /BOB_LAB/<YOUR_LASTNAME>/ in the repository
-    including the employee folder structure. Use available code if possible.
+    including the employee folder structure.
     ```
 
 ## ✅ Expected Output from Bob
