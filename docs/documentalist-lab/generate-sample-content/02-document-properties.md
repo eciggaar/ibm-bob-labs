@@ -79,7 +79,7 @@ The repository doesn't enforce requiredness at the API level (all fields technic
 
 #### System-owned properties — set automatically, never touch
 
-These are managed by FileNet and you cannot (and should not) set them manually:
+These are managed by Content Cortex and you cannot (and should not) set them manually:
 
 | Property | Set by |
 |---|---|

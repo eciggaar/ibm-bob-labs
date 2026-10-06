@@ -17,7 +17,7 @@ Before starting this lab, ensure you have:
 - Bob IDE installed and running.
 - Cloned the Git repository and opened it in IBM Bob — follow the steps below.
 - Python environment for running the script in the skill `class_property_report`.
-- Downloaded the `mcp.json` file from the Box Note link provided by your lab facilitator and placed it in the `.bob` directory of the cloned repository.
+- Configured the `mcp.json` file with your lab environment credentials.
 
 1. Next, navigate to your preferred working directory,
 
@@ -47,6 +47,6 @@ Before starting this lab, ensure you have:
 
 3. Open the cloned `Bob-AI-Documentalist` folder in Bob IDE via **File → Open Folder…**.
 
-4. Finally, download the `mcp.json` file from the Box Note link provided by your lab facilitator and place it in the `.bob` directory inside the cloned repository.
+4. The MCP server configuration file `mcp.json` is included in the `.bob` directory of the cloned repository. Open this file and update the placeholder values for `USERNAME`, `PASSWORD`, `SERVER_URL`, and `OBJECT_STORE` with the environment information from the Box note provided by your lab facilitators.
 
 Ready to begin? Click the *"Bob, What Do Have?"* link below to get started.

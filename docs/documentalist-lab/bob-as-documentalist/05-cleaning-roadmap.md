@@ -4,14 +4,14 @@ You've seen the inventory, the duplicates, the legacy classes, and the inheritan
 
 ## 💬 Prompt to Bob
 
-1. For this, switch to **Ask Mode** and enter the following prompt:
+1. For this, switch to **Plan Mode** and enter the following prompt:
 
   ```
   Bob, based on everything you've seen in our repository —
   the duplicates, the legacy classes, the naming inconsistencies — 
   what would you recommend as a cleaning plan? 
   Give me a prioritized roadmap with quick wins and longer-term actions. 
-  Create a Markdown with that plan.
+  Create a Markdown with that plan. Do not execute the plan.
   ```
 
 ## ✅ Expected Output from Bob
@@ -134,16 +134,12 @@ Bob should produce a structured roadmap similar to:
 - Complete HR domain coverage
 - Governance framework established
 
-**Timeline:** 12 weeks  
-**Team:** 3 FTE core + part-time support  
-**ROI:** 2.5 year payback period
-
 **Full Roadmap:** `audits/repository-cleanup-roadmap.md`
 :::
 
 ## 💡 The Governance Lesson
 
-Bob's roadmap mirrors what FileNet administrators would produce manually — but Bob derived it **from the live repository**, not from a static document or prior knowledge. The recommendations reflect the current state of the system at the moment you asked.
+Bob's roadmap mirrors what Content Cortex administrators would produce manually — but Bob derived it **from the live repository**, not from a static document or prior knowledge. The recommendations reflect the current state of the system at the moment you asked.
 
 ## 🏁 Lab Summary
 

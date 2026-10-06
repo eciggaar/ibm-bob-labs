@@ -38,7 +38,7 @@ The properties are all correctly set (`EmployeeID=DUP001`, `Department=Human Res
 Here's the final state:
 
 ✅ `DUP001_Payslip_2024_01` — properties fixed: `EmployeeID=DUP001`, `Department=Human Resources`, `DocType=Payslip`  
-⚠️ `className` still shows `Document` on read-back — the class change was accepted by the API but may not yet be reflected. Worth re-checking in FileNet Navigator or retrying the class update if it persists.
+⚠️ `className` still shows `Document` on read-back — the class change was accepted by the API but may not yet be reflected. Worth re-checking in Content Navigator or retrying the class update if it persists.
 
 :::
 

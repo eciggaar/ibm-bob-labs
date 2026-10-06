@@ -24,55 +24,44 @@ Bob should return a structured catalog similar to:
 
 ::: info 
 
-All 5 consolidation candidates have **zero documents**. Here is the complete cleanup analysis:
-
-#### Cleanup Analyse: Duplicaten & Consolidatiekandidaten
+Looking at the 49 classes returned, here are the candidates worth scrutinising:
 
 ---
 
-##### 🔴 Prioriteit 1 — Lege klassen die dezelfde entiteit modelleren als een bestaande klasse
+##### 🔴 Likely Duplicates / Overlapping Purpose
 
-These 5 classes have **0 documents** and are structurally redundant. They can be removed without data migration.
-
-| Klasse (verwijderen) | Samenvoegen met | Reden |
-|---|---|---|
-| `AangifteBTWKwartaal` | `AangifteBTW` | Zelfde document, andere periodiciteit — voeg eigenschap `Periode` (Maandelijks/Kwartaal/Jaarlijks) toe |
-| `CorrectieAangifteLoonheffingen` | `AangifteLoonheffingen` | Correctie is een kenmerk, geen aparte documentsoort — voeg boolean `IsCorrectie` toe |
-| `VoortaxatieVennootschapsbelasting` | `AangifteVennootschapsbelasting` | Voorlopig vs. definitief is een aanslageigenschap — voeg `AanslagType` toe |
-| `MotorrijtuigenbelastingAangifte` | *(onderzoek vereist)* | Mogelijk verouderd/ongebruikt — geen documenten, geen duidelijke pendant |
-| `VereenvoudigdeDouaneaangifte` | `Douaneaangifte` | AEO-vereenvoudiging is een proceduretype — voeg eigenschap `AangifteType` (Standaard/Vereenvoudigd) toe |
+| Candidates | Concern |
+|---|---|
+| `AangifteBTW` + `AangifteBTWKwartaal` | Periodicity variant, not a distinct type — could be one class with a `period` property. |
+| `Douaneaangifte` + `VereenvoudigdeDouaneaangifte` + `InvoerAangifte` + `UitvoerAangifte` | Four classes for customs declarations differing only by direction or procedure. Strong consolidation candidate. |
+| `AangifteLoonheffingen` + `CorrectieAangifteLoonheffingen` | A correction is a lifecycle state, not a new document type. |
+| `VoorlopigAanslagIB` + `AanslagBiljet` | Preliminary vs. final assessment — same underlying document, different stage. |
+| `VoortaxatieVennootschapsbelasting` + `AangifteVennootschapsbelasting` | Same pattern repeated for corporate tax. |
 
 ---
 
-##### 🟡 Prioriteit 2 — Overlappende domaanklassen (nader onderzoek)
+##### 🟡 Possibly Redundant Business Classes
 
-| Klasse | Probleem | Aanbeveling |
-|---|---|---|
-| `AangifteBTW` + `BTWCorrectiemelding` + `BTWTeruggaafVerzoek` | Drie aparte klassen voor één BTW-levenscyclus | Overweeg één klasse `BTWDocument` met eigenschap `Documenttype` |
-| `VoorlopigAanslagIB` + `AanslagBiljet` | Zowel voorlopige als definitieve aanslag als aparte klassen | Prima als ze echt andere eigenschappen hebben — anders samenvoegen met `AanslagType` |
-| `Douaneaangifte` + `InvoerAangifte` + `UitvoerAangifte` | In-/uitvoer zijn varianten van dezelfde douaneaangifte | Overweeg consolidatie met eigenschap `Richting` (Invoer/Uitvoer/Doorvoer) |
-
----
-
-##### 🟢 Prioriteit 3 — Eigenschapcontrole aanbevolen
-
-Both `AangifteBTW` and `AangifteBTWKwartaal` have **identical property sets** — only system properties, no domain-specific custom properties at all. This confirms they were differentiated by class name instead of by data, which is the core structural problem throughout this schema.
+| Class | Concern |
+|---|---|
+| `KwartaalrapportBelasting` | Internal management report — arguably operational data, not a content-managed document class. |
+| `FiscaalAdviesrapport` | Generic advisory report — may just be an `Email` or unclassified `Document` in practice. |
+| `HRDocument` | Only **one** HR class for all personnel documents. Either intentionally broad (fine), or sub-classes were never created (gap). |
+| `Contract` | Same — a single Contract class with no visible sub-types (e.g. employment, supplier, NDA). |
 
 ---
 
-##### Samenvatting
+##### Summary
 
-| Categorie | Aantal klassen | Actie |
-|---|---|---|
-| Lege redundante klassen | 5 | Verwijderen + samenvoegen |
-| Overlappende levenscycluskansen | 6–8 | Nader onderzoek + eventueel consolideren |
-| Klassen zonder eigen eigenschappen | Minstens 2 bevestigd | Voeg domeinspecifieke properties toe |
-
-The root cause across all cases is the same: **document variants are modelled as separate classes instead of as property values**. Fixing this will reduce the business class count from 31 to roughly 18–20 well-structured classes.
+| Priority | Action |
+|---|---|
+| High | Consolidate the 4 customs declaration classes |
+| High | Merge BTW kwartaal into `AangifteBTW` with a period property |
+| Medium | Replace correction/preliminary variants with a status/lifecycle field on the parent class |
+| Low | Decide if `HRDocument` and `Contract` need sub-classes for more granular classification |
 
 :::
 
-
 ## 💡 Key Insight
 
-Bob identified **~5 classes** that are candidates for consolidation or removal. This is the "historical debt" — classes created over time without governance, by different teams, for overlapping purposes. In a well-governed repository, you'd most likely have **fewer than 50 classes** with clear ownership.
+Bob identified **~5 classes** that are candidates for consolidation or removal. This is the "historical debt" — classes created over time without governance, by different teams, for overlapping purposes. In a well-governed repository, you'd most likely have **fewer than 50 classes** with clear ownership, but of course this depends very much on the size of your repo.

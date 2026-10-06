@@ -20,7 +20,7 @@ For this section, Bob makes a single call to the `property-extraction-cs-mcp-ser
 
 | Tool | Parameter | What It Does |
 |------|-----------|-------------|
-| `list_all_classes` | `root_class: "Document"` | Returns all document classes (subclasses of `Document`) registered in the IBM FileNet Object Store |
+| `list_all_classes` | `root_class: "Document"` | Returns all document classes (subclasses of `Document`) registered in the IBM Content Cortex Object Store |
 
 
 ## 📋 The Situation
@@ -50,131 +50,111 @@ Bob should return a structured catalog similar to:
 
 ::: info 
 
-1. Aangifte BPM (`AangifteBPM`)
-2. BTW Aangifte (`AangifteBTW`)
-3. BTW Aangifte Kwartaal (`AangifteBTWKwartaal`)
-4. Aangifte Dividendbelasting (`AangifteDividendbelasting`)
-5. Aangifte Inkomstenbelasting (`AangifteInkomstenbelasting`)
-6. Aangifte Loonheffingen (`AangifteLoonheffingen`)
-7. Aangifte Successierecht (`AangifteSuccessierecht`)
-8. Aangifte Vennootschapsbelasting (`AangifteVennootschapsbelasting`)
-9. Aanslagbiljet (`AanslagBiljet`)
-10. BTW Correctiemelding (`BTWCorrectiemelding`)
-11. BTW Teruggaaf Verzoek (`BTWTeruggaafVerzoek`)
-12. Belasting Controle Rapport (`BelastingControleRapport`)
-13. Beroepschrift Belasting (`BeroepschriftBelasting`)
-14. Bezwaarschrift Belasting (`BezwaarschriftBelasting`)
-15. Code Module (`CodeModule`)
-16. Correctie Aangifte Loonheffingen (`CorrectieAangifteLoonheffingen`)
-17. Document (`Document`)
-18. Douaneaangifte (`Douaneaangifte`)
-19. Email (`Email`)
-20. Entry Template (`EntryTemplate`)
-21. Fiscaal Adviesrapport (`FiscaalAdviesrapport`)
-22. Fiscaal Ruling Document (`FiscaalRulingDocument`)
-23. Form Data (`FormData`)
-24. Form Policy (`FormPolicy`)
-25. Form Template (`FormTemplate`)
-26. HR Document (`HRDocument`)
-27. Invoer Aangifte (`InvoerAangifte`)
-28. Jaarrekening Document (`JaarrekeningDocument`)
-29. Kwartaalrapport Belasting (`KwartaalrapportBelasting`)
-30. Loonbelasting Verklaring (`LoonbelastingVerklaring`)
-31. Motorrijtuigenbelasting Aangifte (`MotorrijtuigenbelastingAangifte`)
-32. MCP Server Resource (`MsResource`)
-33. Origine Verklaring (`OrigineVerklaring`)
-34. Preferences Document (`PreferencesDocument`)
-35. Records Template (`RecordsTemplate`)
-36. Scenario Definition (`ScenarioDefinition`)
-37. Simulation (`Simulation`)
-38. Stored Search (`StoredSearch`)
-39. Transit Document (`TransitDocument`)
-40. Uitvoer Aangifte (`UitvoerAangifte`)
-41. Vereenvoudigde Douaneaangifte (`VereenvoudigdeDouaneaangifte`)
-42. Voorlopige Aanslag Inkomstenbelasting (`VoorlopigAanslagIB`)
-43. Voortaxatie Vennootschapsbelasting (`VoortaxatieVennootschapsbelasting`)
-44. Web Content Template (`WebContentTemplate`)
-45. ITX Form Template (`WebFormTemplate`)
-46. Winst- en Verliesrekening (`WinstEnVerliesrekening`)
-47. Workflow Definition (`WorkflowDefinition`)
-48. XML Property Mapping Script (`XMLPropertyMappingScript`)
-
-Total: 48 document classes.
+Now let me apply the grouping rules from the skill. N = 49 total classes.
 
 ---
 
-#### Grouped by Domain
+**HR** (symbolic name starts with `HR`): `HRDocument` → 1
 
 ---
 
-##### HR (1 class)
-- HR Document (`HRDocument`)
-
-*(Tax Administration total: 1 class)*
+**Contracts / Legal** (symbolic name is or starts with `Contract`): `Contract` → 1
 
 ---
 
-##### Tax Administration
-- Aangifte BPM (`AangifteBPM`)
-- BTW Aangifte (`AangifteBTW`)
-- BTW Aangifte Kwartaal (`AangifteBTWKwartaal`)
-- Aangifte Dividendbelasting (`AangifteDividendbelasting`)
-- Aangifte Inkomstenbelasting (`AangifteInkomstenbelasting`)
-- Aangifte Loonheffingen (`AangifteLoonheffingen`)
-- Aangifte Successierecht (`AangifteSuccessierecht`)
-- Aangifte Vennootschapsbelasting (`AangifteVennootschapsbelasting`)
-- Aanslagbiljet (`AanslagBiljet`)
-- BTW Correctiemelding (`BTWCorrectiemelding`)
-- BTW Teruggaaf Verzoek (`BTWTeruggaafVerzoek`)
-- Belasting Controle Rapport (`BelastingControleRapport`)
-- Beroepschrift Belasting (`BeroepschriftBelasting`)
-- Bezwaarschrift Belasting (`BezwaarschriftBelasting`)
-- Correctie Aangifte Loonheffingen (`CorrectieAangifteLoonheffingen`)
-- Douaneaangifte (`Douaneaangifte`)
-- Fiscaal Adviesrapport (`FiscaalAdviesrapport`)
-- Fiscaal Ruling Document (`FiscaalRulingDocument`)
-- Invoer Aangifte (`InvoerAangifte`)
-- Jaarrekening Document (`JaarrekeningDocument`)
-- Kwartaalrapport Belasting (`KwartaalrapportBelasting`)
-- Loonbelasting Verklaring (`LoonbelastingVerklaring`)
-- Motorrijtuigenbelasting Aangifte (`MotorrijtuigenbelastingAangifte`)
-- Origine Verklaring (`OrigineVerklaring`)
-- Transit Document (`TransitDocument`)
-- Uitvoer Aangifte (`UitvoerAangifte`)
-- Vereenvoudigde Douaneaangifte (`VereenvoudigdeDouaneaangifte`)
-- Voorlopige Aanslag Inkomstenbelasting (`VoorlopigAanslagIB`)
-- Voortaxatie Vennootschapsbelasting (`VoortaxatieVennootschapsbelasting`)
-- Winst- en Verliesrekening (`WinstEnVerliesrekening`)
-
-*(Tax Administration total: 30 classes)*
+**Tax Administration** (starts with `Aangifte`, `BTW`, `Belasting`, `Bezwaar`, `Beroep`, `Correctie`, `Douane`, `Fiscaal`, `Invoer`, `Jaarrekening`, `Kwartaal`, `Loonbelasting`, `Motorrijtuigen`, `Origine`, `Transit`, `Uitvoer`, `Vereenvoudigde`, `Voorlopig`, `Voortaxatie`, `Winst`, `Aanslag`):
+- `AangifteBPM`, `AangifteBTW`, `AangifteBTWKwartaal`, `AangifteDividendbelasting`, `AangifteInkomstenbelasting`, `AangifteLoonheffingen`, `AangifteSuccessierecht`, `AangifteVennootschapsbelasting`, `AanslagBiljet`, `BTWCorrectiemelding`, `BTWTeruggaafVerzoek`, `BelastingControleRapport`, `BeroepschriftBelasting`, `BezwaarschriftBelasting`, `CorrectieAangifteLoonheffingen`, `Douaneaangifte`, `FiscaalAdviesrapport`, `FiscaalRulingDocument`, `InvoerAangifte`, `JaarrekeningDocument`, `KwartaalrapportBelasting`, `LoonbelastingVerklaring`, `MotorrijtuigenbelastingAangifte`, `OrigineVerklaring`, `TransitDocument`, `UitvoerAangifte`, `VereenvoudigdeDouaneaangifte`, `VoorlopigAanslagIB`, `VoortaxatieVennootschapsbelasting`, `WinstEnVerliesrekening` → 30
 
 ---
 
-##### System / Technical (23 classes)
-- Code Module (`CodeModule`)
-- Document (`Document`) *(Base root class)*
-- Email (`Email`)
-- Entry Template (`EntryTemplate`)
-- Form Data (`FormData`)
-- Form Policy (`FormPolicy`)
-- Form Template (`FormTemplate`)
-- MCP Server Resource (`MsResource`)
-- Preferences Document (`PreferencesDocument`)
-- Records Template (`RecordsTemplate`)
-- Scenario Definition (`ScenarioDefinition`)
-- Simulation (`Simulation`)
-- Stored Search (`StoredSearch`)
-- Web Content Template (`WebContentTemplate`)
-- ITX Form Template (`WebFormTemplate`)
-- Workflow Definition (`WorkflowDefinition`)
-- XML Property Mapping Script (`XMLPropertyMappingScript`)
+**System / Technical** (remaining): `CodeModule`, `Document`, `Email`, `EntryTemplate`, `FormData`, `FormPolicy`, `FormTemplate`, `MsResource`, `PreferencesDocument`, `RecordsTemplate`, `ScenarioDefinition`, `Simulation`, `StoredSearch`, `WebContentTemplate`, `WebFormTemplate`, `WorkflowDefinition`, `XMLPropertyMappingScript` → 17
 
-*(System / Technical total: 17 classes)*
+Total: 1 + 1 + 30 + 17 = 49 ✅
 
 ---
 
-**Verification**: **1** (HR) + **24** (Tax Administration) + **23** (System / Technical) = **48** total.
+#### Document Class Inventory
+
+##### 🧑‍💼 HR (1)
+
+| Display Name | Symbolic Name |
+|---|---|
+| HR Document | `HRDocument` |
+
+---
+
+##### ⚖️ Contracts / Legal (1)
+
+| Display Name | Symbolic Name |
+|---|---|
+| Contract | `Contract` |
+
+---
+
+##### 🏛️ Tax Administration (30)
+
+| Display Name | Symbolic Name |
+|---|---|
+| Aangifte BPM | `AangifteBPM` |
+| Aangifte Dividendbelasting | `AangifteDividendbelasting` |
+| Aangifte Inkomstenbelasting | `AangifteInkomstenbelasting` |
+| Aangifte Loonheffingen | `AangifteLoonheffingen` |
+| Aangifte Successierecht | `AangifteSuccessierecht` |
+| Aangifte Vennootschapsbelasting | `AangifteVennootschapsbelasting` |
+| Aanslagbiljet | `AanslagBiljet` |
+| Belasting Controle Rapport | `BelastingControleRapport` |
+| Beroepschrift Belasting | `BeroepschriftBelasting` |
+| Bezwaarschrift Belasting | `BezwaarschriftBelasting` |
+| BTW Aangifte | `AangifteBTW` |
+| BTW Aangifte Kwartaal | `AangifteBTWKwartaal` |
+| BTW Correctiemelding | `BTWCorrectiemelding` |
+| BTW Teruggaaf Verzoek | `BTWTeruggaafVerzoek` |
+| Correctie Aangifte Loonheffingen | `CorrectieAangifteLoonheffingen` |
+| Douaneaangifte | `Douaneaangifte` |
+| Fiscaal Adviesrapport | `FiscaalAdviesrapport` |
+| Fiscaal Ruling Document | `FiscaalRulingDocument` |
+| Invoer Aangifte | `InvoerAangifte` |
+| Jaarrekening Document | `JaarrekeningDocument` |
+| Kwartaalrapport Belasting | `KwartaalrapportBelasting` |
+| Loonbelasting Verklaring | `LoonbelastingVerklaring` |
+| Motorrijtuigenbelasting Aangifte | `MotorrijtuigenbelastingAangifte` |
+| Origine Verklaring | `OrigineVerklaring` |
+| Transit Document | `TransitDocument` |
+| Uitvoer Aangifte | `UitvoerAangifte` |
+| Vereenvoudigde Douaneaangifte | `VereenvoudigdeDouaneaangifte` |
+| Voorlopige Aanslag Inkomstenbelasting | `VoorlopigAanslagIB` |
+| Voortaxatie Vennootschapsbelasting | `VoortaxatieVennootschapsbelasting` |
+| Winst- en Verliesrekening | `WinstEnVerliesrekening` |
+
+---
+
+##### ⚙️ System / Technical (17)
+
+| Display Name | Symbolic Name |
+|---|---|
+| Code Module | `CodeModule` |
+| Document | `Document` |
+| Email | `Email` |
+| Entry Template | `EntryTemplate` |
+| Form Data | `FormData` |
+| Form Policy | `FormPolicy` |
+| Form Template | `FormTemplate` |
+| ITX Form Template | `WebFormTemplate` |
+| MCP Server Resource | `MsResource` |
+| Preferences Document | `PreferencesDocument` |
+| Records Template | `RecordsTemplate` |
+| Scenario Definition | `ScenarioDefinition` |
+| Simulation | `Simulation` |
+| Stored Search | `StoredSearch` |
+| Web Content Template | `WebContentTemplate` |
+| Workflow Definition | `WorkflowDefinition` |
+| XML Property Mapping Script | `XMLPropertyMappingScript` |
+
+---
+
+✅ **Verification:** 1 (HR) + 1 (Contracts / Legal) + 30 (Tax Administration) + 17 (System / Technical) = **49 total** (API returned: 49)
 :::
+
 
 ::: warning NOTE
 The formatting of Bob's output may differ from the example above — the structure, grouping style, and wording can vary between responses. However, the **total number of document classes found should always be the same** (48 in this lab environment), as it reflects the actual state of the object store.
@@ -189,4 +169,4 @@ If you want the next level of detail, we can produce a second inventory that sep
 Bob can describe the **business purpose** of each class without you needing to read technical documentation. Notice how he groups them by domain — this is AI reasoning about naming patterns, not a pre-configured taxonomy.
 
 #### For Administrators
-The `determine_class` tool --- made available by the MCP server --- queries the live FNCM repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.
+The `list_all_classes` tool --- made available by the MCP server --- queries the live FNCM repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.

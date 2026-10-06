@@ -28,7 +28,7 @@ Based on the property data in the file:
 
 ##### The base `Document` class — 63 inherited system properties
 
-Every FileNet class is a subclass of `Document`. You get 63 system-owned properties automatically — IBM manages them, you cannot remove or rename any of them:
+Every custom document class is a subclass of `Document`. You get 63 system-owned properties automatically — IBM manages them, you cannot remove or rename any of them:
 
 | Group | Examples |
 |---|---|
