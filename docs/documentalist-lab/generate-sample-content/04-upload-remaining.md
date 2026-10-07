@@ -8,7 +8,7 @@ Replace the example values below with your actual employee data from the script 
 :::
 
 
-1. Switch to **Agent Mode** and enter the following prompt:
+1. Make sure **Agent Mode** is selected and enter the following prompt:
 
     ```
     Help me to upload the HR documents for my remaining 4 employees. The files 

@@ -6,7 +6,7 @@ You need to create sample HR documents to work with, but you're not sure how the
 
 1. Start a new task in IBM Bob by clicking the `+` sign on top of the Bob chat panel.
 
-1. Switch to **Agent Mode** and enter the following prompt:
+1. Make sure **Agent Mode** is selected and enter the following prompt:
 
     ```
     I need to generate sample HR documents for this lab. Can you explain 

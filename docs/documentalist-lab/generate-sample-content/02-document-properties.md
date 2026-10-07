@@ -4,7 +4,7 @@ Before uploading anything, you want Bob to tell you exactly which properties mat
 
 ## 💬 Prompt to Bob
 
-1. Switch to **Agent Mode** and enter the following prompt:
+1. Make sure **Agent Mode** is selected and enter the following prompt:
     ```
     Before we upload HR documents to the repository, tell me which 
     properties I should set on each document? What's the difference between 

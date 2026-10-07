@@ -4,7 +4,7 @@ You've seen the inventory, the duplicates, the legacy classes, and the inheritan
 
 ## 💬 Prompt to Bob
 
-1. For this, switch to **Plan Mode** and enter the following prompt:
+1. Make sure **Plan Mode** is selected and enter the following prompt:
 
   ```
   Bob, based on everything you've seen in our repository —

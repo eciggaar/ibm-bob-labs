@@ -10,7 +10,7 @@ The files are ready. Now you'll ask Bob to upload the first employee's documents
 - Furthermore, keep the chat open and **approve each step** when prompted. Bob will ask for confirmation before e.g. creating folders and uploading documents, since MCP tool calls require explicit approval.
 :::
 
-1. Switch to **Agent Mode** and enter the following prompt:
+1. Make sure **Agent Mode** is selected and enter the following prompt:
 
       ```
       Upload all HR documents for my first employee to the repository. The files

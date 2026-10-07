@@ -29,7 +29,7 @@ You need a complete inventory of all document classes. Instead of navigating the
 
 ## 💬 Prompt to Bob
 
-1. Switch to **Ask Mode** and enter the following prompt:
+1. Make sure **Ask Mode** is selected and enter the following prompt:
 
    ```
    I want to understand our IBM Content Services repository. 
