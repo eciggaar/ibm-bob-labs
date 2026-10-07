@@ -107,6 +107,6 @@ The metadata comment block at the bottom of each generated `.txt` file tells you
 
 ## 💡 Key Insight
 
-Notice that `DocType` is what distinguishes a Payslip from a Performance Review — they're both `HRDocument` instances. This is the design pattern we discussed in Lab 1: *"use properties to differentiate, not separate classes"*. 
+Notice that `DocType` is what distinguishes a Payslip from a Performance Review — they're both `HRDocument` instances. This is the design pattern we discussed in the first lab: *"use properties to differentiate, not separate classes"*. 
 
 When we search for "all payslips for employee DUP001", we'll search for `HRDocument` where `EmployeeID = DUP001` AND `DocType = Payslip`.

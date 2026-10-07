@@ -31,29 +31,30 @@ During the audit you've found a number of problematic documents. Before fixing t
 
 ::: info
 
-Here is the triage result for `DUP001_Payslip_2024_01`:
+Here's the full triage:
 
 ---
 
 ```
-Document:      DUP001_Payslip_2024_01
+Document: TES001_Payslip_2024_01
 Current class: Document  ← WRONG
+
+What is it?       Payslip for January 2024 (Acme Corporation)
+Who does it belong to?  Alice Rossi — Employee ID TES001, Finance department
 
 Recommended class: HRDocument
 
 Recommended properties:
-  EmployeeID:  DUP001
-  Department:  Human Resources
-  DocType:     Payslip
+  EmployeeID:   TES001
+  Department:   Finance
+  DocType:      Payslip
 
-Confidence: High
+Confidence: High — all values are explicitly stated in the document content.
 ```
-
-**Why High confidence:** The document content is unambiguous — it is a January 2024 payslip for **Antoine Muller**, employee ID `DUP001`, working in the **Human Resources** department at Acme Corporation. All three required properties (`EmployeeID`, `Department`, `DocType`) are explicitly stated in the document body.
 
 ---
 
-No changes have been made. Would you like me to go ahead and fix it — reclassify it as `HRDocument` and set the properties?
+The document metadata even confirms this was a deliberate Lab 3 seed error: it was uploaded as a bare `Document` with no properties set. Ready to reclassify it if you'd like to go ahead.
 
 :::
 

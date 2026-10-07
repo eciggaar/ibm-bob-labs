@@ -150,6 +150,8 @@ In this lab, Bob helped you to:
 
 ## 🎓 Lab Series Complete
 
-🏆🏆 **Congratulations** 🏆🏆 - You have completed all labs in this series! 
+🏆🏆 **Congratulations** 🏆🏆 
 
-You've learned how to use Bob as an AI documentalist to inventory, classify, and govern documents in a live IBM Content Services repository leveraging the power of Bob and the out-of-the-box MCP Server capabilities of the platform.
+You have completed all labs in this series! 
+
+You've learned how to use IBM Bob as an AI documentalist to inventory, classify, and govern documents in a live IBM Content Services repository leveraging the power of Bob and the out-of-the-box MCP Server capabilities of IBM Content Cortex.

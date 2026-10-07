@@ -25,7 +25,7 @@ Bob should produce a structured roadmap similar to:
 
 ---
 
-#### Phase 1: Quick Wins (Weeks 1-3)
+#### Phase 1: Quick Wins
 **Focus:** Low-risk consolidations + complete documentation
 
 **Actions:**
@@ -39,7 +39,7 @@ Bob should produce a structured roadmap similar to:
 
 ---
 
-#### Phase 2: Investigation & Planning (Weeks 4-6)
+#### Phase 2: Investigation & Planning
 **Focus:** Understand before acting
 
 **Actions:**
@@ -54,7 +54,7 @@ Bob should produce a structured roadmap similar to:
 
 ---
 
-#### Phase 3: Medium-Risk Changes (Weeks 7-9)
+#### Phase 3: Medium-Risk Changes
 **Focus:** Customs, choice lists, execute Phase 2 decisions
 
 **Actions:**
@@ -69,7 +69,7 @@ Bob should produce a structured roadmap similar to:
 
 ---
 
-#### Phase 4: HR Enhancement (Weeks 10-12)
+#### Phase 4: HR Enhancement
 **Focus:** Build out HR domain with specialized classes
 
 **Actions:**

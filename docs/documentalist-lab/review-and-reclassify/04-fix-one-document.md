@@ -5,7 +5,7 @@ Bob has diagnosed the problem. Now you'll ask him to fix it — reclassifying th
 ## 💬 Prompt to Bob
 ::: warning ⚠️ Important
 
-- Replace the document reference `xxxxxx` with the document ID from the previous step.
+- Replace the document reference `xxxxxx` with the document ID or name from the previous step.
 
 - Keep the chat open and **approve each step** when prompted. Bob will ask for confirmation before e.g. invoking skills, executing commands and creating files.
 
@@ -50,7 +50,7 @@ Bob may report that `className` still shows `Document` after the reclassificatio
 
 ### Verify the reclassification in IBM Content Navigator
 
-1. Open IBM Content Navigator and navigate to `/BOB_LAB/DUPONT/`.
+1. Open IBM Content Navigator and navigate to `/BOB_LAB/<YOUR_LASTNAME>/`.
 
 1. Select the document and open its **Properties** panel on the right.
 
