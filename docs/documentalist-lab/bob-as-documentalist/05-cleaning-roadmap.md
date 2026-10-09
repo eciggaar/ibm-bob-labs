@@ -7,10 +7,9 @@ You've seen the inventory, the duplicates, the legacy classes, and the inheritan
 1. Make sure **Plan Mode** is selected and enter the following prompt:
 
   ```
-  Bob, based on everything you've seen in our repository —
-  the duplicates, the legacy classes, the naming inconsistencies — 
-  what would you recommend as a cleaning plan? 
-  Give me a prioritized roadmap with quick wins and longer-term actions. 
+  Help me create a cleaning plan based on everything you've seen in our
+  repository — the duplicates, the legacy classes, the naming inconsistencies.
+  Include a prioritized roadmap with quick wins and longer-term actions. 
   Create a Markdown with that plan. Do not execute the plan.
   ```
 

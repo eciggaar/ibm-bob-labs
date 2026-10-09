@@ -55,7 +55,7 @@ Use Navigator to verify:
 
 ## 💡 Navigator vs. Bob
 
-IBM Content Navigator provides a **visual interface** for browsing and managing documents, while Bob provides a **conversational interface** for the same operations. Both interact with the same IBM Content Services repository via GraphQL APIs.
+IBM Content Navigator provides a **visual interface** for browsing and managing documents, while IBM Bob provides a **conversational interface** for the same operations. Both interact with the same repository via GraphQL APIs.
 
 **Navigator is useful for:**
 - Visual browsing and folder navigation

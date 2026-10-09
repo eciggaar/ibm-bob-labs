@@ -31,8 +31,8 @@ When you run the script, you will be asked for your last name. This will be used
 
 | What | How |
 |------|-----|
-| **Namespace your files** | Local files go to `HR_YOURLASTNAME/` instead of `HR/` |
-| **Create a namespaces in the repository** | Documents are filed under `/BOB_LAB/YOURLASTNAME/` |
+| **Namespace your files** | Local files go to `HR_<YOUR_LASTNAME>/` instead of `HR/` |
+| **Create a namespaces in the repository** | Documents are filed under `/BOB_LAB/<YOUR_LASTNAME>/` |
 | **Generate unique employees** | Your 5 employees are deterministically generated from your name |
 | **Prefix employee IDs** | IDs become `YOU001`–`YOU005` (first 3 letters of your last name) |
 

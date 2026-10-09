@@ -126,6 +126,6 @@ The employee list was already printed in the previous run output. Here it is:
 5 employees total, all fictional and deterministically derived from the `DUPONT` namespace seed.
 :::
 
-## 💡 Key Insight
+## 💡 Key Insights
 
 You didn't need to read the Python source, look up the CLI flags, or figure out the right command to run — you just described what you wanted in plain language. This is the core shift that AI coding agents like IBM Bob enable: the mental overhead of *how to run a tool* is replaced by simply stating *what you need*. The same principle applies throughout this lab.

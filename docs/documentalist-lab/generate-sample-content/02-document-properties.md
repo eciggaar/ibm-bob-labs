@@ -105,8 +105,6 @@ The 5 seeded errors all violate the **core properties** tier:
 The metadata comment block at the bottom of each generated `.txt` file tells you exactly which properties to set for that specific document when uploading.
 :::
 
-## 💡 Key Insight
+## 💡 Key Insights
 
-Notice that `DocType` is what distinguishes a Payslip from a Performance Review — they're both `HRDocument` instances. This is the design pattern we discussed in the first lab: *"use properties to differentiate, not separate classes"*. 
-
-When we search for "all payslips for employee DUP001", we'll search for `HRDocument` where `EmployeeID = DUP001` AND `DocType = Payslip`.
+The most critical design pattern here is using **properties as discriminators**. Instead of creating separate document classes for Payslips, Contracts, and Performance Reviews, all files share a single `HRDocument` class differentiated by the `DocType` property. While metadata follows a tiered structure — distinguishing essential core properties (like `EmployeeID` and `DocType`) from optional enrichment fields (like `JobRole` or `Location`) — using `DocType` as a discriminator prevents class explosion, keeps the taxonomy manageable, and enables flexible cross-document querying.

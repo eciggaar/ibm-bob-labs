@@ -8,7 +8,7 @@
 
 By the end of this lab, you will be able to:
 
-- Use Bob to **inventory all document classes** in a live IBM Content Services repository
+- Use Bob to **inventory all document classes** in a live IBM Content Cortex repository
 - Understand the **class hierarchy** — how `Document` is the root and all other classes inherit from it
 - **Deep-dive into a specific class** (HRDocument) to see all its properties, types, and searchability
 - Ask Bob to **identify historical debt** — duplicates, legacy classes, naming inconsistencies
@@ -29,26 +29,30 @@ You need a complete inventory of all document classes. Instead of navigating the
 
 ## 💬 Prompt to Bob
 
-1. Make sure **Ask Mode** is selected and enter the following prompt:
+1. Make sure **Agent Mode** is selected and enter the following prompt:
 
    ```
-   I want to understand our IBM Content Services repository. 
-   Can you give me a complete inventory of all document classes we have? 
-   Keep it concise. Group them by domain (HR, Tax Administration, 
-   System / Technical).
+   I want to better understand our content repository. Can you give me a 
+   complete inventory of all document classes we have? 
    ```
 
 ## 🔍 What Bob Does Behind the Scenes
 
-- Calls `list_all_classes` with `root_class: "Document"` → retrieves all subclasses of `Document` registered in the object store.
-- Analyzes the symbolic names and display names.
-- Groups them by domain (e.g. HR, Tax Administration, System / Technical).
+- **Activates the `class-inventory` skill**, which loads the grouping rules and the local classification script into context.
+- **Fetches all document classes** from the live repository by calling the `list_all_classes` tool on the `property-extraction-cs-mcp-server` — no admin console needed.
+- **Classifies each class by domain** (HR, Contracts/Legal, Tax Administration, System/Technical) based on naming patterns, using the skill's deterministic script so the grouping is consistent every time.
+- **Presents a verified inventory** — four grouped tables with a cross-check total — without inventing counts or commentary of its own.
 
 ## ✅ Expected Output from Bob
 
 Bob should return a structured catalog similar to:
 
 ::: info
+
+Here is the complete document class inventory for your IBM Content Services repository:
+
+---
+
 #### Document Class Inventory
 
 ---
@@ -80,13 +84,13 @@ Bob should return a structured catalog similar to:
 | Aangifte Successierecht | AangifteSuccessierecht |
 | Aangifte Vennootschapsbelasting | AangifteVennootschapsbelasting |
 | Aanslagbiljet | AanslagBiljet |
+| Belasting Controle Rapport | BelastingControleRapport |
+| Beroepschrift Belasting | BeroepschriftBelasting |
+| Bezwaarschrift Belasting | BezwaarschriftBelasting |
 | BTW Aangifte | AangifteBTW |
 | BTW Aangifte Kwartaal | AangifteBTWKwartaal |
 | BTW Correctiemelding | BTWCorrectiemelding |
 | BTW Teruggaaf Verzoek | BTWTeruggaafVerzoek |
-| Belasting Controle Rapport | BelastingControleRapport |
-| Bezwaarschrift Belasting | BezwaarschriftBelasting |
-| Beroepschrift Belasting | BeroepschriftBelasting |
 | Correctie Aangifte Loonheffingen | CorrectieAangifteLoonheffingen |
 | Douaneaangifte | Douaneaangifte |
 | Fiscaal Adviesrapport | FiscaalAdviesrapport |
@@ -130,19 +134,16 @@ Bob should return a structured catalog similar to:
 
 ---
 
-✅ Verification: 1 (HR) + 1 (Contracts / Legal) + 30 (Tax Administration) + 17 (System / Technical) = 49 total (API returned: 49)
+✅ Verification: 1 (HR) + 1 (Contracts / Legal) + 30 (Tax Administration) + 17 (System / Technical) = **49 total**
 
 ---
 
-This inventory is retrieved live from your repository via the `list_all_classes` API. Key observations:
+The repository is heavily oriented towards **Dutch tax administration** — the 30 Tax Administration classes cover the full lifecycle of Dutch fiscal documents (VAT, income tax, corporate tax, customs, payroll tax, etc.). Business content classes are lean: just `HRDocument` and `Contract` outside the tax domain. The remaining 17 classes are system/infrastructure types used by FileNet, eForms, and MCP integrations.
 
-- **Tax Administration dominates** with 30 of 49 classes (61%), centered on NL tax law (BTW, inkomstenbelasting, vennootschapsbelasting, douane).
-- **HR** and **Contracts/Legal** each have a single class — `HRDocument` covers all personnel documents, and `Contract` is the sole class-legal type.
-- **System / Technical** classes (17) are infrastructure artifacts: form templates, entry templates, stored searches, workflow definitions, and XML mapping scripts.
 :::
 
 ::: warning NOTE
-The formatting of Bob's output may differ from the example above — the structure, grouping style, and wording can vary between responses. However, the **total number of document classes found should always be the same** (48 in this lab environment), as it reflects the actual state of the object store.
+The formatting of Bob's output may differ from the example above — the structure, grouping style, and wording can vary between responses. However, the **total number of document classes found should always be the same** (49 in this lab environment), as it reflects the actual state of the object store.
 :::
 
 If you want the next level of detail, we can produce a second inventory that separates **custom business classes** from **out-of-the-box IBM classes**, and optionally include each class’s description and properties.
@@ -154,4 +155,4 @@ If you want the next level of detail, we can produce a second inventory that sep
 Bob can describe the **business purpose** of each class without you needing to read technical documentation. Notice how he groups them by domain — this is AI reasoning about naming patterns, not a pre-configured taxonomy.
 
 #### For Administrators
-The `list_all_classes` tool --- made available by the MCP server --- queries the live FNCM repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.
+The `list_all_classes` tool --- made available by the MCP server --- queries the live Content Cortex repository. This is the **actual current state** of your object store, not a cached or static view. Any class created or deleted since the last deployment will appear here.

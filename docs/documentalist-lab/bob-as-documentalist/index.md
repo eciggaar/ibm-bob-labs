@@ -1,6 +1,6 @@
 ## Overview
 
-In this lab you learn how to use IBM Bob with IBM Content Services to inventory, classify, and govern documents in a live FNCM repository. You'll explore the document class model, understand class hierarchies, and get AI-powered recommendations for cleaning up your repository.
+In this lab you learn how to use IBM Bob with IBM Content Cortex to inventory, classify, and govern documents in a live repository. You'll explore the document class model, understand class hierarchies, and get AI-powered recommendations for cleaning up your repository.
 
 ::: tip NOTE
 IBM Bob is powered by generative AI and LLMs, and a defining trait of these systems is that they are *non-deterministic* — unlike the *deterministic* tools most developers are accustomed to. In practice, that means the same prompt can produce different output from one run to the next. This is both a strength and a quirk of the technology, and it is something to work *with* rather than against.

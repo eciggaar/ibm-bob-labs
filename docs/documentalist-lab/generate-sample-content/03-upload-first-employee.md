@@ -56,14 +56,8 @@ All 11 documents for **DUP001 Antoine Muller** are now in the repository. Here's
 **11 documents uploaded** — 10 correctly classified as `HRDocument` with full metadata, 1 intentionally seeded as bare `Document` (the payslip) ready for Lab 3 detection.
 :::
 
-## 💡 What Happens at Creation
+## 💡 Key Insights
 
-When Bob calls `create_document`, in the live FNCM repository:
+When a document is created in an object store, its content, class assignment, property values, and initial version series are persisted in a single save operation. Structured properties such as `EmployeeID`, `DocType`, and `Department` are stored in the object store database and are immediately available for property-based queries. 
 
-- A new document object is created with a unique GUID
-- The class is set to `HRDocument` (inheriting all 108 properties)
-- The text content is stored
-- The metadata properties are set (EmployeeID, DocType, etc.)
-- Major version 1.0 of the document is created
-
-The document is now searchable by any of its properties — you can find it by EmployeeID, by DocType, by Department, or by full-text content search.
+Full-text indexing is performed asynchronously by Content Search Services and requires the class and properties to be enabled for indexing. Uploading a single employee set first provides a validated baseline, confirming folder creation and filing, metadata mapping, and index behavior before scaling to bulk ingestion.

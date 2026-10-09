@@ -7,16 +7,24 @@ Your first employee's documents are in. Now you'll upload the remaining 4 employ
 Replace the example values below with your actual employee data from the script output.
 :::
 
-
 1. Make sure **Agent Mode** is selected and enter the following prompt:
 
     ```
-    Help me to upload the HR documents for my remaining 4 employees. The files 
-    are in HR_<YOUR_LASTNAME>/. 
+    Help me to upload the HR documents for my remaining 4 employees. The files
+    are in HR_<YOUR_LASTNAME>/.
 
     Please file all documents under /BOB_LAB/<YOUR_LASTNAME>/ in the repository
     including the employee folder structure.
     ```
+
+## 🔍 What Bob Does Behind the Scenes
+
+- **Activates the `hr-document-upload` skill**, which guides Bob through batch upload handling, folder creation, deduplication rules, and the intentional lab error seeds.
+- **Inspects the repository** by calling `lookup_documents_by_path` on the `core-cs-mcp-server` to detect existing files under `/BOB_LAB/<YOUR_LASTNAME>/` and safely skip the already-uploaded first employee.
+- **Builds employee folder structures** by calling `create_folder` on the `core-cs-mcp-server` for all remaining employee folders and category subdirectories.
+- **Uploads documents with metadata** by calling `create_document` on the `core-cs-mcp-server` for each file, setting properties such as `EmployeeID`, `DocType`, `Department`, and employee name.
+- **Applies intentional lab error seeds** on select files (e.g., using `Contract` or base `Document` classes, or omitting properties) to simulate real-world data quality issues for later remediation labs.
+- **Presents a structured upload summary** confirming the 44 uploaded documents, skipped duplicates, and applied seeds.
 
 ## ✅ Expected Output from Bob
 
@@ -51,6 +59,8 @@ I have completed the bulk upload of your remaining HR documents successfully. Be
 All files are successfully organized under your employee directory structure in the content repository!
 :::
 
-## 💡 Key Insight
+## 💡 Key Insights
 
-When you requested the upload of your remaining employees, Bob automatically activated a specialized `hr-document-upload` skill. This skill analyzed your local folders, checked the repository to safely skip existing duplicates, built the employee folder structures, and applied the Lab 3 misclassification seeds. Aside from those intentional seeds, each document was successfully created with proper metadata, making them immediately searchable and usable within the repository.
+Uploading dozens of documents across multiple folder hierarchies manually in IBM Content Navigator would be tedious and error-prone. Ingestion automation ensures that folder structures, metadata mapping, and document filings remain consistent and repeatable across large batch operations. 
+
+Furthermore, real-world repositories frequently suffer from data entropy over time — such as legacy misclassifications, incomplete property sets, and missing identifiers. The anomalies intentionally seeded across several documents in this upload simulate these common data quality issues, setting the stage for the next lab where you will use AI reasoning and IBM Bob to detect, audit, and remediate them.

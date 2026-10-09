@@ -101,7 +101,7 @@ Two structural reasons:
 
 ## 💡 The "Class vs Property" Design Decision
 
-This is a fundamental IBM Content Services design question: *"Should I create a new class, or add a property to an existing class?"*
+This is a fundamental IBM Content Cortex design question: *"Should I create a new class, or add a property to an existing class?"*
 
 ### Create a new class when:
 - The document type has fundamentally different properties

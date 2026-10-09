@@ -22,7 +22,7 @@ You want Bob to find all HR documents in your namespace that are missing critica
 
 ## 🔍 What Bob Does Behind the Scenes
 
-Bob activates the `hr-classification-workflow` skill and runs a two-pass audit against the IBM Content Services repository:
+Bob activates the `hr-classification-workflow` skill and runs a two-pass audit against the IBM Content Cortex repository:
 
 **Pass 1 — EmployeeID property check (HRDocument class)**
 - Queries all `HRDocument` objects under `/BOB_LAB/<LASTNAME>/` using `INSUBFOLDER` containment.

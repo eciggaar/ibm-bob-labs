@@ -63,6 +63,6 @@ As a result, **HR-specific metadata properties** (such as `EmployeeID`) are miss
 Would you like me to reclassify it to `HRDocument` and populate the missing properties?
 :::
 
-## 💡 Key Insight
+## 💡 Key Insights
 
 Verification is an important step in the document upload process. By checking a sample document, you can spot problems that are invisible in the file system — like a document filed under the wrong class with missing metadata. In this case, the check revealed exactly that: a seeded error that will be corrected in the next lab.
