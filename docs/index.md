@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Start Here →
-      link: /ibm-bob/
+      link: /documentalist-lab/bob-as-documentalist/
 
 features:
   - title: 🛠️ Get Started with IBM Bob
