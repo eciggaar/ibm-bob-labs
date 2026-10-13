@@ -94,11 +94,11 @@ In this lab, you:
 |-------------|-----|
 | Got your personal lab namespace | Entered your last name → unique employee dataset |
 | Understood the HR document taxonomy | Bob explained 8 categories + DocType values |
-| Generated 55 realistic HR documents | `python generate_hr_documents.py --user YOURLASTNAME` |
+| Generated 55 realistic HR documents | `python generate_hr_documents.py --user <YOUR_LASTNAME>` |
 | Uploaded your first employee's 11 documents | Bob called `create_document` × 11 |
 | Uploaded remaining 44 documents | Bob called `create_document` × 44 |
 | Verified a document's properties | Bob called `lookup_documents_by_path` + `get_document_properties` |
-| Reviewed documents in Navigator | Browsed `/BOB_LAB/YOURLASTNAME/` in IBM Content Navigator web UI |
+| Reviewed documents in Navigator | Browsed `/BOB_LAB/<YOUR_LASTNAME>/` in IBM Content Navigator web UI |
 
 ## 💡 Lessons Learned
 
@@ -109,4 +109,4 @@ In this lab, you:
 
 ## ➡️ Next Step
 
-In the next lab, Bob will help you search **your namespace** (`/BOB_LAB/YOURLASTNAME/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating a full AI-powered classification pipeline.
+In the next lab, Bob will help you search **your namespace** (`/BOB_LAB/<YOUR_LASTNAME>/`), find the misclassified documents, read their content, reason about what they should be, and fix them — demonstrating a full AI-powered classification pipeline.

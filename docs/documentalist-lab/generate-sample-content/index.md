@@ -22,9 +22,9 @@ By the end of this lab, you will be able to:
 
 ## Your Personal Lab Namespace
 
-::: warning Important - Read this before running anything
+::: warning ⚠️ Important
 
-This lab is designed to run safely in parallel with other participants. To avoid conflicts in the shared repository, **every participant works in their own namespace** based on their last name.
+- This lab is designed to run safely in parallel with other participants. To avoid conflicts in the shared repository, **every participant works in their own namespace** based on their last name.
 :::
 
 When you run the script, you will be asked for your last name. This will be used to:

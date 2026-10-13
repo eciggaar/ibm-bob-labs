@@ -7,6 +7,8 @@ Your first employee's documents are in. Now you'll upload the remaining 4 employ
 Replace the example values below with your actual employee data from the script output.
 :::
 
+1. Start a new task in IBM Bob by clicking the `+` sign on top of the Bob chat panel.
+
 1. Make sure **Agent Mode** is selected and enter the following prompt:
 
     ```
@@ -30,37 +32,29 @@ Replace the example values below with your actual employee data from the script 
 
 ::: info
 
-I have completed the bulk upload of your remaining HR documents successfully. Below is the full summary for the `DUPONT` namespace.
-
 #### Upload Summary — DUPONT
 
 | Employee | Uploaded | Already in repo | Seeded error |
 |---|---|---|---|
-| DUP001 Antoine Muller | 0 | 11 | — |
-| DUP002 Lina Girard | 11 | 0 | Wrong class (`Contract` instead of `HRDocument`) — `Department` missing |
-| DUP003 Lucas Mercier | 11 | 0 | `HRDocument` with `EmployeeID = 000000` (should be the real ID) |
-| DUP004 Mia Renard | 11 | 0 | Bare `Document` class — no metadata at all |
-| DUP005 Amira Dubois | 11 | 0 | `HRDocument` but missing `Department` and `DocType` |
+| DUP001 Alice Renard | 0 | 11 | Bare `Document` class on the payslip. It has no `EmployeeID` or HR metadata. (already in repo) |
+| DUP002 Camille Benali | 11 | 0 | Wrong class on the employment contract. It is `Contract` instead of `HRDocument`, and it has no HR properties. |
+| DUP003 Maxime Henry | 11 | 0 | `HRDocument` with invalid `EmployeeID = 000000` on the performance review. The real ID is `DUP003`. |
+| DUP004 Ravi Martin | 11 | 0 | Bare `Document` class on the disciplinary record. It has no metadata at all. |
+| DUP005 Nour Bernard | 11 | 0 | `HRDocument` with `EmployeeID`, `Department` and `DocType` omitted on the exit notes. |
 
-**Total uploaded:** 44  |  **Already in repo:** 11  |  **Errors:** 0
-
-##### Key Details & Lab Seeds Applied
+**Total uploaded:** 44 | **Already in repo:** 11 | **Errors:** 0
 
 ---
 
-* **Employee Folders Created:** 41 new folders created in the content repository under `/BOB_LAB/DUPONT/`.
-* **Deduplication:** The 11 documents belonging to `DUP001_Antoine Muller` were detected in the repository and safely skipped to avoid duplication.
-* **Seeded Error Simulation:** As designed for Lab 3, the following error seeds were systematically applied to test downstream remediation:
-  1. **DUP002:** `DUP002_Employment_Contract.txt` uploaded as `Contract` class (wrong domain), causing `Department` to be missing.
-  2. **DUP003:** `DUP003_Performance_Review_2024.txt` uploaded with incorrect `EmployeeID = 000000`.
-  3. **DUP004:** `DUP004_Disciplinary_Record.txt` uploaded as a bare `Document` class with no metadata at all.
-  4. **DUP005:** `DUP005_Exit_Notes.txt` uploaded as `HRDocument` but missing its `Department` and `DocType` properties.
+The upload exited cleanly. It created 36 folders. `/BOB_LAB`, `/BOB_LAB/DUPONT` and `DUP001_Alice Renard` already existed. Each of the 4 new employees has a folder under `/BOB_LAB/DUPONT/` with the 8 category subfolders `01_Recruitment` to `08_Exit`.
 
-All files are successfully organized under your employee directory structure in the content repository!
+Alice Renard (DUP001) was already fully uploaded, so the script skipped her 11 documents. A re-run will skip all 55 documents.
+
 :::
+
 
 ## 💡 Key Insights
 
 Uploading dozens of documents across multiple folder hierarchies manually in IBM Content Navigator would be tedious and error-prone. Ingestion automation ensures that folder structures, metadata mapping, and document filings remain consistent and repeatable across large batch operations. 
 
-Furthermore, real-world repositories frequently suffer from data entropy over time — such as legacy misclassifications, incomplete property sets, and missing identifiers. The anomalies intentionally seeded across several documents in this upload simulate these common data quality issues, setting the stage for the next lab where you will use AI reasoning and IBM Bob to detect, audit, and remediate them.
+Furthermore, real-world repositories tend to accumulate quality problems over time — documents uploaded in a hurry, under the wrong class, or with missing and incorrect properties. The anomalies intentionally seeded across several documents in this upload simulate these common data quality issues, setting the stage for the next lab where you will use AI reasoning and IBM Bob to detect, audit, and remediate them.

@@ -5,7 +5,7 @@ Before moving on, you want to verify that the documents were uploaded correctly.
 ## 💬 Prompt to Bob
 
 ::: warning ⚠️ Important
-Replace the example values below with your actual employee data from the script output.
+- Replace the example values below with your actual employee data from the script output.
 :::
 
 1. Make sure **Agent Mode** is selected and enter the following prompt:
@@ -27,40 +27,23 @@ Replace the example values below with your actual employee data from the script 
 ## ✅ Expected Output from Bob
 
 ::: info
-The document was found and here are its properties — but there's a **notable issue** flagged:
-
----
-
-#### 📄 DUP001 — January 2024 Payslip
-
----
+The payslip is in the repository — and it has the **intentional seeded misclassification** applied. Here's a summary of the key properties:
 
 | Property | Value |
 |---|---|
-| **Document ID** | `{A0F70520-0000-C139-8A2E-AD79B79AB60E}` |
-| **Name** | `DUP001_Payslip_2024_01` |
-| **Path** | `/BOB_LAB/DUPONT/DUP001_Antoine Muller/04_Payroll/` |
-| **Class** | `Document` ⚠️ |
-| **MIME Type** | `text/plain` |
-| **Content Size** | 2,345 bytes |
-| **Version** | 1.0 (current) |
+| **Document ID** | `{A135D9C0-0000-C138-839D-455377D2161B}` |
+| **Class** | `Document` ⚠️ *(seeded error — should be `HRDocument`)* |
+| **DocumentTitle** | `DUP001_Payslip_2024_01.txt` |
+| **MimeType** | `text/plain` |
+| **ContentSize** | 2,339 bytes |
 | **Creator** | `cpmanager` |
-| **Date Created** | 2026-10-01 |
-| **Date Checked In** | 2026-10-01 |
-| **Last Modified** | 2026-10-01 |
+| **DateCreated** | 2026-10-13 |
+| **Version** | 1.0 (current, not reserved) |
+| **EmployeeID** | *(absent — no HR metadata)* |
 
 ---
 
-##### ⚠️ Issue Detected: Wrong Document Class
-
-The payslip was uploaded under the generic **`Document`** class instead of the expected **`HRDocument`** class. This is confirmed both by:
-
-1. The `className` field returning `Document` (all other employees' payslips — DUP002 through DUP005 — are correctly classified as `HRDocument`).
-2. The AI summary embedded in the document explicitly notes: *"The document was incorrectly uploaded as a generic Document class without the required EmployeeID metadata, which must be corrected."*
-
-As a result, **HR-specific metadata properties** (such as `EmployeeID`) are missing from this document.
-
-Would you like me to reclassify it to `HRDocument` and populate the missing properties?
+**Seeded error confirmed:** The document was uploaded as a bare `Document` class with no `EmployeeID`, `Department`, or `DocType` properties. It should be classified as `HRDocument` with `EmployeeID = DUP001`. This is an intentional Lab 3 misclassification for you to detect and fix during the classification audit exercise.
 :::
 
 ## 💡 Key Insights

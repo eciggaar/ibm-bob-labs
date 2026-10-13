@@ -10,12 +10,15 @@ The files are ready. Now you'll ask Bob to upload the first employee's documents
 - Furthermore, keep the chat open and **approve each step** when prompted. Bob will ask for confirmation before e.g. creating folders and uploading documents, since MCP tool calls require explicit approval.
 :::
 
+1. Start a new task in IBM Bob by clicking the `+` sign on top of the Bob chat panel.
+
 1. Make sure **Agent Mode** is selected and enter the following prompt:
 
       ```
       Upload all HR documents for my first employee to the repository. The files
-      are in HR_<YOUR_LASTNAME>/. Please file them under /BOB_LAB/<YOUR_LASTNAME>/
-      in the repository, including the employee folder structure.
+      are in HR_<YOUR_LASTNAME>/. Use absolute file paths. Please file them under
+      /BOB_LAB/<YOUR_LASTNAME>/ in the repository, including the employee folder 
+      structure. For this run, only use MCP tool calls.
       ```
 
 ## 🔍 What Bob Does Behind the Scenes
@@ -31,29 +34,48 @@ The files are ready. Now you'll ask Bob to upload the first employee's documents
 ## ✅ Expected Output from Bob
 
 ::: info
-All 11 documents for **DUP001 Antoine Muller** are now in the repository. Here's the complete summary:
+
+#### Upload Summary — DUPONT / DUP001 Alice Renard
 
 ---
 
-#### Upload Summary — DUP001 Antoine Muller
+##### Folder structure created
 
-**Repository path:** `/BOB_LAB/DUPONT/DUP001_Antoine Muller/`
+```
+/BOB_LAB/DUPONT/                     ← new
+/BOB_LAB/DUPONT/DUP001_Alice Renard/ ← new
+  ├── 01_Recruitment/
+  ├── 02_Employment_Contract/
+  ├── 03_Personal_Administration/
+  ├── 04_Payroll/
+  ├── 05_Performance/
+  ├── 06_Training/
+  ├── 07_Disciplinary/
+  └── 08_Exit/
+```
 
-| # | Document | Folder | Class | Status |
+---
+
+##### Documents uploaded (11/11)
+
+| Folder | File | Class | EmployeeID | Note |
 |---|---|---|---|---|
-| 1 | `DUP001_Job_Application` | `01_Recruitment` | `HRDocument` | ✅ |
-| 2 | `DUP001_Interview_Notes` | `01_Recruitment` | `HRDocument` | ✅ |
-| 3 | `DUP001_Employment_Contract` | `02_Employment_Contract` | `HRDocument` | ✅ |
-| 4 | `DUP001_ID_Documents` | `03_Personal_Administration` | `HRDocument` | ✅ |
-| 5 | `DUP001_Personal_Info` | `03_Personal_Administration` | `HRDocument` | ✅ |
-| 6 | `DUP001_Payslip_2024_01` | `04_Payroll` | `Document` | ⚠️ **Seeded error** — base class, no HR metadata |
-| 7 | `DUP001_Salary_Info` | `04_Payroll` | `HRDocument` | ✅ |
-| 8 | `DUP001_Performance_Review_2024` | `05_Performance` | `HRDocument` | ✅ |
-| 9 | `DUP001_Training_Record` | `06_Training` | `HRDocument` | ✅ |
-| 10 | `DUP001_Disciplinary_Record` | `07_Disciplinary` | `HRDocument` | ✅ |
-| 11 | `DUP001_Exit_Notes` | `08_Exit` | `HRDocument` | ✅ |
+| 01_Recruitment | `DUP001_Interview_Notes.txt` | HRDocument | DUP001 | ✓ |
+| 01_Recruitment | `DUP001_Job_Application.txt` | HRDocument | DUP001 | ✓ |
+| 02_Employment_Contract | `DUP001_Employment_Contract.txt` | HRDocument | DUP001 | ✓ |
+| 03_Personal_Administration | `DUP001_ID_Documents.txt` | HRDocument | DUP001 | ✓ |
+| 03_Personal_Administration | `DUP001_Personal_Info.txt` | HRDocument | DUP001 | ✓ |
+| 04_Payroll | `DUP001_Payslip_2024_01.txt` | **Document** | — | ⚠️ Lab 3 seed: bare class, no HR metadata |
+| 04_Payroll | `DUP001_Salary_Info.txt` | HRDocument | DUP001 | ✓ |
+| 05_Performance | `DUP001_Performance_Review_2024.txt` | HRDocument | DUP001 | ✓ |
+| 06_Training | `DUP001_Training_Record.txt` | HRDocument | DUP001 | ✓ |
+| 07_Disciplinary | `DUP001_Disciplinary_Record.txt` | HRDocument | DUP001 | ✓ |
+| 08_Exit | `DUP001_Exit_Notes.txt` | HRDocument | DUP001 | ✓ |
 
-**11 documents uploaded** — 10 correctly classified as `HRDocument` with full metadata, 1 intentionally seeded as bare `Document` (the payslip) ready for Lab 3 detection.
+**Total uploaded: 11 | Errors: 0 | Lab 3 seed applied: 1**
+
+> ⚠️ `DUP001_Payslip_2024_01.txt` was intentionally uploaded as the base `Document` class with no `EmployeeID` or HR metadata — this is the deliberate Lab 3 misclassification seed for DUP001.
+
 :::
 
 ## 💡 Key Insights
