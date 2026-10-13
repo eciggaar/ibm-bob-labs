@@ -5,7 +5,9 @@
     "preview": "vitepress preview docs"
   },
   "devDependencies": {
+    "mermaid": "^12.1.0",
     "vitepress": "2.0.0-alpha.20",
+    "vitepress-mermaid-renderer": "^1.2.2",
     "vitepress-plugin-tabs": "^0.9.1"
   }
 }
