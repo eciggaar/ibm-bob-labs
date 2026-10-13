@@ -17,123 +17,135 @@ You've seen the inventory, the duplicates, the legacy classes, and the inheritan
 
 Bob should produce a structured roadmap similar to:
 
-:::info 
-#### Repository Cleanup Roadmap - Executive Summary
+::: info
 
-#### 12-Week Plan | 5 Phases | 61 → 56 Classes
+#### Repository Cleanup Roadmap & Architecture Plan
 
----
+#### Executive Summary
 
-#### Phase 1: Quick Wins
-**Focus:** Low-risk consolidations + complete documentation
-
-**Actions:**
-- ✅ Consolidate `AangifteBTWKwartaal` → `AangifteBTW` (add Period property)
-- ✅ Consolidate `CorrectieAangifteLoonheffingen` → `AangifteLoonheffingen` (add IsCorrection flag)
-- ✅ Consolidate `VoortaxatieVennootschapsbelasting` → `AangifteVennootschapsbelasting` (add AssessmentType)
-- ✅ Document all 61 classes with descriptions and usage guidelines
-
-**Deliverables:** 61 → 58 classes | 100% documentation coverage  
-**Risk:** LOW | **Impact:** HIGH
+- **Scope:** Complete analysis of 49 repository document classes (30 Tax Administration, 1 HR, 1 Contracts/Legal, 17 System/Technical).
+- **Primary Objective:** Eliminate redundant classes, resolve generic vs. specialized hierarchy conflicts, standardize naming conventions, and establish governance.
+- **Estimated Timeline:** 12-Week Phased Implementation.
 
 ---
 
-#### Phase 2: Investigation & Planning
-**Focus:** Understand before acting
+#### Current State Assessment
 
-**Actions:**
-- 🔍 Investigate `AangifteDocument` (parent class? catch-all? legacy?)
-- 🔍 Analyze `MotorrijtuigenbelastingAangifte` usage (keep? merge? delete?)
-- 📊 Property usage analysis across all classes
-- 🎯 Design choice lists for data quality (JobStatus, EmploymentType, etc.)
-- 📋 HR gap analysis - design 7 specialized HR classes
+```mermaid
+pie title Document Classes by Domain (49 Total)
+    "Tax Administration (30)" : 30
+    "System / Technical (17)" : 17
+    "HR (1)" : 1
+    "Contracts / Legal (1)" : 1
+```
 
-**Deliverables:** Investigation reports | Implementation plans | Stakeholder decisions  
-**Risk:** LOW | **Impact:** Foundation for Phases 3-4
-
----
-
-#### Phase 3: Medium-Risk Changes
-**Focus:** Customs, choice lists, execute Phase 2 decisions
-
-**Actions:**
-- ⚠️ Consolidate `VereenvoudigdeDouaneaangifte` → `Douaneaangifte` (after regulatory compliance check)
-- ⚠️ Execute Motor Vehicle Tax decision (keep/merge/delete based on Phase 2 findings)
-- ✅ Implement choice lists for 80% of key properties
-- ✅ Execute AangifteDocument decision (restructure/migrate/delete)
-- ✅ Migrate data to enforce choice lists
-
-**Deliverables:** 58 → 56 classes | 80% choice list coverage | Improved data quality  
-**Risk:** MEDIUM | **Impact:** HIGH
+##### Key Issues Identified
+1. **Direct Duplicates & Frequency Proliferation:** Classes created for specific reporting periods (e.g., `AangifteBTWKwartaal`) or amendment states (`CorrectieAangifteLoonheffingen`).
+2. **Customs Hierarchy Overlap:** Generic `Douaneaangifte` coexists alongside specific import, export, and simplified declaration classes.
+3. **Domain Granularity Imbalance:** 30 hyper-specific tax classes vs. single catch-all classes for HR (`HRDocument` with 108 properties) and Contracts (`Contract`).
+4. **Naming Inconsistencies:** Mixture of abbreviations (`VoorlopigAanslagIB`, `AangifteBPM`) and full words (`VoortaxatieVennootschapsbelasting`).
 
 ---
 
-#### Phase 4: HR Enhancement
-**Focus:** Build out HR domain with specialized classes
+#### 12-Week Roadmap Overview
 
-**Actions:**
-- ✅ Create 7 new HR document classes:
-  - RecruitmentDocument
-  - EmploymentContractDocument
-  - PayrollDocument
-  - PerformanceReviewDocument
-  - TrainingDocument
-  - DisciplinaryDocument
-  - ExitDocument
-- ✅ Build property templates for common scenarios
-- ✅ Comprehensive testing and validation
-- ✅ User training and documentation
-- ✅ Production rollout
-
-**Deliverables:** 56 → 63 classes (strategic increase) | Complete HR domain | Trained users  
-**Risk:** LOW | **Impact:** HIGH
+| Phase | Focus Area | Timeline | Target Reduction / Enhancement | Risk Level |
+|---|---|---|---|:---:|
+| **Phase 1** | Quick Wins: Obvious Duplicate Consolidation | Weeks 1–3 | 49 → 46 Classes | Low |
+| **Phase 2** | Customs & Financial Statements Alignment | Weeks 4–6 | 46 → 44 Classes | Medium |
+| **Phase 3** | Choice Lists & Metadata Standardization | Weeks 7–8 | Standardize 80%+ Key Properties | Low |
+| **Phase 4** | HR & Contract Domain Evaluation | Weeks 9–10 | Formalize Subtype/Classification Strategy | Low |
+| **Phase 5** | Governance, Retention & Auditing | Weeks 11–12 | Continuous Policy Enforcement | Low |
 
 ---
 
-#### Phase 5: Governance & Monitoring (Ongoing)
-**Focus:** Maintain improvements
-
-**Actions:**
-- 📋 Establish class governance framework
-- 📋 Define property creation policies
-- 📋 Implement change management process
-- 📊 Monthly metrics and monitoring
-- 📊 Quarterly usage reviews
-- 📊 Annual repository audits
-
-**Deliverables:** Governance framework | Monitoring dashboards | Continuous improvement  
-**Risk:** LOW | **Impact:** Sustained quality
+#### Phase Details
 
 ---
 
-#### Summary: All 5 Duplicates Addressed
+##### Phase 1: Quick Wins (Weeks 1–3)
+**Objective:** Merge classes that represent pure status/frequency variants into their primary parent classes.
 
-| Duplicate Class | Target Class | Phase | Week | Risk |
-|----------------|--------------|-------|------|------|
-| AangifteBTWKwartaal | AangifteBTW | 1 | 1 | LOW |
-| CorrectieAangifteLoonheffingen | AangifteLoonheffingen | 1 | 2 | LOW |
-| VoortaxatieVennootschapsbelasting | AangifteVennootschapsbelasting | 1 | 3 | LOW |
-| VereenvoudigdeDouaneaangifte | Douaneaangifte | 3 | 7 | MEDIUM |
-| MotorrijtuigenbelastingAangifte | TBD | 3 | 8 | MEDIUM |
+* **Action 1.1: VAT Quarterly Filing Consolidation**
+  * Merge `AangifteBTWKwartaal` → `AangifteBTW`.
+  * Add/verify `FilingPeriod` choice list (`Maand`, `Kwartaal`, `Jaar`) on `AangifteBTW`.
+* **Action 1.2: Payroll Tax Correction Consolidation**
+  * Merge `CorrectieAangifteLoonheffingen` → `AangifteLoonheffingen`.
+  * Add `IsCorrection` boolean property.
+* **Action 1.3: Corporate Preliminary Assessment Consolidation**
+  * Merge `VoortaxatieVennootschapsbelasting` → `AangifteVennootschapsbelasting`.
+  * Add `AssessmentType` choice list (`Voorlopig`, `Definitief`).
 
 ---
 
-#### Key Outcomes
+##### Phase 2: Customs & Financial Reporting Alignment (Weeks 4–6)
+**Objective:** Resolve coexistence of generic parent classes with specialized filing subtypes.
 
-**Class Optimization:**
-- Start: 61 classes
-- After Phase 1: 58 classes (-3 duplicates)
-- After Phase 3: 56 classes (-2 more duplicates)
-- After Phase 4: 63 classes (+7 specialized HR classes)
-- **Net Result: Better structure, no redundancy**
+* **Action 2.1: Customs Declarations Architecture**
+  * Evaluate `Douaneaangifte` vs. `InvoerAangifte`, `UitvoerAangifte`, and `VereenvoudigdeDouaneaangifte`.
+  * Standardize on `Douaneaangifte` with a mandatory `CustomsProcedure` choice list, or officially deprecate the generic class in favor of specialized subclasses.
+* **Action 2.2: P&L Statement Consolidation**
+  * Review standalone `WinstEnVerliesrekening` filings.
+  * Integrate P&L documents into `JaarrekeningDocument` using a `FinancialStatementComponent` property.
 
-**Quality Improvements:**
-- 100% classes documented
-- 80% properties with choice lists
-- Complete HR domain coverage
-- Governance framework established
+---
 
-**Full Roadmap:** `audits/repository-cleanup-roadmap.md`
+##### Phase 3: Choice Lists & Metadata Standardization (Weeks 7–8)
+**Objective:** Enforce data quality and resolve naming drift.
+
+* **Action 3.1: Naming & Symbolic Name Alignment**
+  * Standardize abbreviations across tax classes (documenting legacy aliases for `VoorlopigAanslagIB`).
+* **Action 3.2: Choice List Deployment**
+  * Implement strict choice lists for core HR properties (`JobStatus`, `EmploymentType`, `CurrentStatus`, `DocType`).
+  * Ensure consistent property template usage across the object store.
+
+---
+
+##### Phase 4: HR & Contract Domain Architecture (Weeks 9–10)
+**Objective:** Verify that the single-class discriminator model satisfies compliance and retention requirements.
+
+* **Action 4.1: HR Retention & Security Review**
+  * Validate that using `DocType` within `HRDocument` meets GDPR and retention schedule requirements.
+  * If different document types require strict separate lifecycle policies (e.g., recruitment vs. disciplinary), define specialized subclasses.
+* **Action 4.2: Contracts Schema Enrichment**
+  * Add contract metadata properties (`ContractType`, `Counterparty`, `EffectiveDate`, `ExpirationDate`) to `Contract`.
+
+---
+
+##### Phase 5: Ongoing Governance & Automation (Weeks 11–12)
+**Objective:** Prevent future class proliferation.
+
+* **Action 5.1: Class Creation Gatekeeping**
+  * Mandate architectural approval before any new Document subclass is created.
+  * Enforce the rule: *Use properties/choice lists for variations; reserve classes for distinct schemas or lifecycles.*
+* **Action 5.2: Automated Repository Audits**
+  * Schedule quarterly health checks to detect unindexed classes, orphaned documents, and schema drift.
+
+---
+
+#### Action Matrix Summary
+
+| Deprecated / Source Class | Target / Surviving Class | Strategy | Risk |
+|---|---|---|:---:|
+| `AangifteBTWKwartaal` | `AangifteBTW` | Add `FilingPeriod` property | Low |
+| `CorrectieAangifteLoonheffingen` | `AangifteLoonheffingen` | Add `IsCorrection` flag | Low |
+| `VoortaxatieVennootschapsbelasting` | `AangifteVennootschapsbelasting` | Add `AssessmentType` property | Low |
+| `VereenvoudigdeDouaneaangifte` | `Douaneaangifte` | Add `DeclarationType` choice list | Medium |
+| `WinstEnVerliesrekening` | `JaarrekeningDocument` | Add `DocumentComponent` property | Low |
+
+:::
+
+::: warning Why a 12-week estimate?
+The 12-week schedule reflects traditional manual enterprise content governance. In production environments, administrators typically need to manually audit classes, write and test custom migration scripts, regression-test downstream integrations (such as SAP ArchiveLink and Salesforce), normalize legacy data for choice lists, and navigate standard multi-week enterprise release cadences.
+
+**How IBM Bob and MCP automation could reduce this timeline:**
+By combining AI assistance with deterministic MCP tools, many labor-intensive phases could be significantly streamlined:
+- **Instant Schema & Property Diffing:** Bob can compare property templates, types, and constraints across candidate classes in seconds via `get_class_property_descriptions`.
+- **Automated Batch Migration Scripts:** Rather than hand-coding migration utilities, Bob could generate and pre-validate idempotent GraphQL/MCP operations (`update_document_class`, `update_document_properties`) for document reclassification.
+- **Data Normalization:** Bob can analyze legacy property value patterns to assist in building standardization maps for new choice lists.
+- **Automated Verification:** Automated pre- and post-migration checks could confirm that document counts and property values remain intact, helping reduce manual verification effort and migration risks.
+
+*Depending on an organization's internal change approval processes, testing requirements, and integration complexity, leveraging these automations might substantially shorten the overall execution timeline.*
 :::
 
 ## 💡 The Governance Lesson
@@ -152,7 +164,7 @@ In this lab, Bob helped you to:
 | Explained the inheritance model | AI reasoning on property metadata |
 | Produced a prioritized cleaning roadmap | AI synthesis of all findings |
 
-## 💡 Key Takeaways
+## 💡 Key Insights
 
 - **Bob can interrogate a live repository** — no need to navigate admin consoles or read static documentation
 - **The "class vs property" design decision** is the root cause of class proliferation

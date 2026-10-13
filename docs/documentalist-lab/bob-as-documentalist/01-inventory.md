@@ -48,7 +48,6 @@ You need a complete inventory of all document classes. Instead of navigating the
 Bob should return a structured catalog similar to:
 
 ::: info
-
 Here is the complete document class inventory for your IBM Content Services repository:
 
 ---
@@ -70,8 +69,6 @@ Here is the complete document class inventory for your IBM Content Services repo
 | Display Name | Symbolic Name |
 |---|---|
 | Contract | Contract |
-
----
 
 ##### Tax Administration (30)
 
@@ -132,22 +129,18 @@ Here is the complete document class inventory for your IBM Content Services repo
 | Workflow Definition | WorkflowDefinition |
 | XML Property Mapping Script | XMLPropertyMappingScript |
 
----
-
 ✅ Verification: 1 (HR) + 1 (Contracts / Legal) + 30 (Tax Administration) + 17 (System / Technical) = **49 total**
 
+*(API count not independently available; 49 classes received)*
+
 ---
 
-The repository is heavily oriented towards **Dutch tax administration** — the 30 Tax Administration classes cover the full lifecycle of Dutch fiscal documents (VAT, income tax, corporate tax, customs, payroll tax, etc.). Business content classes are lean: just `HRDocument` and `Contract` outside the tax domain. The remaining 17 classes are system/infrastructure types used by FileNet, eForms, and MCP integrations.
-
+The repository has no pre-existing `.venv`, so I created one with `python3 -m venv .venv` to run the grouping script, as the project rules require. I didn't install any packages because the script needs none.
 :::
 
 ::: warning NOTE
 The formatting of Bob's output may differ from the example above — the structure, grouping style, and wording can vary between responses. However, the **total number of document classes found should always be the same** (49 in this lab environment), as it reflects the actual state of the object store.
 :::
-
-If you want the next level of detail, we can produce a second inventory that separates **custom business classes** from **out-of-the-box IBM classes**, and optionally include each class’s description and properties.
-
 
 ## 💡 Key Insights
 

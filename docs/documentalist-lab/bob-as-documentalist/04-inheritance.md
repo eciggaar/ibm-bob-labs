@@ -18,90 +18,78 @@ Bob should provide an explaination similar to:
 
 ::: info
 
-Based on the property data in the file:
+#### The Relationship Between `Document` and `HRDocument`
+
+In IBM Content Services (FileNet), document classes follow an **object-oriented inheritance model**. `Document` is the **root base class** for all content in the repository, and `HRDocument` is a direct subclass of `Document`.
+
+```mermaid
+classDiagram
+    class Document {
+        +63 System Properties (Engine mechanics)
+        +9 Base Custom Properties (Title, AI, Templates)
+        Total: 72 Properties
+    }
+
+    class HRDocument {
+        +36 HR Business & Integration Properties
+        Total: 108 Properties
+    }
+
+    Document <|-- HRDocument : Inherits
+```
 
 ---
 
-#### `Document` → `HRDocument` Inheritance
+#### Why Does `HRDocument` Have 108 Properties?
+
+`HRDocument` does not define 108 independent properties from scratch. Rather:
+* **72 properties (67%)** are **inherited** directly from the base `Document` class.
+* **36 properties (33%)** are **added** specifically for HR business data and enterprise integrations.
 
 ---
 
-##### The base `Document` class — 63 inherited system properties
+#### 1. What `HRDocument` Inherits from `Document` (72 Properties)
 
-Every custom document class is a subclass of `Document`. You get 63 system-owned properties automatically — IBM manages them, you cannot remove or rename any of them:
+Every document in the repository requires underlying engine mechanics to support lifecycle management, access control, storage, and versioning.
 
-| Group | Examples |
-|---|---|
-| **Identity & audit** | `Id`, `Creator`, `DateCreated`, `LastModifier`, `DateLastModified` |
-| **Security** | `Owner`, `Permissions`, `SecurityPolicy`, `SecurityFolder`, `ActiveMarkings` |
-| **Versioning** | `IsCurrentVersion`, `MajorVersionNumber`, `MinorVersionNumber`, `VersionStatus`, `IsReserved` |
-| **Content & storage** | `ContentSize`, `MimeType`, `ContentElements`, `StoragePolicy`, `StorageArea` |
-
----
-
-#### What `HRDocument` adds — 45 custom properties
-
-On top of the 63 inherited ones, `HRDocument` carries 45 custom properties. But **not all 45 were defined by the HR team**.
+* **63 System-Owned Properties:**
+  * **Versioning:** `MajorVersionNumber`, `MinorVersionNumber`, `IsCurrentVersion`, `IsReserved`, `ReservationType`, `VersionSeries`, `VersionStatus`, etc.
+  * **Security & Access Control:** `Permissions`, `Owner`, `SecurityPolicy`, `SecurityFolder`, `ActiveMarkings`.
+  * **Storage & Content Engine:** `MimeType`, `ContentSize`, `StorageArea`, `StorageLocation`, `ContentRetentionDate`, `DateContentLastAccessed`.
+  * **Audit & Lifecycle:** `Creator`, `DateCreated`, `LastModifier`, `DateLastModified`, `DateCheckedIn`, `CurrentState`, `IsInExceptionState`.
+* **9 Base Custom Properties:**
+  * Core identity: `DocumentTitle`
+  * UI & Entry Templates: `EntryTemplateId`, `EntryTemplateObjectStoreName`, `EntryTemplateLaunchedWorkflowNumber`, `ComponentBindingLabel`, `IgnoreRedirect`, `ClbSecurityController`
+  * AI & Search Integration: `GenaiDateIndexed`, `GenaiWatsonxSummary`
 
 ---
 
-##### ✅ Genuine HR-domain properties (36)
+#### 2. What `HRDocument` Adds (36 Custom Properties)
 
-These were defined specifically for HR business use:
+`HRDocument` introduces 36 business properties tailored for employee records and cross-system automation:
 
-| Group | Properties | Count |
-|---|---|---|
-| **Employee identity** | `FirstName`, `LastName`, `PersonalID`, `Birthdate`, `EmployeeID` | 5 |
-| **Job & employment** | `JobRole`, `JobFunction`, `JobCode`, `JobLevel`, `JobStatus`, `EmploymentType`, `CurrentStatus`, `StartDate`, `TerminationDate` | 9 |
-| **Organisation** | `Company`, `CompanyCode`, `BusinessUnit`, `Division`, `Department`, `CostCenter`, `Location` | 7 |
-| **SAP integration** | `SAPEmployeeID`, `SapLinkTrigger`, `sapLinked`, `SAPDocId`, `SAPDocProt`, `SAPComps`, `SAPContType`, `SAPCompVersion` | 8 |
-| **Salesforce integration** | `SFLinkTrigger`, `SfSalesforceRelationships` | 2 |
-| **DocuFlow integration** | `docuflowTimestamp`, `docuflowUsername` | 2 |
-| **Classification** | `DocType`, `DocumentCategory`, `ClassDocType` | 3 |
-
----
-
-##### ⚙️ Platform-level or integration properties (9)
-
-These are custom (not system-owned) but were **not defined by the HR team** — they were added by the Content Services platform setup or AI infrastructure and exist across many classes:
-
-| Property | Origin |
-|---|---|
-| `DocumentTitle` | Generic CS platform metadata |
-| `ComponentBindingLabel` | IBM Content Navigator platform |
-| `IgnoreRedirect` | IBM Content Navigator platform |
-| `EntryTemplateObjectStoreName` | Entry template infrastructure |
-| `EntryTemplateLaunchedWorkflowNumber` | Entry template infrastructure |
-| `EntryTemplateId` | Entry template infrastructure |
-| `ClbSecurityController` | CLB security infrastructure |
-| `GenaiDateIndexed` | watsonx AI platform |
-| `GenaiWatsonxSummary` | watsonx AI platform |
+| Functional Area | Count | Properties Added |
+|---|:---:|---|
+| **Employee Identification & Personal Data** | 5 | `FirstName`, `LastName`, `EmployeeID`, `PersonalID`, `Birthdate` |
+| **Job & Organizational Structure** | 14 | `JobRole`, `JobFunction`, `JobCode`, `JobLevel`, `JobStatus`, `EmploymentType`, `CurrentStatus`, `Company`, `CompanyCode`, `BusinessUnit`, `Division`, `Department`, `CostCenter`, `Location` |
+| **Employment Dates** | 2 | `StartDate`, `TerminationDate` |
+| **SAP HR ArchiveLink Integration** | 8 | `SAPEmployeeID`, `SapLinkTrigger`, `sapLinked`, `SAPDocId`, `SAPDocProt`, `SAPComps`, `SAPContType`, `SAPCompVersion` |
+| **Salesforce & Workflow Integration** | 4 | `SFLinkTrigger`, `SfSalesforceRelationships`, `docuflowTimestamp`, `docuflowUsername` |
+| **Document Classification within HR** | 3 | `DocType`, `DocumentCategory`, `ClassDocType` |
 
 ---
 
-#### Why so many properties?
+#### Architectural Takeaway: Single Class vs. Subclass Proliferation
 
-Two structural reasons:
+Notice the properties `DocType` and `DocumentCategory` on `HRDocument`. 
 
-1. **One class, many document types.** `DocType` distinguishes a Job Application from a Payslip from a Performance Review — all stored as `HRDocument`. That single class must carry fields for every HR use case at once.
+Instead of creating dozens of individual document classes for every type of HR record (e.g. `EmploymentContract`, `PaySlip`, `PerformanceReview`, `LeaveRequest`), the HR domain uses a **single class design** where `DocType` acts as a discriminator. This avoids schema sprawl while giving all HR documents access to employee metadata and ERP integration flags.
 
-2. **Three external systems integrated directly.** SAP (8 properties), Salesforce (2), and DocuFlow (2) each stamped their own linking fields onto the class.
-
----
-
-#### Numbers at a glance
-
-| Layer | Count |
-|---|---|
-| Inherited from `Document` (system) | 63 |
-| Added by HR team (genuine HR) | 36 |
-| Added by platform/integrations | 9 |
-| **Total** | **108** |
 :::
 
 ## 💡 The "Class vs Property" Design Decision
 
-This is a fundamental IBM Content Cortex design question: *"Should I create a new class, or add a property to an existing class?"*
+This is a fundamental design question: *"Should I create a new class, or add a property to an existing class?"*
 
 ### Create a new class when:
 - The document type has fundamentally different properties
