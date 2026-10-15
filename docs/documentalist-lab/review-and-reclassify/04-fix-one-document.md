@@ -42,9 +42,9 @@ Here's the final state:
 
 :::
 
-::: warning NOTE
+::: tip NOTE
 
-Bob may report that `className` still shows `Document` after the reclassification. This is **not** a failed operation — it looks like this is a flaw in the current version of the `get_document_properties` MCP tool. Its GraphQL query does not request `className` from the server, so in the response the tool always falls back to the hardcoded default `"Document"` regardless of the document's actual class.
+Bob may report that `className` still shows `Document` after the reclassification. This is **not** a failed operation. In the current version of the `get_document_properties` MCP tool, the GraphQL query does not request `className` from the server. Hence, in the response the tool always falls back to the hardcoded default `"Document"` regardless of the document's actual class.
 
 :::
 

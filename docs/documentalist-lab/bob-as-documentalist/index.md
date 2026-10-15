@@ -8,15 +8,13 @@ IBM Bob is powered by generative AI and LLMs, and a defining trait of these syst
 **Precision is what tips the odds in your favor.** The more clearly you describe what you want, the more closely Bob's output will mirror your intent. Throughout this lab, your results may slightly differ from the examples shown — and that is expected, not a defect. Human review remains essential at every step, and never more so than while you are still learning the tool.
 :::
 
-
-
 ## Prerequisites
 
 Before starting this lab, ensure you have:
 
 - Bob IDE installed and running.
 - Cloned the Git repository and opened it in IBM Bob — follow the steps below.
-- Python environment for running the script in the skill `class_property_report`.
+- Python 3.13+ for running the scripts in the skill `class_property_report`.
 - Configured the `mcp.json` file with your lab environment credentials.
 
 1. Next, navigate to your preferred working directory,

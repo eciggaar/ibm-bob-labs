@@ -1,42 +1,20 @@
 ## Overview
 
-> **Note:** Bob's responses might vary slightly from the examples in this tutorial, but its key actions should be the same.
+::: tip NOTE
 
-The previous lab gave you a map of the territory. Now you need content to work with. You'll generate a personal set of 5 fictional employees — unique to you — whose HR documents need to be stored in the repository. Each employee has 8 categories of documents, from their original job application all the way through to exit notes.
-
-## What You Will Learn
-
-By the end of this lab, you will be able to:
-
-- Understand the **HR document taxonomy** — 8 categories covering the full employee lifecycle
-- Use the **`generate_hr_documents.py`** script to create a **personal, isolated** set of HR documents
-- Ask Bob to **upload documents to the repository** using the MCP tool `create_document` with correct metadata
-- Understand how **`DocType`, `EmployeeID`, `Department`** properties are set at creation time
-- **Verify** that documents were created correctly using the MCP tools `lookup_documents_by_name` and `get_document_properties`
-
-## Prerequisites
-
-- Completed previous lab: Meet Bob, your AI documentalist.
-- Access to IBM Content Navigator (link is in the Box note provided to you by the lab facilitators).
-- Python environment for running the document generation script.
-
-## Your Personal Lab Namespace
-
-::: warning ⚠️ Important
-
-- This lab is designed to run safely in parallel with other participants. To avoid conflicts in the shared repository, **every participant works in their own namespace** based on their last name.
+This lab is designed to run safely in parallel with other participants. To avoid conflicts in the shared repository, **every participant works in their own namespace** based on their last name.
 :::
 
-When you run the script, you will be asked for your last name. This will be used to:
+In this lab you will be asked for your last name. This will be used to:
 
 | What | How |
 |------|-----|
-| **Namespace your files** | Local files go to `HR_<YOUR_LASTNAME>/` instead of `HR/` |
+| **Namespace your files** | Local files go to `HR_<YOUR_LASTNAME>/` |
 | **Create a namespaces in the repository** | Documents are filed under `/BOB_LAB/<YOUR_LASTNAME>/` |
 | **Generate unique employees** | Your 5 employees are deterministically generated from your name |
 | **Prefix employee IDs** | IDs become `YOU001`–`YOU005` (first 3 letters of your last name) |
 
-## The HR Document Taxonomy
+### The HR Document Taxonomy
 
 Before generating content, understand the 8 HR document categories:
 
@@ -51,17 +29,14 @@ Before generating content, understand the 8 HR document categories:
 | 7 | **Disciplinary** | Disciplinary Record |
 | 8 | **Exit** | Exit Notes |
 
-**5 employees × 11 documents each = 55 documents total**
+**5** employees × **11** documents each = **55** documents **total**
 
-## MCP Tools Used
 
-| Tool | What It Does |
-|------|-------------|
-| `determine_class` | Confirms the `HRDocument` class identifier |
-| `get_class_property_descriptions` | Shows which properties to set on each document |
-| `create_document` | Uploads a document with content and metadata |
-| `lookup_documents_by_name` | Verifies a document was created |
-| `get_document_properties` | Confirms properties were set correctly |
+## Prerequisites
+
+- Completed the previous lab: *Meet Bob, your AI documentalist*.
+- Access to IBM Content Navigator (link is in the Box note provided to you by the lab facilitators).
+- Python 3.13+ for running the document generation script and the scripts needed by the skills.
 
 ## Lab Sections
 

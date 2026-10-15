@@ -1,3 +1,31 @@
+::: info 🎬 The Story
+*The previous lab gave you a map of the territory. Now you need content to work with.*
+
+*You'll generate a personal set of 5 fictional employees — unique to you — whose HR documents need to be stored in the repository. Each employee has 8 categories of documents, from their original job application all the way through to exit notes.*
+
+*You'll run a script to generate realistic sample documents locally, then ask Bob to upload them to the repository with the correct metadata. It should be straightforward — but you'll make a few mistakes along the way. Those mistakes will be the challenge for the next lab.*
+:::
+
+## 🎯 What You Will Learn
+
+By the end of this lab, you will be able to:
+
+- Understand the **HR document taxonomy** — 8 categories covering the full employee lifecycle.
+- Use the **`generate_hr_documents.py`** script to create a **personal, isolated** set of HR documents.
+- Ask Bob to **upload documents to the repository** using the MCP tool `create_document` with correct metadata.
+- Understand how **`DocType`, `EmployeeID`, `Department`** properties are set at creation time.
+- **Verify** that documents were created correctly using the MCP tools `lookup_documents_by_name` and `get_document_properties`.
+
+## 🔧 MCP Tools Used
+
+| Tool | What It Does |
+|------|-------------|
+| `determine_class` | Confirms the `HRDocument` class identifier |
+| `get_class_property_descriptions` | Shows which properties to set on each document |
+| `create_document` | Uploads a document with content and metadata |
+| `lookup_documents_by_name` | Verifies a document was created |
+| `get_document_properties` | Confirms properties were set correctly |
+
 ## 📋 The Situation
 
 You need to create sample HR documents to work with, but you're not sure how the generation script works or what it will create. You ask Bob to explain the code and the process.

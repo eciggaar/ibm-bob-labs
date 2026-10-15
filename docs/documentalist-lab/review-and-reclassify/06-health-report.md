@@ -148,9 +148,9 @@ In this lab, Bob helped you to:
 4. **Prevention is better than cure** — entry templates, controlled vocabularies, and restricted class selection prevent misclassification at upload time
 5. **Governance is ongoing** — a monthly audit with Bob takes minutes and keeps the repository healthy
 
-## 🎓 Lab Series Complete
+## 🎓 🏆🏆 **Congratulations** 🏆🏆 
 
-🏆🏆 **Congratulations** 🏆🏆 
+
 
 You have completed all labs in this series!
 
